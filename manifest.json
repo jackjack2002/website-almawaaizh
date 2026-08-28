@@ -1,0 +1,22 @@
+{
+  "name": "Brave Kids Project",
+  "short_name": "Kids Admin",
+  "description": "Pusat Kendali Super Admin BraveKids Project.",
+  "start_url": "./admin.html",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#f1f5f9",
+  "theme_color": "#E85D5E",
+  "icons": [
+    {
+      "src": "assets/logo_new.png",
+      "sizes": "250x250",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logo_new.png",
+      "sizes": "1000x1000",
+      "type": "image/png"
+    }
+  ]
+}

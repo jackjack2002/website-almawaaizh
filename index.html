@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#0C387A">
   <title>Registrasi Event</title>
-  
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="assets/logo_new.png?v=3">
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
+
   <style>
     :root {
       --primary: #0C387A;      /* Biru Tua (Navy) menyesuaikan warna dominan poster */
@@ -36,9 +36,9 @@
       from { opacity: 0; transform: translateY(30px); } /* Jarak angkat 30px agar tidak terlalu jauh & menghentak */
       to { opacity: 1; transform: translateY(0); }
     }
-    .anim-fade-in-up { 
+    .anim-fade-in-up {
       /* 1s = durasi meluncur, 0.3s = menunggu splash screen melarut dulu, both = mengunci opacity 0 saat menunggu */
-      animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s both; 
+      animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s both;
     }
     .splash-logo { width: 350px; height: auto; object-fit: contain; animation: floatLogo 3s ease-in-out infinite; margin-bottom: 20px; }
     @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -66,7 +66,7 @@
     .input-label { display: block; margin-bottom: 6px; font-size: 0.8rem; font-weight: 700; color: var(--text-main); }
     .input-modern { width: 100%; padding: 13px 16px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 0.9rem; outline: none; transition: var(--transition); color: var(--text-main); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
     .input-modern:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(124, 144, 130, 0.2); }
-    
+
     /* --- KELAS ANIMASI ERROR (GETAR & MERAH) --- */
     @keyframes shakeError {
       0%, 100% { transform: translateX(0); }
@@ -122,10 +122,10 @@
     .phone-prefix { background: #e2e8f0; color: #475569; padding: 13px 5px; font-weight: 800; font-size: 0.9rem; border: none; border-right: 2px solid #cbd5e1; width: 70px; text-align: center; outline: none; transition: var(--transition); font-family: inherit; }
     .phone-prefix:focus { background: #cbd5e1; }
     .phone-input-group .input-modern { border: none; background: transparent; border-radius: 0; margin-bottom: 0 !important; width: 100%; box-shadow: none !important; }
-    
+
     /* Tambahan efek loading saat cari domisili */
     .spin-small { animation: spin 1s linear infinite; }
-    
+
     /* Animasi Map Pin Mini untuk Auto-Complete Domisili */
     .map-pin-mini { width: 16px; height: 16px; background: #e11d48; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); animation: pinBounceMini 0.5s infinite alternate; display: inline-block; position: relative; margin-right: 6px; top: 2px; }
     .map-pin-mini::after { content: ''; width: 6px; height: 6px; background: white; position: absolute; top: 5px; left: 5px; border-radius: 50%; box-shadow: inset 0 1px 2px rgba(0,0,0,0.2); }
@@ -141,7 +141,7 @@
     /* =======================================================
        FORMULA ANIMASI ULTIMATE (SUNRISE, PRINTER, FIREWORKS)
        ======================================================= */
-    
+
     /* 1. Efek Sunrise Glow pada Splash Screen */
     .sun-glow-core { position: absolute; bottom: -100px; width: 300px; height: 300px; background: radial-gradient(circle, var(--accent-yellow) 0%, transparent 75%); border-radius: 50%; opacity: 0; transform: scale(0.3); transition: transform 2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 1.5s ease-out; z-index: 1; pointer-events: none; }
     .splash-screen.active-sunrise .sun-glow-core { opacity: 0.8; transform: scale(3); }
@@ -153,14 +153,14 @@
     .api-loader.active { display: flex; }
 
     .printer-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; }
-    
+
     /* Mulut Printer dengan nuansa Abu-abu Gelap Elektronik Modern */
     .printer-slot { width: 320px; height: 32px; background: #334155; border: 4px solid #0F172A; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); position: relative; z-index: 30; display: flex; justify-content: center; align-items: center; }
     .printer-slot-inner { width: 85%; height: 100%; background: #020617; box-shadow: inset 0 2px 4px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; border-radius: 4px; }
-    
+
     /* Lampu Hijau "Processing" yang menyala terang */
     .printer-slot-light { width: 90%; height: 4px; background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); opacity: 0.8; border-radius: 2px; }
-    
+
     @keyframes viberateMotor { 0% { transform: translate(1px, 0); } 100% { transform: translate(-1px, 0.5px); } }
     .api-loader.active .printer-slot { animation: viberateMotor 0.1s infinite alternate; }
 
@@ -199,21 +199,21 @@
   </div>
 
   <div id="apiLoader" class="api-loader">
-    
+
     <div class="printer-wrapper">
       <div class="printer-slot">
         <div class="printer-slot-inner">
           <div class="printer-slot-light"></div>
         </div>
       </div>
-      
+
       <div class="printer-mask">
         <div class="ticket-paper-output">
           <div id="printer-org" style="font-size: 11px; font-weight: 900; letter-spacing: 2px; color: var(--primary); text-transform: uppercase; margin-bottom: 4px; text-align: center;">â˜… E-TICKET RESMI â˜…</div>
           <div id="printer-event" style="font-size: 9px; font-weight: 800; color: var(--text-muted); margin-bottom: 16px; text-align: center; text-transform: uppercase;">MEMUAT EVENT...</div>
-          
+
           <div style="width: 100%; border-top: 2px dashed #cbd5e1; margin-bottom: 16px;"></div>
-          
+
           <div style="width: 100%; text-align: center;">
             <span style="font-size: 11px; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 2px;">PESERTA</span>
             <span id="printer-nama-peserta" style="font-size: 14px; font-weight: 900; color: var(--text-main); text-transform: uppercase;">MEMPROSES...</span>
@@ -233,7 +233,7 @@
              TANGGAL
           </div>
           <!-- =================================== -->
-          
+
           <div class="fake-barcode-area">
              <div style="width: 4px;"></div><div style="width: 8px;"></div>
              <div style="width: 4px;"></div><div style="width: 16px;"></div>
@@ -249,7 +249,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="loading-badge">
       <div class="loading-dot"></div>
       MENCETAK TIKET...
@@ -257,7 +257,7 @@
 
   </div>
   <div class="container" id="mainContainer">
-    
+
     <div class="header" id="mainHeader" style="display: none;">
       <h2 id="header-org">Memuat...</h2>
       <p id="header-sub" style="margin:0; font-size:0.75rem; color:var(--text-muted); font-weight:500;"></p>
@@ -275,7 +275,7 @@
     <div id="step-home" class="step-content active" style="padding: 10px;">
       <div class="glass" style="margin-top: 0px; padding: 1rem;">
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 6px; background-color: var(--primary);"></div>
-        
+
         <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 1rem;">
           <div style="background: white; padding: 0.6rem; border-radius: 0.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 0.5rem; border: 1px solid #e2e8f0;">
             <div style="width: 2.2rem; height: 2.2rem; border-radius: 0.6rem; display: flex; align-items: center; justify-content: center; color: white; background-color: var(--primary);">
@@ -302,7 +302,7 @@
         <div class="pricing-status-card" style="padding: 1rem; margin-bottom: 1rem;">
           <!-- Poster Gambar Ustadz 1:1 Dikecilkan Lebarnya Tengah-->
           <img src="assets/poster1.png" alt="Poster Kegiatan" style="width: 100%; max-width: 220px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; margin: 0 auto 10px auto; border: 1px solid #e2e8f0; display: block;">
-          
+
           <!-- Elemen tersembunyi agar fungsi JavaScript bawaan tidak error -->
           <div id="fomo-harga" style="display: none;"></div>
 
@@ -349,11 +349,11 @@
     <div id="step-0" class="step-content">
       <h3 style="margin-top:0; color:var(--primary); text-align:center; font-size: 1.1rem;">Syarat & Ketentuan</h3>
       <p style="font-size: 0.7rem; text-align:center; color:var(--text-muted); margin-top:-5px; margin-bottom: 12px;">Mohon baca dan setujui sebelum melanjutkan</p>
-      
+
       <div class="snk-box" id="snk-text" style="padding: 12px; font-size: 0.75rem; margin-bottom: 12px;">
         <div style="text-align: center; margin-top: 80px;"><i data-lucide="loader-2" class="spinner" style="width:24px; height:24px; border:none; display:inline-block;"></i></div>
       </div>
-      
+
       <label style="display: flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer; margin-bottom: 15px;">
         <input type="checkbox" id="cb-setuju" style="width: 16px; height: 16px; accent-color: var(--primary);">
         Saya menyetujui persyaratan di atas
@@ -368,9 +368,9 @@
     <div id="step-1" class="step-content">
       <h3 style="margin-top:0; color:var(--primary); text-align:center; font-size: 1.1rem;">Kuesioner Singkat</h3>
       <p style="font-size: 0.7rem; text-align:center; color:var(--text-muted); margin-top:-5px; margin-bottom: 15px;">Bantu kami mengenal Anda lebih baik</p>
-      
+
       <div class="form-card" style="padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 15px;">
-        
+
         <div class="form-group" style="margin-bottom: 12px;">
           <label class="input-label" style="font-size: 0.75rem;">1. Apa harapan Anda mengikuti kajian ini?</label>
           <textarea id="kuis_q1" class="input-modern" rows="2" placeholder="Tulis harapan Anda..." style="resize: none; font-size: 0.8rem; padding: 10px;"></textarea>
@@ -401,7 +401,7 @@
     <!-- ================= STEP 2: FORM DATA DIRI ================= -->
     <div id="step-2" class="step-content">
       <h3 style="margin-top:0; font-size: 1.1rem;">Data Diri Peserta</h3>
-      
+
       <div id="wadah-semua-peserta"></div>
 
       <button onclick="tambahAnakCard()" class="btn-action" style="background: #fefce8; color: #a16207; border: 2px dashed #facc15; box-shadow: none; padding: 0.7rem; font-size: 0.75rem; border-radius: 10px;">
@@ -409,7 +409,7 @@
       </button>
 
       <div class="form-card" style="margin-top: 15px; padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
-        
+
         <div style="margin-bottom: 15px;">
           <div class="form-group" style="margin-bottom: 0;">
             <label class="input-label" style="font-size: 0.75rem;">Tahu informasi darimana? <span style="color: #ef4444;">*</span></label>
@@ -438,7 +438,7 @@
             <input type="radio" id="follow_ya" name="follow_munira_global" value="" checked>
           </div>
         </div>
-  
+
         <!-- Pilihan Opsi Infaq / Buku (DIROMBAK - TAHAP 4) -->
         <style>
           /* Layout untuk grid bersebelahan */
@@ -451,7 +451,7 @@
           .opt-desc { font-size: 0.6rem; color: var(--text-muted); line-height: 1.2; }
           .opt-radio:checked ~ .opt-card .check-icon { display: block; }
           .check-icon { display: none; color: var(--primary); position: absolute; top: 8px; right: 8px; }
-          
+
           /* CSS Khusus Tombol Toggle Switch (On/Off) */
           .switch { position: relative; display: inline-block; width: 36px; height: 20px; flex-shrink: 0; }
           .switch input { opacity: 0; width: 0; height: 0; }
@@ -462,11 +462,11 @@
         </style>
 
         <div class="form-group" style="margin-top: 25px; margin-bottom: 0;">
-          
+
           <!-- Header dengan Toggle -->
           <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #cbd5e1; padding-bottom: 10px; margin-bottom: 12px;">
             <label class="input-label" style="font-size: 0.85rem; margin: 0;">Dukung Kegiatan Ini? <span style="color: var(--text-muted); font-weight: normal; font-size: 0.7rem;">(Opsional)</span></label>
-            
+
             <!-- Ditambahkan wadah flex agar label 'Lewati' sejajar dengan toggle -->
             <div style="display: flex; align-items: center;">
               <span style="font-size: 0.65rem; color: #94a3b8; font-weight: 600; margin-right: 8px;">Lewati</span>
@@ -477,14 +477,14 @@
               </label>
             </div>
           </div>
-          
+
           <!-- Radio tersembunyi untuk nilai '0' (Tidak Infaq / Toggle Off) -->
           <input type="radio" name="pilihan_infaq" id="infaq_nol" value="0" style="display: none;">
 
           <!-- Wadah 2 Opsi Bersebelahan (Grid 50:50) -->
           <div id="wadah_pilihan_dukungan">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-              
+
               <label style="position: relative; display: block; cursor: pointer;">
                 <!-- Secara default Buku terpilih jika toggle ON -->
                 <input type="radio" name="pilihan_infaq" id="infaq_buku" value="buku_100000" class="opt-radio" checked onchange="document.getElementById('wadah_infaq_bebas').style.display = 'none'; lucide.createIcons();">
@@ -494,7 +494,7 @@
                   <i data-lucide="check-circle-2" class="check-icon" style="width: 16px;"></i>
                 </div>
               </label>
-              
+
               <label style="position: relative; display: block; cursor: pointer;">
                 <input type="radio" name="pilihan_infaq" id="infaq_bebas" value="bebas" class="opt-radio" onchange="document.getElementById('wadah_infaq_bebas').style.display = 'block'; document.getElementById('infaq_bebas_nominal').focus(); lucide.createIcons();">
                 <div class="opt-card">
@@ -504,9 +504,9 @@
                   <i data-lucide="check-circle-2" class="check-icon" style="width: 16px;"></i>
                 </div>
               </label>
-              
+
             </div>
-            
+
             <div id="wadah_infaq_bebas" style="display: none; padding: 12px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; margin-top: 10px;">
               <label style="font-size: 0.7rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; display: block;">Masukkan Nominal Infaq</label>
               <div style="position: relative;">
@@ -560,9 +560,9 @@
 
       <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
         <p style="font-size: 0.75rem; font-weight: 800; color: var(--text-main); margin: 0 0 10px; letter-spacing: 0.5px;">SCAN QRIS UNTUK MEMBAYAR</p>
-        
+
         <img src="assets/qris.png" alt="QRIS Muniira" style="width: 100%; max-width: 180px; border-radius: 10px; border: 2px solid #e2e8f0; margin-bottom: 10px;" onerror="this.src='https://placehold.co/180x180/fdf0e0/265383?text=QRIS+NOT+FOUND'">
-        
+
         <!-- Tombol Download Dikecilkan -->
         <a href="assets/qris.png" download="QRIS_Muniira.png" onclick="window.isDownloading = true; setTimeout(() => window.isDownloading = false, 2000);" style="display: flex; align-items: center; justify-content: center; gap: 6px; background: var(--accent-green); color: white; padding: 8px 12px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 0.7rem; margin: 0 auto 10px; width: max-content; box-shadow: 0 2px 8px rgba(56, 159, 102, 0.2); transition: 0.2s;">
           <i data-lucide="download" style="width: 14px; height: 14px;"></i> SIMPAN QRIS
@@ -577,14 +577,14 @@
       <div class="form-group" style="margin-bottom: 15px;">
         <label class="input-label" style="font-size: 0.75rem;">Upload Bukti <span style="color: #ef4444; font-size:1rem; line-height:0;">*</span></label>
         <div id="area_bukti" class="upload-area" style="position: relative; padding: 20px 15px;">
-          
+
           <div id="uploadPlaceholder">
             <i data-lucide="upload-cloud" style="width: 30px; height: 30px; margin-bottom: 8px; display: block; margin-left: auto; margin-right: auto;"></i>
             <p style="margin:0; font-size:0.75rem; font-weight:600; color:var(--text-main);" id="upload-text">Klik pilih foto struk</p>
           </div>
-          
+
           <img id="previewImage" src="" alt="Preview Bukti" style="display: none; width: 100%; max-height: 150px; object-fit: contain; border-radius: 8px; border: 2px solid var(--text-main);">
-          
+
           <input type="file" id="file_bukti" accept="image/*" onchange="handleFileUpload(event)">
         </div>
       </div>
@@ -604,14 +604,14 @@
 
     <div id="step-4" class="step-content" style="text-align: center; padding: 15px 10px; position: relative;">
       <div class="fireworks-overlay" id="fireworksArea"></div>
-      
+
       <!-- Ikon Sukses: Hijau elegan ala Google (Soft Emerald) & Sedikit Efek Glow -->
       <div style="width: 50px; height: 50px; background: #e6f4ea; color: #137333; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; position: relative; z-index: 5; box-shadow: 0 4px 10px rgba(19, 115, 51, 0.15);">
         <i data-lucide="check" style="width: 28px; height: 28px;"></i>
       </div>
       <h2 style="margin:0; color: var(--text-main); font-size: 1.2rem;">Pendaftaran Sukses!</h2>
       <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 4px;">Data telah tersimpan di sistem.</p>
-      
+
       <div id="wadah-tiket-sukses" style="display: none;"></div>
       <div id="wadah-link-buku" style="display: none;"></div>
 
@@ -660,9 +660,9 @@
 
     // FITUR KODE UNIK (Range 101 - 499)
     let kodeUnikBayar = Math.floor(Math.random() * 399) + 101;
-    
+
     let currentStep = 0;
-    let appSettings = {}; 
+    let appSettings = {};
     let jumlahAnak = 0;
     let sudahKirimWA = false;
 
@@ -683,12 +683,12 @@
           if (data.status === "success") {
             document.getElementById('snk-text').innerText = data.snk;
             appSettings = data.pengaturan;
-            
+
             // --- INJEKSI DATA KE HALAMAN FOMO & PRINTER ---
-            
+
             // 1. Mengubah Judul Tab Browser Dinamis
             document.title = appSettings.Nama_Event ? "Registrasi - " + appSettings.Nama_Event : "Registrasi Event";
-            
+
             // 2. Mengubah Header Form Dinamis
             if(document.getElementById('header-org')) {
               document.getElementById('header-org').innerText = appSettings.Penyelenggara || "Penyelenggara Event";
@@ -701,7 +701,7 @@
             document.getElementById('fomo-event').innerText = appSettings.Nama_Event || "Memuat Event...";
             document.getElementById('fomo-lokasi').innerText = appSettings.Lokasi || "Lokasi Event";
             document.getElementById('fomo-tgl').innerText = appSettings.Tanggal_Event || "Segera Hadir";
-            
+
             // Injeksi teks ke animasi kertas printer thermal
             if(document.getElementById('printer-event')) {
               document.getElementById('printer-event').innerText = appSettings.Nama_Event || "Muniira Kids & Teens";
@@ -713,7 +713,7 @@
             if(document.getElementById('fomo-org')) {
               document.getElementById('fomo-org').innerText = appSettings.Penyelenggara || "Muniira Kids & Teens";
             }
-            
+
             // Perbaikan: Bungkus dengan String() agar terhindar dari TypeError
             let hargaMentah = String(appSettings.Harga_Tiket || "410000");
             let hargaAngka = parseInt(hargaMentah.replace(/\D/g, '')) || 410000;
@@ -776,12 +776,12 @@
             setTimeout(() => {
               // 1. Sembunyikan splash screen (otomatis memicu efek zoom-out dari CSS)
               document.getElementById('splashScreen').classList.add('hidden');
-              
+
               // 2. Tampilkan form utama dengan efek meluncur dari bawah
               const mainCont = document.getElementById('mainContainer');
               mainCont.style.display = 'block';
               mainCont.classList.add('anim-fade-in-up');
-              
+
               // Paksa Lucide untuk menggambar ulang semua ikon di layar
               lucide.createIcons();
             }, 2000); // Diperpanjang menjadi 2 detik agar pendaran fajar merekah sempurna
@@ -811,18 +811,18 @@
       currentStep = step;
 
       const stepperEl = document.getElementById('mainStepper');
-      
+
       // Sembunyikan stepper HANYA saat berada di Landing Page utama ('home')
       if (document.getElementById('step-home').classList.contains('active') && step !== 0 && step !== 1 && step !== 2 && step !== 3 && step !== 4) {
         stepperEl.style.display = 'none';
       } else {
         stepperEl.style.display = 'flex';
-        
+
         // Bersihkan seluruh status aktif/selesai pada semua dot
         ['dot-0', 'dot-1', 'dot-2', 'dot-3', 'dot-4'].forEach(id => {
           if(document.getElementById(id)) document.getElementById(id).classList.remove('active', 'completed');
         });
-        
+
         // Atur status dot berdasarkan tahapan step yang aktif
         if (step === 0) {
           document.getElementById('dot-0').classList.add('active');
@@ -846,11 +846,11 @@
           document.getElementById('dot-4').classList.add('active');
         }
       }
-      
+
       // Logika Auto-Scroll pelan jika masuk Step 4
       if (step === 4) {
         window.scrollTo({top: 0, behavior: 'smooth'});
-        
+
         // --- PICU SELEBRASI KEMBANG API ---
         trigerKembangApiPremium();
 
@@ -863,7 +863,7 @@
         let hitungMundur = 15;
         const teksCountdown = document.getElementById('teks-countdown');
         const angkaCountdown = document.getElementById('angka-countdown');
-        
+
         if (teksCountdown && angkaCountdown) {
           teksCountdown.style.display = 'inline-block';
           angkaCountdown.innerText = hitungMundur;
@@ -909,9 +909,9 @@
           <input type="hidden" id="lat_${id}" value="">
           <input type="hidden" id="lon_${id}" value="">
           ${id > 1 ? `<button onclick="hapusAnakCard(${id})" style="position: absolute; top: 12px; right: 12px; background: #fee2e2; border: none; color: #e11d48; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.7rem; transition: 0.2s;"><i data-lucide="trash-2" style="width:12px; height:12px; vertical-align:middle;"></i> Hapus</button>` : ''}
-          
+
           <h4 style="margin: 0 0 12px; color: var(--primary); border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px; font-weight: 700; font-size: 0.95rem;">ðŸ‘¤ Data Peserta Ke-${id}</h4>
-          
+
           <div class="form-group" style="margin-bottom: 12px;">
             <label class="input-label" style="font-size: 0.75rem;">Nama Lengkap <span style="color: #ef4444;">*</span></label>
             <input type="text" id="nama_anak_${id}" class="input-modern" placeholder="Ketik nama lengkap kamu" style="padding: 10px 12px; height: 42px;">
@@ -956,15 +956,15 @@
           <div style="display: none;">
             <input type="number" id="usia_${id}" value="0">
           </div>
-          
+
         </div>
       `;
-  
+
   wadah.insertAdjacentHTML('beforeend', cardHTML);
   let titles = document.querySelectorAll('#wadah-semua-peserta h4');
   titles.forEach((el, index) => { el.innerHTML = `ðŸ‘¤ Data Peserta Ke-${index + 1}`; });
   lucide.createIcons();
-  
+
   // AUTO-FILL KELUARGA: Jika ini adalah peserta ke-2 dst, otomatis salin data kontak dari Peserta ke-1
   if (id > 1) {
     if (document.getElementById('kode_negara_1')) document.getElementById(`kode_negara_${id}`).value = document.getElementById('kode_negara_1').value;
@@ -990,23 +990,23 @@
       const wadahOrtu = document.getElementById(`wadah_ortu_${id}`);
       if(isChecked) {
         wadahOrtu.style.display = 'none';
-        document.getElementById(`kode_negara_${id}`).value = document.getElementById('kode_negara_1').value; 
+        document.getElementById(`kode_negara_${id}`).value = document.getElementById('kode_negara_1').value;
         document.getElementById(`domisili_${id}`).value = document.getElementById('domisili_1').value;
         document.getElementById(`nama_wali_${id}`).value = document.getElementById('nama_wali_1').value;
         document.getElementById(`no_hp_${id}`).value = document.getElementById('no_hp_1').value;
-        
+
         // Salin status pilihan toggle kapsul
         const status1 = document.querySelector('input[name="status_wali_1"]:checked').value;
         if(status1 === 'Aba') document.getElementById(`status_aba_${id}`).checked = true;
         else document.getElementById(`status_umma_${id}`).checked = true;
       } else {
         wadahOrtu.style.display = 'block';
-        document.getElementById(`kode_negara_${id}`).value = "+62"; 
+        document.getElementById(`kode_negara_${id}`).value = "+62";
         document.getElementById(`domisili_${id}`).value = "";
         document.getElementById(`nama_wali_${id}`).value = "";
         document.getElementById(`status_umma_${id}`).checked = true;
         document.getElementById(`no_hp_${id}`).value = "";
-        
+
         // Pastikan box medis anak ke-2 ikut tersembunyi rapi saat reset
         if(document.getElementById(`toggle_medis_${id}`)) document.getElementById(`toggle_medis_${id}`).checked = false;
         if(document.getElementById(`box_medis_${id}`)) document.getElementById(`box_medis_${id}`).style.display = 'none';
@@ -1037,16 +1037,16 @@
 
       for(let i=1; i<=jumlahAnak; i++) {
         if(document.getElementById(`card_anak_${i}`)) {
-          
+
           let elNama = document.getElementById(`nama_anak_${i}`);
           let elDom = document.getElementById(`domisili_${i}`);
           let elHp = document.getElementById(`no_hp_${i}`);
           let hpGroup = document.getElementById(`group_hp_${i}`);
           let elEmail = document.getElementById(`email_wali_${i}`);
-          
+
           if (!elNama.value.trim()) {
             elNama.classList.add('error-shake');
-            Swal.fire({ icon: 'warning', title: 'Data Belum Lengkap', text: `Mohon isi Nama Lengkap untuk Peserta Ke-${i}.`, confirmButtonColor: '#0C387A', returnFocus: false }); 
+            Swal.fire({ icon: 'warning', title: 'Data Belum Lengkap', text: `Mohon isi Nama Lengkap untuk Peserta Ke-${i}.`, confirmButtonColor: '#0C387A', returnFocus: false });
             elNama.scrollIntoView({behavior: "smooth", block: "center"});
             setTimeout(() => elNama.focus(), 300); return;
           }
@@ -1108,12 +1108,12 @@
         // Hapus titik agar sistem tidak keliru saat menjumlahkan total tagihan
         infaqTerpilih = parseInt(document.getElementById('infaq_bebas_nominal').value.replace(/\D/g, '')) || 0;
       }
-      
+
       let totalKartuAktif = 0;
-      
+
       let rincianHTML = `<div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0; text-align: left; font-size: 0.75rem; color: var(--text-muted); line-height: 1.5;">`;
       rincianHTML += `<div style="font-weight: 700; color: var(--text-main); margin-bottom: 6px; font-size: 0.65rem; letter-spacing: 0.5px;">RINCIAN TIKET:</div>`;
-      
+
       for(let i=1; i<=jumlahAnak; i++) {
         if(document.getElementById(`card_anak_${i}`)) {
           totalKartuAktif++;
@@ -1126,30 +1126,30 @@
             </div>`;
         }
       }
-      
+
       // BIAYA ADMIN FLAT (Tidak dikalikan jumlah peserta)
-      let biayaAdmin = 1000; 
+      let biayaAdmin = 1000;
       let totalAkhir = (totalKartuAktif * infaqTerpilih) + biayaAdmin + kodeUnikBayar;
-      
+
       // --- PERUBAHAN TAMPILAN BIAYA TAMBAHAN WAJIB ---
       // Diberi garis putus-putus tipis dan digeser rata kanan agar terpisah dari rincian tiket utama
       rincianHTML += `<div style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed #cbd5e1; display: flex; flex-direction: column; align-items: flex-end; gap: 1px;">`;
-      
+
       rincianHTML += `
         <div style="font-size: 0.55rem; color: #94a3b8; display: flex; gap: 20px; opacity: 0.8;">
           <span>+ Biaya Layanan</span>
           <span style="font-weight: 600;">Rp ${biayaAdmin.toLocaleString('id-ID')}</span>
         </div>`;
-        
+
       rincianHTML += `
         <div style="font-size: 0.55rem; color: #94a3b8; display: flex; gap: 20px; opacity: 0.8;">
           <span>+ Kode Unik</span>
           <span style="font-weight: 700; color: var(--primary);">Rp ${kodeUnikBayar}</span>
         </div>`;
-        
+
       rincianHTML += `</div>`; // Menutup container kotak biaya rata kanan
       rincianHTML += `</div>`; // Menutup container rincian utama
-      
+
       document.getElementById('display_kelas_nama').innerHTML = rincianHTML;
       // Ukuran font angka tagihan dikecilkan dari 2.2rem ke 1.6rem
       document.getElementById('display_total').innerHTML = `<span style="font-size: 1.6rem; color: var(--text-main); font-family: 'Poppins', sans-serif; font-weight: 800; letter-spacing: -0.5px;">Rp ${totalAkhir.toLocaleString('id-ID')}</span>`;
@@ -1157,7 +1157,7 @@
 
     function handleFileUpload(event) {
       const file = event.target.files[0]; if (!file) return;
-      
+
       if (file.size > 10 * 1024 * 1024) {
         Swal.fire({ icon: 'error', title: 'Ukuran Terlalu Besar', text: 'Ukuran foto maksimal 10 MB. Silakan kompres/crop foto struk Anda.', confirmButtonColor: '#E85D5E' });
         event.target.value = ''; return;
@@ -1167,19 +1167,19 @@
       const reader = new FileReader();
       reader.onload = function(e) {
         const img = new Image(); img.onload = function() {
-          const canvas = document.createElement('canvas'); 
+          const canvas = document.createElement('canvas');
           const MAX_WIDTH = 1000;
           let scaleSize = img.width > MAX_WIDTH ? MAX_WIDTH / img.width : 1;
           canvas.width = img.width * scaleSize; canvas.height = img.height * scaleSize;
           canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-          
+
           const compressedBase64 = canvas.toDataURL('image/jpeg', 0.6);
-          
+
           document.getElementById('base64Output').value = compressedBase64;
-          
+
           // Sembunyikan tulisan & ikon awan bawaan kotak
           document.getElementById('uploadPlaceholder').style.display = 'none';
-          
+
           // Tampilkan gambar struk di dalam kotak tersebut
           document.getElementById('previewImage').src = compressedBase64;
           document.getElementById('previewImage').style.display = 'block';
@@ -1198,11 +1198,11 @@
       let checkInfaq = document.querySelector('input[name="pilihan_infaq"]:checked');
       if (checkInfaq) valInfaq = checkInfaq.value;
 
-      if (valInfaq === 'bebas' && !base64Str) { 
+      if (valInfaq === 'bebas' && !base64Str) {
         if(areaBukti) areaBukti.classList.add('error-shake');
-        Swal.fire({ icon: 'warning', title: 'Struk Belum Ada', text: 'Harap upload foto struk transfer terlebih dahulu.', confirmButtonColor: '#E85D5E', returnFocus: false }); 
+        Swal.fire({ icon: 'warning', title: 'Struk Belum Ada', text: 'Harap upload foto struk transfer terlebih dahulu.', confirmButtonColor: '#E85D5E', returnFocus: false });
         if(areaBukti) areaBukti.scrollIntoView({behavior: "smooth", block: "center"});
-        return; 
+        return;
       }
 
       // Di dalam fungsi submitData(), cari blok penyusunan arrPeserta dan ubah menjadi:
@@ -1221,7 +1221,7 @@
             // TRICK: Kita lempar data "Gender" ke kolom lama "Usia" agar Google Sheets tidak rusak
             usia: document.getElementById(`gender_${i}`) ? document.getElementById(`gender_${i}`).value : "-",
             domisili: document.getElementById(`domisili_${i}`).value || "-",
-            followMunira: followMuniraVal, 
+            followMunira: followMuniraVal,
             hp: (() => {
                 let hpMentah = document.getElementById(`no_hp_${i}`).value ? document.getElementById(`kode_negara_${i}`).value + document.getElementById(`no_hp_${i}`).value : "";
                 return hpMentah.replace(/\D/g, '') || "-";
@@ -1234,17 +1234,17 @@
       }
 
       let emailVal = document.getElementById('email_wali_1') ? document.getElementById('email_wali_1').value : "-";
-      
+
       // Ambil jenis infaq yang dipilih user di form
       valInfaq = document.querySelector('input[name="pilihan_infaq"]:checked') ? document.querySelector('input[name="pilihan_infaq"]:checked').value : "0";
-      
+
       // Tentukan besar infaq terpilih berdasarkan inputan user
       let infaqTerpilih = 0;
       if (valInfaq === 'bebas') {
           let inputNominal = document.getElementById('infaq_bebas_nominal');
           infaqTerpilih = inputNominal ? parseInt(inputNominal.value.replace(/\D/g, '')) || 0 : 0;
       }
-      
+
       // Ambil Kode Prefix dari pengaturan Spreadsheet, jika kosong/lupa diisi, defaultnya adalah "EVT" (Event)
       let prefixEvent = appSettings.Kode_Prefix || "EVT";
 
@@ -1283,7 +1283,7 @@
       // 2. Suntik Total Harga (Termasuk Kode Unik & Biaya Admin)
       let biayaAdminPrint = arrPeserta.length * 1000;
       let totalAkhirPrint = (arrPeserta.length * infaqTerpilih) + biayaAdminPrint + kodeUnikBayar;
-      
+
       if(document.getElementById('printer-total')) {
           // TAHAP 4: Tulis GRATIS jika tidak ada infaq atau beli buku (karena bayarnya via lynk.id)
           if (valInfaq === '0' || valInfaq === 'buku_100000') {
@@ -1296,7 +1296,7 @@
       // 3. Suntik Timestamp (Tanggal & Jam Cetak)
       let d = new Date();
       let wCetak = ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-      
+
       if(document.getElementById('printer-waktu')) {
           document.getElementById('printer-waktu').innerText = wCetak;
       }
@@ -1306,7 +1306,7 @@
           let dp = new Date();
           let dString = dp.getFullYear() + ("0" + (dp.getMonth() + 1)).slice(-2) + ("0" + dp.getDate()).slice(-2);
           // Preview dummy otomatis menyesuaikan prefix dari Spreadsheet
-          let previewID = prefixEvent + "-" + dString + "-####"; 
+          let previewID = prefixEvent + "-" + dString + "-####";
           document.getElementById('printer-booking').innerText = previewID;
       }
       // ----------------------------------
@@ -1322,13 +1322,13 @@
       .then(response => {
         // Tarik kembali kertas printer sebelum menutup tirai loading
         document.getElementById('apiLoader').classList.remove('active');
-        
+
         // Hentikan suara
         let audPrint = document.getElementById('audioPrinter');
         if (audPrint) { audPrint.pause(); audPrint.currentTime = 0; }
 
         if (response.status === 'success') {
-          window.linkBuktiGlobal = response.linkBukti; 
+          window.linkBuktiGlobal = response.linkBukti;
           window.orderIdsGlobal = response.orderIds;
 
           let htmlTiket = '';
@@ -1347,7 +1347,7 @@
           });
 
           document.getElementById('wadah-tiket-sukses').innerHTML = htmlTiket;
-          
+
           // TAHAP 7: Tampilkan tombol link buku HANYA jika user memilih opsi Beli Buku
           if (valInfaq === 'buku_100000') {
             document.getElementById('wadah-link-buku').style.display = 'block';
@@ -1362,7 +1362,7 @@
       })
       .catch(err => {
         document.getElementById('apiLoader').classList.remove('active');
-        
+
         // Hentikan suara
         let audPrint = document.getElementById('audioPrinter');
         if (audPrint) { audPrint.pause(); audPrint.currentTime = 0; }
@@ -1389,12 +1389,12 @@
       // 2. Susun DATA PENDAFTAR (Sederhana dan Dewasa)
       let detailPesertaWA = "";
       let index = 1;
-      
+
       for (let i = 1; i <= jumlahAnak; i++) {
         if (!document.getElementById(`card_anak_${i}`)) continue;
-        
+
         const getVal = (id) => document.getElementById(`${id}_${i}`) ? document.getElementById(`${id}_${i}`).value : "-";
-        
+
         let nama = getVal('nama_anak');
         let usia = getVal('usia');
         let domisili = getVal('domisili');
@@ -1406,9 +1406,9 @@
 
       // 3. Susun Pesan Super Singkat, Sopan & Clean
       let valInfaq = document.querySelector('input[name="pilihan_infaq"]:checked') ? document.querySelector('input[name="pilihan_infaq"]:checked').value : "0";
-      
+
       let namaPesertaTampil = document.getElementById('nama_anak_1') ? document.getElementById('nama_anak_1').value : "Peserta";
-      
+
       let teksTambahan = "";
       if (valInfaq === 'buku_100000') {
          teksTambahan = "Saya juga telah memilih opsi membeli buku kajian. Saya akan menyelesaikan pembayaran dan klaim melalui link resmi: https://lynk.id/masukkan_username_anda";
@@ -1448,9 +1448,9 @@ Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! ðŸ
           cancelButtonColor: '#94a3b8'
         }).then((result) => {
           if (result.isConfirmed) {
-            kirimWA(); 
+            kirimWA();
           } else if (result.dismiss === Swal.DismissReason.cancel) {
-            window.location.reload(); 
+            window.location.reload();
           }
         });
       } else {
@@ -1462,7 +1462,7 @@ Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! ðŸ
       let teksYangDisalin = ""; let pesanSukses = "";
       if (jenis === 'total') {
         const teksTotal = document.getElementById('display_total').innerText;
-        teksYangDisalin = teksTotal.replace(/[^0-9]/g, ''); 
+        teksYangDisalin = teksTotal.replace(/[^0-9]/g, '');
         pesanSukses = "Nominal Rp " + parseInt(teksYangDisalin).toLocaleString('id-ID') + " berhasil disalin!";
       } else if (jenis === 'rekening') {
         teksYangDisalin = appSettings.Rekening_Tujuan; pesanSukses = "Nomor Rekening berhasil disalin!";
@@ -1475,7 +1475,7 @@ Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! ðŸ
     }
 
     function formatNoHP(input) {
-      let angka = input.value.replace(/\D/g, ''); 
+      let angka = input.value.replace(/\D/g, '');
       if (angka.startsWith('0')) angka = angka.substring(1);
       if (angka.startsWith('62')) angka = angka.substring(2);
       if (angka === '') { input.value = ''; return; }
@@ -1505,7 +1505,7 @@ Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! ðŸ
     // ==========================================
     // MESIN AUTOCOMPLETE DOMISILI (DIUPGRADE - BEBAS CUSTOM KETIKAN)
     // ==========================================
-    let timerPencarian; 
+    let timerPencarian;
 
     function cariDomisiliAPI(inputEl, id) {
       clearTimeout(timerPencarian);
@@ -1527,7 +1527,7 @@ Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! ðŸ
           .then(res => res.json())
           .then(data => {
             wadah.innerHTML = "";
-            
+
             // Ambil koordinat cadangan dari hasil pertama (jika API menemukan sesuatu yang mirip)
             let fallbackLat = data.length > 0 ? data[0].lat : "";
             let fallbackLon = data.length > 0 ? data[0].lon : "";
@@ -1540,9 +1540,9 @@ Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! ðŸ
             divManual.style.fontSize = "0.85rem";
             divManual.style.color = "var(--primary)";
             divManual.style.fontWeight = "800";
-            divManual.style.backgroundColor = "#fff1f2"; 
+            divManual.style.backgroundColor = "#fff1f2";
             divManual.innerHTML = `<i data-lucide="edit-3" style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin-right:5px;"></i> Gunakan: "<b>${val}</b>"`;
-            
+
             divManual.onclick = function() {
               inputEl.value = val;
               // Diam-diam masukkan koordinat cadangan agar peta admin tetap terisi
@@ -1572,25 +1572,25 @@ Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! ðŸ
                 div.style.color = "var(--text-main)";
                 div.style.fontWeight = "500";
                 div.style.lineHeight = "1.4";
-                
+
                 div.innerText = tempat.display_name;
-                
+
                 div.onclick = function() {
                   let parts = tempat.display_name.split(',');
                   let namaSingkat = parts.slice(0, 3).join(', ').trim();
                   inputEl.value = namaSingkat;
-                  
+
                   // Simpan Lat dan Lon ke input hidden
                   if(document.getElementById('lat_'+id)) document.getElementById('lat_'+id).value = tempat.lat;
                   if(document.getElementById('lon_'+id)) document.getElementById('lon_'+id).value = tempat.lon;
-                  
+
                   wadah.style.display = "none";
                   saveDraft(); // Auto-save saat lokasi terpilih
                 };
-                
+
                 div.onmouseover = function() { this.style.background = "#f8fafc"; };
                 div.onmouseout = function() { this.style.background = "white"; };
-                
+
                 wadah.appendChild(div);
               });
             }
@@ -1627,14 +1627,14 @@ Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! ðŸ
     // Fungsi Pintar Buka Grup WA (Anti Gagal meski ada spasi salah ketik di Excel)
     function bukaGrupInfoWA() {
       let link = appSettings["Link_Grup_WA"];
-      
+
       // Jika kosong, sistem otomatis cari key apa pun yang ada kata "Grup_WA"
       if(!link) {
         for(let key in appSettings) {
           if(key.includes("Grup_WA")) link = appSettings[key];
         }
       }
-      
+
       if(link && link.length > 5) {
         window.open(link, "_blank");
       } else {

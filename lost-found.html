@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Katalog Barang Temuan - Brave Kids Project</title>
+  
+  <meta name="theme-color" content="#fffbeb">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/logo_new.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    :root {
+      --primary: #3b82f6; 
+      --accent-yellow: #fcd34d;
+      --bg-light: #fffbeb;     /* THEME ADMIN: Krem Lembut */
+      --text-main: #573312;    /* THEME ADMIN: Cokelat Tua */
+      --text-muted: #78716c;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Nunito', sans-serif; }
+    body { background: var(--bg-light); margin: 0; padding: 15px; color: var(--text-main); display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-bottom: 30px; }
+    
+    .header { width: 100%; max-width: 480px; text-align: center; margin-bottom: 20px; margin-top: 10px; }
+    .header h2 { margin: 0; font-size: 1.4rem; font-weight: 900; color: var(--primary); }
+    
+    /* TOKOPEDIA STYLE: GRID 2 KOLOM */
+    .catalog-grid { width: 100%; max-width: 480px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+    
+    .product-card { background: white; border: 3px solid var(--text-main); border-radius: 18px; overflow: hidden; box-shadow: 4px 4px 0 var(--text-main); display: flex; flex-direction: column; transition: 0.2s; position: relative; }
+    
+    /* 🔥 CSS SCROLL SNAP FOR CARD CAROUSEL (Murni CSS, Tanpa JS) */
+    .product-carousel-area { 
+      width: 100%; 
+      aspect-ratio: 1/1; /* Kotak Sempurna */
+      display: flex; 
+      overflow-x: auto; /* Bisa geser horizontal */
+      scroll-snap-type: x mandatory; /* Wajib berhenti pas di tengah foto */
+      scroll-behavior: smooth; 
+      -webkit-overflow-scrolling: touch; /* Halus di iOS */
+      border-bottom: 3px solid var(--text-main);
+      background: #f8fafc;
+      position: relative;
+    }
+    /* Sembunyikan Scrollbar */
+    .product-carousel-area::-webkit-scrollbar { display: none; }
+    .product-carousel-area { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .carousel-item-img { 
+      flex: 0 0 100%; /* Satu foto ukuran full */
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      scroll-snap-align: start; /* Titik kunci snap */
+    }
+    
+    /* Indikator Titik ala Tokopedia */
+    .carousel-dots {
+      position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 4px; background: rgba(0,0,0,0.4); padding: 3px 6px; border-radius: 10px; backdrop-filter: blur(2px);
+    }
+    .dot { width: 6px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 50%; }
+    .dot.active { background: white; width: 12px; border-radius: 4px; }
+
+    .product-info { padding: 10px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .product-title { font-size: 0.85rem; font-weight: 800; color: var(--text-main); margin: 0 0 4px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.3; min-height: 2.6em; }
+    .product-desc { font-size: 0.7rem; color: var(--text-muted); margin: 0 0 10px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.3; min-height: 2.6em; }
+    
+    .btn-klaim { width: 100%; background: var(--accent-yellow); color: var(--text-main); border: 2px solid var(--text-main); padding: 8px; border-radius: 10px; font-size: 0.75rem; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; box-shadow: 0 3px 0 var(--text-main); transition: 0.1s; margin-top: auto;}
+    .btn-klaim:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--text-main); }
+    
+    #loadingLF { text-align: center; padding: 40px; font-weight: 800; font-size: 0.9rem; color: var(--text-muted); width: 100%; max-width: 480px; }
+
+    /* 🔥 CSS UNTUK MODAL GESER KE SAMPING */
+    .modal-gallery-slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 15px;
+      padding-bottom: 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .modal-gallery-slider::-webkit-scrollbar { display: none; }
+    
+    .modal-slide-item {
+      flex: 0 0 90%; /* Foto mengambil 90% lebar modal, sisa 10% untuk ngintip foto sebelah */
+      width: 90%;
+      scroll-snap-align: center; /* Snap di tengah */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 3px solid var(--text-main);
+      border-radius: 16px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 4px 4px 0 var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <img src="assets/logo_new.png" alt="Brave Kids Logo" style="width: 80px; height: auto; margin-bottom: 5px;" onerror="this.src='https://placehold.co/100x50/3b82f6/white?text=LOGO'">
+    <h2>🎒 Katalog Barang Tertinggal</h2>
+    <p style="margin: 3px 0 0 0; font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">Apakah barang jagoan kecil Ayah/Bunda ada di bawah ini?</p>
+  </div>
+
+  <div id="loadingLF"><i data-lucide="loader-2" style="animation: spin 1s linear infinite; display:inline-block; vertical-align:middle; margin-right:5px;"></i> Membuka Gudang Logistik...</div>
+  
+  <div class="catalog-grid" id="wadahKatalogLF" style="display: none;"></div>
+
+  <script>
+    lucide.createIcons();
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxa25GC1mdJCMpqfRDoxhQx7bMpr2R_w3YpVxnxzNNnH9YuEHyczlMY7jmISp-ZPfmSWw/exec";
+    
+    let nomorAdminWA = "6285122994009"; 
+    let orderIdAnak = "";
+
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      orderIdAnak = urlParams.get('id') || "BKP-UMUM";
+      
+      // Sinkronisasi real-time (tampilan admin mode jeda)
+      fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "get_catalog_lf" }) })
+      .then(res => res.json()).then(res => {
+        document.getElementById('loadingLF').style.display = 'none';
+        
+        if(res.status === "success") {
+          nomorAdminWA = res.nomorAdmin || nomorAdminWA;
+          let grid = document.getElementById('wadahKatalogLF');
+          grid.style.display = 'grid';
+          
+          let barangTersedia = res.data.filter(b => b.status === "TERSEDIA");
+          
+          if(barangTersedia.length === 0) {
+            grid.innerHTML = `<div style="grid-column: 1 / -1; text-align:center; padding:40px; color:var(--text-muted); font-weight:800; font-size:0.85rem;">Alhamdulillah, gudang logistik kosong. Belum ada barang tertinggal yang ditemukan panitia! 🎉</div>`;
+            return;
+          }
+          
+          grid.innerHTML = barangTersedia.map(b => {
+            let splitFotos = b.foto.split(",").map(x => x.trim());
+            let randomId = "car-" + Math.floor(Math.random() * 10000); // Untuk sync dots
+            
+            // --- RAKIT HTML KAROUSEL UNTUK CARD (MODE GESER) ---
+            let htmlKumpulanFoto = "";
+            let htmlDots = "";
+
+            splitFotos.forEach((fotoUrl, index) => {
+              let urlThumb = fotoUrl;
+              // Konversi Drive Thumbnail W400 (Ringan untuk Katalog Grid)
+              if(urlThumb.includes('/d/')){ let m = urlThumb.match(/\/d\/([a-zA-Z0-9_-]+)/); if(m) urlThumb = "https://drive.google.com/thumbnail?id=" + m[1] + "&sz=w400"; }
+              if(b.foto === "Tidak ada foto" || !b.foto) urlThumb = "https://placehold.co/300x300/f1f5f9/64748b?text=Tidak+Ada+Foto";
+
+              htmlKumpulanFoto += `<img src="${urlThumb}" class="carousel-item-img" alt="${b.nama}">`;
+              
+              // Buat titik indikator jika foto > 1
+              if(splitFotos.length > 1) {
+                  htmlDots += `<div class="dot ${index === 0 ? 'active' : ''}"></div>`;
+              }
+            });
+
+            let areaFotoHTML = `
+              <div style="position:relative; width:100%;">
+                <div class="product-carousel-area" id="${randomId}" onscroll="updateCarouselDots(this)">
+                   ${htmlKumpulanFoto}
+                </div>
+                ${splitFotos.length > 1 ? `
+                  <div class="carousel-dots">${htmlDots}</div>
+                  <div style="position:absolute; top:8px; right:8px; background:rgba(255,255,255,0.7); border:1px solid var(--text-main); font-size:0.6rem; font-weight:900; padding:2px 5px; border-radius:5px; pointer-events:none; backdrop-filter:blur(2px);"><i data-lucide="hand" style="width:10px;height:10px;vertical-align:middle;margin-right:2px;">
+                    </i>GESER</div>` : ''}
+                
+                <div style="position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; background:transparent;" onclick="bukaPopupGaleriFotoLengkap('${b.nama}', '${b.foto}')"></div>
+                
+                <div style="position:absolute; top:8px; left:8px; background:white; border:2px solid var(--text-main); font-size:0.6rem; font-weight:900; padding:2px 6px; border-radius:6px; box-shadow:1px 1px 0 var(--text-main); pointer-events:none; z-index:2;">🔍 DETAIL</div>
+              </div>`;
+            
+            return `
+              <div class="product-card">
+                ${areaFotoHTML}
+                <div class="product-info">
+                  <div onclick="bukaPopupGaleriFotoLengkap('${b.nama}', '${b.foto}')" style="cursor:pointer;">
+                    <h3 class="product-title">${b.nama}</h3>
+                    <p class="product-desc">${b.deskripsi}</p>
+                  </div>
+                  <button onclick="hubungiKlaimBarang('${b.id}', '${b.nama}')" class="btn-klaim"><i data-lucide="message-circle" style="width:12px;"></i> Klaim Barang</button>
+                </div>
+              </div>`;
+          }).join("");
+          lucide.createIcons();
+          
+          // 🔥 Panggil auto-slide setelah elemen selesai digambar di layar
+          jalankanAutoSlide(); 
+        }
+      }).catch(e => {
+        document.getElementById('loadingLF').innerHTML = "Gagal memuat gudang logistik. Periksa internet.";
+      });
+    };
+
+    // --- FUNGSI UNTUK UPDATE TITIK INDIKATOR SAAT DIGESER ---
+    function updateCarouselDots(areaScroll) {
+        const dotsContainer = areaScroll.parentNode.querySelector('.carousel-dots');
+        if(!dotsContainer) return;
+        
+        const scrollLeft = areaScroll.scrollLeft;
+        const width = areaScroll.offsetWidth;
+        const activeIndex = Math.round(scrollLeft / width);
+        
+        const dots = dotsContainer.querySelectorAll('.dot');
+        dots.forEach((dot, idx) => {
+            if(idx === activeIndex) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    }
+
+    function hubungiKlaimBarang(idBarang, namaBarang) {
+      Swal.fire({
+        title: 'Konfirmasi Klaim 🎒',
+        text: `Apakah Ayah/Bunda yakin ingin mengklaim "${namaBarang}" sebagai milik Ananda?`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, Benar!',
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#3b82f6',
+        allowOutsideClick: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({ title: 'Mengunci data...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+          
+          fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({ action: "klaim_barang_public", idBarang: idBarang, orderId: orderIdAnak })
+          })
+          .then(res => res.json())
+          .then(res => {
+            Swal.close();
+            if (res.status === "success") {
+              let pesan = `Assalamualaikum panitia logistik Brave Kids.\n\n Saya sudah melakukan klaim barang tertinggal di sistem web.\n📦 *ID Barang:* ${idBarang}\n🏷️ *Nama Barang:* ${namaBarang}\n\nData klaim sudah terkunci otomatis ke Order ID kami: *${orderIdAnak}*. Bagaimana teknis serah terima barangnya ya panitia? Terima kasih 🙏`;
+              window.open(`https://api.whatsapp.com/send?phone=${nomorAdminWA}&text=${encodeURIComponent(pesan)}`, "_blank");
+              window.location.reload(); 
+            } else {
+              Swal.fire('Gagal Klaim', res.message, 'error');
+            }
+          })
+          .catch(e => { Swal.close(); Swal.fire('Error', 'Gagal terhubung ke server. Periksa internet.', 'error'); });
+        }
+      });
+    }
+
+    // --- FUNGSI POP-UP DETAIL FOTO GESER KE SAMPING (UPDATE KEBUTUHAN USER) ---
+    function bukaPopupGaleriFotoLengkap(namaBarang, listFotoMentah) {
+      let arrayUrls = listFotoMentah.split(",").map(url => url.trim());
+      
+      // Buat container HTML untuk slider horizontal
+      let htmlSliderBox = `<div class="modal-gallery-slider">`;
+      
+      arrayUrls.forEach((url, idx) => {
+        let urlHD = url;
+        // Konversi Drive Thumbnail W800 (Tajam untuk Pop-up Fullscreen)
+        if(urlHD.includes('/d/')){ let m = urlHD.match(/\/d\/([a-zA-Z0-9_-]+)/); if(m) urlHD = "https://drive.google.com/thumbnail?id=" + m[1] + "&sz=w800"; }
+        if(url === "Tidak ada foto" || !url) urlHD = "https://placehold.co/400x300/f1f5f9/64748b?text=Tidak+Ada+Foto";
+        
+        htmlSliderBox += `
+          <div class="modal-slide-item">
+            <div style="background:#fffbeb; padding:5px 10px; width:100%; font-size:0.75rem; font-weight:900; color:var(--text-main); text-align:center; border-bottom:3px solid var(--text-main);">📸 FOTO KE-${idx+1} DARI ${arrayUrls.length}</div>
+            <img src="${urlHD}" style="width:100%; height:auto; display:block; max-height:65vh; object-fit:contain; background:#f8fafc;">
+          </div>`;
+      });
+      htmlSliderBox += `</div>`;
+      
+      // Tambahkan petunjuk geser jika foto > 1
+      if(arrayUrls.length > 1) {
+          htmlSliderBox += `<p style="text-align:center; color:var(--text-muted); font-size:0.7rem; font-weight:700; margin: 10px 0 0 0;"><i data-lucide="hand" style="width:12px;height:12px;vertical-align:middle;margin-right:3px;"></i> Geser ke samping untuk melihat foto lainnya</p>`;
+      }
+
+      Swal.fire({
+        title: namaBarang.toUpperCase(),
+        html: htmlSliderBox,
+        confirmButtonText: 'TUTUP PREVIEW',
+        confirmButtonColor: '#3b82f6',
+        width: '95%', // Lebarkan sedikit modalnya agar enak buat geser
+        customClass: { popup: 'border-4 border-slate-900 rounded-[24px]' },
+        didOpen: () => {
+            lucide.createIcons(); // Re-create icon di dalam modal
+        }
+      });
+    }
+
+    // --- FUNGSI AUTO SLIDE UNTUK KATALOG GAMBAR ---
+    function jalankanAutoSlide() {
+      // Cari semua area carousel yang ada di layar
+      const semuaCarousel = document.querySelectorAll('.product-carousel-area');
+      
+      semuaCarousel.forEach(carousel => {
+        // Cek apakah gambar di dalam carousel ini lebih dari 1
+        const jumlahGambar = carousel.querySelectorAll('.carousel-item-img').length;
+        
+        if (jumlahGambar > 1) {
+          // Buat timer berjalan setiap 2 detik (2000 ms)
+          setInterval(() => {
+            const lebarSatuGambar = carousel.clientWidth;
+            const scrollMaksimal = carousel.scrollWidth - lebarSatuGambar;
+            
+            // Jika sudah mentok di ujung kanan, balik ke gambar pertama (kiri)
+            // Kasih toleransi -10px untuk menghindari bug pembulatan pixel di HP
+            if (carousel.scrollLeft >= scrollMaksimal - 10) {
+              carousel.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+              // Jika belum mentok, geser ke kanan sejauh 1 gambar
+              carousel.scrollBy({ left: lebarSatuGambar, behavior: 'smooth' });
+            }
+          }, 2000);
+        }
+      });
+    }
+
+  </script>
+</body>
+</html>
