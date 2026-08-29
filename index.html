@@ -197,6 +197,32 @@
       0% { transform: scale(1); opacity: 1; }
       100% { transform: scale(45); opacity: 0; }
     }
+
+    /* ===== RESPONSIVE MOBILE ===== */
+    @media (max-width: 480px) {
+      .form-card { padding: 16px; }
+      
+      /* Grid 2 kolom jadi 1 kolom di mobile */
+      .form-card > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+      }
+      
+      /* Tombol Instagram full width di mobile */
+      .form-card a[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+      }
+      
+      /* Upload area min-height menyesuaikan */
+      .form-card div[style*="min-height: 110px"] {
+        min-height: 100px !important;
+      }
+      
+      /* Header step-2 */
+      #step-2 h3 { font-size: 1rem; }
+      
+      /* Stepper label lebih kecil */
+      .step-item small { font-size: 0.5rem !important; }
+    }
   </style>
 </head>
 <body>
@@ -584,21 +610,21 @@
       <!-- ==================== BUKTI FOLLOW INSTAGRAM ==================== -->
       <div class="form-card" style="margin-top: 20px; padding: 20px; background: #FFFFFF; border: 2px solid #E2E8F0; border-radius: 16px;">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #E2E8F0;">
-          <div style="width: 36px; height: 36px; background: #1E85E2; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <div style="width: 36px; height: 36px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(220,39,67,0.3);">
             <i data-lucide="instagram" style="width: 20px; height: 20px; color: white;"></i>
           </div>
           <div>
             <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 800; font-size: 0.9rem; color: #042346;">Bukti Follow Instagram</span>
-            <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 700; font-size: 0.7rem; color: #EF4444; margin-left: 4px;">*</span>
+            <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 700; font-size: 0.7rem; color: #EF4444; margin-left: 4px;">* Wajib</span>
           </div>
         </div>
         <p style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; margin-bottom: 16px; line-height: 1.5;">Upload screenshot follow kedua akun Instagram di bawah ini untuk melanjutkan pendaftaran.</p>
 
-        <!-- 2 Kolom Upload Foto -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+        <!-- 2 Kolom Upload Foto - Responsive -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px;">
           <!-- Kolom 1: al.mawaaizh -->
           <div style="background: #FFFFFF; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 14px; text-align: center; transition: border-color 0.2s, background-color 0.2s;">
-            <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; color: #16539B; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px;">
+            <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
               <i data-lucide="instagram" style="width: 13px; height: 13px;"></i> @al.mawaaizh
             </div>
             <input type="file" id="bukti_follow_1" accept="image/*" capture="environment" style="display: none;" onchange="previewImage(this, 'preview_follow_1')">
@@ -608,12 +634,11 @@
               <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.55rem; color: #94A3B8; margin-top: 3px;">Max 2MB • JPG/PNG</span>
             </div>
             <div id="preview_follow_1_img" style="display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; object-fit: cover; border-radius: 8px;"></div>
-            <button type="button" onclick="removeImage('preview_follow_1', 'bukti_follow_1')" id="remove_follow_1" style="display: none; position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; border-radius: 50%; background: #EF4444; color: white; border: none; font-size: 14px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;">×</button>
           </div>
 
           <!-- Kolom 2: ioubahasaindonesia -->
           <div style="background: #FFFFFF; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 14px; text-align: center; transition: border-color 0.2s, background-color 0.2s;">
-            <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; color: #16539B; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px;">
+            <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
               <i data-lucide="instagram" style="width: 13px; height: 13px;"></i> @ioubahasaindonesia
             </div>
             <input type="file" id="bukti_follow_2" accept="image/*" capture="environment" style="display: none;" onchange="previewImage(this, 'preview_follow_2')">
@@ -623,17 +648,16 @@
               <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.55rem; color: #94A3B8; margin-top: 3px;">Max 2MB • JPG/PNG</span>
             </div>
             <div id="preview_follow_2_img" style="display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; object-fit: cover; border-radius: 8px;"></div>
-            <button type="button" onclick="removeImage('preview_follow_2', 'bukti_follow_2')" id="remove_follow_2" style="display: none; position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; border-radius: 50%; background: #EF4444; color: white; border: none; font-size: 14px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;">×</button>
           </div>
         </div>
 
-        <!-- 2 Tombol Link Instagram -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-          <a href="https://www.instagram.com/al.mawaaizh/" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 12px; background: #1E85E2; color: white; border-radius: 10px; font-family: 'Nunito Sans', sans-serif; font-weight: 800; font-size: 0.7rem; text-decoration: none; box-shadow: 0 3px 10px rgba(30, 133, 226, 0.25); transition: background-color 0.2s, transform 0.1s;">
-            <i data-lucide="instagram" style="width: 14px; height: 14px;"></i> Buka @al.mawaaizh
+<!-- 2 Tombol Link Instagram - Responsive -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+          <a href="https://www.instagram.com/al.mawaaizh/" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; border-radius: 10px; font-family: 'Nunito Sans', sans-serif; font-weight: 800; font-size: 0.85rem; text-decoration: none; box-shadow: 0 4px 12px rgba(220,39,67,0.35); transition: transform 0.1s, box-shadow 0.2s;">
+            <i data-lucide="instagram" style="width: 18px; height: 18px;"></i> Buka @al.mawaaizh
           </a>
-          <a href="https://www.instagram.com/ioubahasaindonesia/" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 12px; background: #16539B; color: white; border-radius: 10px; font-family: 'Nunito Sans', sans-serif; font-weight: 800; font-size: 0.7rem; text-decoration: none; box-shadow: 0 3px 10px rgba(22, 83, 155, 0.25); transition: background-color 0.2s, transform 0.1s;">
-            <i data-lucide="instagram" style="width: 14px; height: 14px;"></i> Buka @ioubahasaindonesia
+          <a href="https://www.instagram.com/ioubahasaindonesia/" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; border-radius: 10px; font-family: 'Nunito Sans', sans-serif; font-weight: 800; font-size: 0.85rem; text-decoration: none; box-shadow: 0 4px 12px rgba(220,39,67,0.35); transition: transform 0.1s, box-shadow 0.2s;">
+            <i data-lucide="instagram" style="width: 18px; height: 18px;"></i> Buka @ioubahasaindonesia
           </a>
         </div>
       </div>
@@ -1833,7 +1857,6 @@ Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! �
     function previewImage(input, previewId) {
       const preview = document.getElementById(previewId);
       const previewImg = document.getElementById(previewId + '_img');
-      const removeBtn = document.getElementById('remove_' + previewId.replace('preview_', ''));
       
       if (input.files && input.files[0]) {
         const file = input.files[0];
@@ -1857,25 +1880,9 @@ Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! �
           preview.querySelector('i[data-lucide="upload-cloud"]').style.display = 'none';
           preview.querySelector('span').style.display = 'none';
           preview.querySelectorAll('span')[1].style.display = 'none';
-          removeBtn.style.display = 'flex';
         };
         reader.readAsDataURL(file);
       }
-    }
-
-    function removeImage(previewId, inputId) {
-      const preview = document.getElementById(previewId);
-      const previewImg = document.getElementById(previewId + '_img');
-      const removeBtn = document.getElementById('remove_' + previewId.replace('preview_', ''));
-      const input = document.getElementById(inputId);
-      
-      input.value = '';
-      previewImg.src = '';
-      previewImg.style.display = 'none';
-      preview.querySelector('i[data-lucide="upload-cloud"]').style.display = 'block';
-      preview.querySelector('span').style.display = 'block';
-      preview.querySelectorAll('span')[1].style.display = 'block';
-      removeBtn.style.display = 'none';
     }
 
   </script>
