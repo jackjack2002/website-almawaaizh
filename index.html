@@ -203,25 +203,25 @@
     /* ===== RESPONSIVE MOBILE ===== */
     @media (max-width: 480px) {
       .form-card { padding: 16px; }
-      
+
       /* Grid 2 kolom jadi 1 kolom di mobile */
       .form-card > div[style*="grid-template-columns"] {
         grid-template-columns: 1fr !important;
       }
-      
+
       /* Tombol Instagram full width di mobile */
       .form-card a[style*="grid-template-columns"] {
         grid-template-columns: 1fr !important;
       }
-      
+
       /* Upload area min-height menyesuaikan */
       .form-card div[style*="min-height: 110px"] {
         min-height: 100px !important;
       }
-      
+
       /* Header step-2 */
       #step-2 h3 { font-size: 1rem; }
-      
+
       /* Stepper label lebih kecil */
       .step-item small { font-size: 0.5rem !important; }
     }
@@ -621,37 +621,41 @@
         <p style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; margin-bottom: 16px; line-height: 1.5;">Upload screenshot follow kedua akun Instagram di bawah ini untuk melanjutkan pendaftaran.</p>
 
         <!-- 2 Kolom Upload Foto - Responsive -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px;">
-          <!-- Kolom 1: al.mawaaizh -->
-          <div style="background: #FFFFFF; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 14px; text-align: center; transition: border-color 0.2s, background-color 0.2s;">
-            <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-              <i data-lucide="instagram" style="width: 13px; height: 13px;"></i> @al.mawaaizh
-            </div>
-            <input type="file" id="bukti_follow_1" accept="image/*" style="display: none;" onchange="previewImage(this, 'preview_follow_1')">
-            <div id="preview_follow_1" style="width: 100%; min-height: 110px; border-radius: 8px; background: #F8FAFC; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #E2E8F0; overflow: hidden; position: relative; transition: background-color 0.2s;" onclick="document.getElementById('bukti_follow_1').click()">
-              <i data-lucide="upload-cloud" style="width: 30px; height: 30px; color: #94A3B8; margin-bottom: 8px;"></i>
-              <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; font-weight: 600;">Tap untuk upload screenshot</span>
-              <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.55rem; color: #94A3B8; margin-top: 3px;">Max 2MB • JPG/PNG</span>
-            </div>
-            <div id="preview_follow_1_img" style="display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; object-fit: cover; border-radius: 8px;"></div>
-            <button type="button" onclick="removeFollowImage(1)" style="display: none; position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; border-radius: 50%; background: #EF4444; color: white; border: none; font-size: 12px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;">×</button>
-          </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px;">
+                  <!-- Kolom 1: al.mawaaizh -->
+                  <div style="background: #FFFFFF; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 14px; text-align: center; transition: border-color 0.2s, background-color 0.2s; position: relative;">
+                    <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                      <i data-lucide="instagram" style="width: 13px; height: 13px;"></i> @al.mawaaizh
+                    </div>
+                    <input type="file" id="bukti_follow_1" accept="image/*" style="display: none;" onchange="previewImage(this, 'preview_follow_1')">
+                    <div id="preview_follow_1" style="width: 100%; min-height: 110px; border-radius: 8px; background: #F8FAFC; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #E2E8F0; overflow: hidden; position: relative; transition: background-color 0.2s;" onclick="document.getElementById('bukti_follow_1').click()">
+                      <div id="teks_placeholder_1" style="display: flex; flex-direction: column; align-items: center;">
+                        <i data-lucide="upload-cloud" style="width: 30px; height: 30px; color: #94A3B8; margin-bottom: 8px;"></i>
+                        <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; font-weight: 600;">Tap untuk upload</span>
+                        <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.55rem; color: #94A3B8; margin-top: 3px;">Max 2MB • JPG/PNG</span>
+                      </div>
+                      <img id="preview_follow_1_img" src="" style="display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; object-fit: cover; border-radius: 8px; z-index: 5;">
+                    </div>
+                    <button type="button" id="btn_remove_1" onclick="removeFollowImage(1)" style="display: none; position: absolute; top: 35px; right: 20px; width: 26px; height: 26px; border-radius: 50%; background: #EF4444; color: white; border: 2px solid white; font-size: 16px; font-weight: bold; line-height: 0; cursor: pointer; z-index: 10; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2); padding-bottom: 2px;">×</button>
+                  </div>
 
-          <!-- Kolom 2: ioubahasaindonesia -->
-          <div style="background: #FFFFFF; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 14px; text-align: center; transition: border-color 0.2s, background-color 0.2s;">
-            <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-              <i data-lucide="instagram" style="width: 13px; height: 13px;"></i> @ioubahasaindonesia
-            </div>
-            <input type="file" id="bukti_follow_2" accept="image/*" style="display: none;" onchange="previewImage(this, 'preview_follow_2')">
-            <div id="preview_follow_2" style="width: 100%; min-height: 110px; border-radius: 8px; background: #F8FAFC; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #E2E8F0; overflow: hidden; position: relative; transition: background-color 0.2s;" onclick="document.getElementById('bukti_follow_2').click()">
-              <i data-lucide="upload-cloud" style="width: 30px; height: 30px; color: #94A3B8; margin-bottom: 8px;"></i>
-              <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; font-weight: 600;">Tap untuk upload screenshot</span>
-              <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.55rem; color: #94A3B8; margin-top: 3px;">Max 2MB • JPG/PNG</span>
-            </div>
-            <div id="preview_follow_2_img" style="display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; object-fit: cover; border-radius: 8px;"></div>
-            <button type="button" onclick="removeFollowImage(2)" style="display: none; position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; border-radius: 50%; background: #EF4444; color: white; border: none; font-size: 12px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;">×</button>
-          </div>
-        </div>
+                  <!-- Kolom 2: ioubahasaindonesia -->
+                  <div style="background: #FFFFFF; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 14px; text-align: center; transition: border-color 0.2s, background-color 0.2s; position: relative;">
+                    <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                      <i data-lucide="instagram" style="width: 13px; height: 13px;"></i> @ioubahasaindonesia
+                    </div>
+                    <input type="file" id="bukti_follow_2" accept="image/*" style="display: none;" onchange="previewImage(this, 'preview_follow_2')">
+                    <div id="preview_follow_2" style="width: 100%; min-height: 110px; border-radius: 8px; background: #F8FAFC; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #E2E8F0; overflow: hidden; position: relative; transition: background-color 0.2s;" onclick="document.getElementById('bukti_follow_2').click()">
+                      <div id="teks_placeholder_2" style="display: flex; flex-direction: column; align-items: center;">
+                        <i data-lucide="upload-cloud" style="width: 30px; height: 30px; color: #94A3B8; margin-bottom: 8px;"></i>
+                        <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; font-weight: 600;">Tap untuk upload</span>
+                        <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.55rem; color: #94A3B8; margin-top: 3px;">Max 2MB • JPG/PNG</span>
+                      </div>
+                      <img id="preview_follow_2_img" src="" style="display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; object-fit: cover; border-radius: 8px; z-index: 5;">
+                    </div>
+                    <button type="button" id="btn_remove_2" onclick="removeFollowImage(2)" style="display: none; position: absolute; top: 35px; right: 20px; width: 26px; height: 26px; border-radius: 50%; background: #EF4444; color: white; border: 2px solid white; font-size: 16px; font-weight: bold; line-height: 0; cursor: pointer; z-index: 10; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2); padding-bottom: 2px;">×</button>
+                  </div>
+                </div>
 
 <!-- 2 Tombol Link Instagram - Responsive -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
@@ -928,25 +932,25 @@
       if (step === 1 && currentStep === 0 && !document.getElementById('cb-setuju').checked) {
         Swal.fire({ icon: 'warning', title: 'Belum Setuju', text: 'Mohon centang persetujuan terlebih dahulu.', confirmButtonColor: '#E85D5E' }); return;
       }
-      
+
       // Validasi Kuesioner wajib diisi saat pindah ke Step 2
       if (step === 2 && currentStep === 1) {
         const q1 = document.getElementById('kuis_q1')?.value?.trim();
         const q2 = document.getElementById('kuis_q2')?.value?.trim();
         const q3 = document.getElementById('kuis_q3')?.value?.trim();
         const q4 = document.getElementById('kuis_q4')?.value?.trim();
-        
+
         if (!q1 || !q2 || !q3 || !q4) {
-          Swal.fire({ 
-            icon: 'warning', 
-            title: 'Kuesioner Belum Lengkap', 
-            text: 'Mohon isi seluruh pertanyaan kuesioner (1-4) sebelum lanjut.', 
-            confirmButtonColor: '#E85D5E' 
-          }); 
+          Swal.fire({
+            icon: 'warning',
+            title: 'Kuesioner Belum Lengkap',
+            text: 'Mohon isi seluruh pertanyaan kuesioner (1-4) sebelum lanjut.',
+            confirmButtonColor: '#E85D5E'
+          });
           return;
         }
       }
-      
+
       if (step === 2 && (currentStep === 0 || currentStep === 1)) {
         if (jumlahAnak === 0) tambahAnakCard();
       }
@@ -1188,14 +1192,14 @@
       let bukti2 = document.getElementById('bukti_follow_2');
       let preview1 = document.getElementById('preview_follow_1');
       let preview2 = document.getElementById('preview_follow_2');
-      
+
       if (!bukti1.files || !bukti1.files[0]) {
         preview1.classList.add('error-shake');
         Swal.fire({ icon: 'warning', title: 'Data Belum Lengkap', text: 'Mohon upload bukti follow Instagram @al.mawaaizh', confirmButtonColor: '#0C387A', returnFocus: false });
         preview1.scrollIntoView({behavior: "smooth", block: "center"});
         setTimeout(() => bukti1.click(), 300); return;
       }
-      
+
       if (!bukti2.files || !bukti2.files[0]) {
         preview2.classList.add('error-shake');
         Swal.fire({ icon: 'warning', title: 'Data Belum Lengkap', text: 'Mohon upload bukti follow Instagram @ioubahasaindonesia', confirmButtonColor: '#0C387A', returnFocus: false });
@@ -1427,7 +1431,7 @@
       // Konversi bukti follow Instagram ke Base64
       let buktiFollow1Base64 = "";
       let buktiFollow2Base64 = "";
-      
+
       const convertToBase64 = (fileInput) => {
         return new Promise((resolve) => {
           const file = fileInput.files[0];
@@ -1864,54 +1868,50 @@ Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! �
     }
 
     // Preview image untuk bukti follow Instagram
-    function previewImage(input, previewId) {
-      const preview = document.getElementById(previewId);
-      const previewImg = document.getElementById(previewId + '_img');
-      
-      if (input.files && input.files[0]) {
-        const file = input.files[0];
-        // Validasi ukuran file (max 2MB)
-        if (file.size > 2 * 1024 * 1024) {
-          Swal.fire({ icon: 'warning', title: 'File Terlalu Besar', text: 'Ukuran maksimal 2MB', confirmButtonColor: '#E85D5E' });
-          input.value = '';
-          return;
-        }
-        // Validasi tipe file
-        if (!file.type.match('image/(jpeg|png|jpg)')) {
-          Swal.fire({ icon: 'warning', title: 'Format Tidak Didukung', text: 'Hanya JPG/PNG', confirmButtonColor: '#E85D5E' });
-          input.value = '';
-          return;
-        }
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          previewImg.src = e.target.result;
-          previewImg.style.display = 'block';
-          preview.querySelector('i[data-lucide="upload-cloud"]').style.display = 'none';
-          preview.querySelector('span').style.display = 'none';
-          preview.querySelectorAll('span')[1].style.display = 'none';
-          // Show remove button
-          const removeBtn = preview.parentElement.querySelector('button[onclick^="removeFollowImage"]');
-          if (removeBtn) removeBtn.style.display = 'flex';
-        };
-        reader.readAsDataURL(file);
-      }
-    }
+        function previewImage(input, previewId) {
+          const previewImg = document.getElementById(previewId + '_img');
+          const num = previewId.split('_')[2]; // Mendapatkan angka 1 atau 2
+          const teksPlaceholder = document.getElementById('teks_placeholder_' + num);
+          const btnRemove = document.getElementById('btn_remove_' + num);
 
-    function removeFollowImage(num) {
-      const input = document.getElementById('bukti_follow_' + num);
-      const preview = document.getElementById('preview_follow_' + num);
-      const previewImg = document.getElementById('preview_follow_' + num + '_img');
-      const removeBtn = preview.parentElement.querySelector('button[onclick^="removeFollowImage"]');
-      
-      input.value = '';
-      previewImg.src = '';
-      previewImg.style.display = 'none';
-      preview.querySelector('i[data-lucide="upload-cloud"]').style.display = 'block';
-      preview.querySelector('span').style.display = 'block';
-      preview.querySelectorAll('span')[1].style.display = 'block';
-      if (removeBtn) removeBtn.style.display = 'none';
-    }
+          if (input.files && input.files[0]) {
+            const file = input.files[0];
+            // Validasi ukuran file (max 2MB)
+            if (file.size > 2 * 1024 * 1024) {
+              Swal.fire({ icon: 'warning', title: 'File Terlalu Besar', text: 'Ukuran maksimal 2MB', confirmButtonColor: '#E85D5E' });
+              input.value = '';
+              return;
+            }
+            // Validasi tipe file
+            if (!file.type.match('image/(jpeg|png|jpg)')) {
+              Swal.fire({ icon: 'warning', title: 'Format Tidak Didukung', text: 'Hanya JPG/PNG', confirmButtonColor: '#E85D5E' });
+              input.value = '';
+              return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              previewImg.src = e.target.result;
+              previewImg.style.display = 'block';
+              teksPlaceholder.style.display = 'none';
+              btnRemove.style.display = 'flex';
+            };
+            reader.readAsDataURL(file);
+          }
+        }
+
+        function removeFollowImage(num) {
+          const input = document.getElementById('bukti_follow_' + num);
+          const previewImg = document.getElementById('preview_follow_' + num + '_img');
+          const teksPlaceholder = document.getElementById('teks_placeholder_' + num);
+          const btnRemove = document.getElementById('btn_remove_' + num);
+
+          input.value = '';
+          previewImg.src = '';
+          previewImg.style.display = 'none';
+          teksPlaceholder.style.display = 'flex';
+          btnRemove.style.display = 'none';
+        }
 
   </script>
 </body>
