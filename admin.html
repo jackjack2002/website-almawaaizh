@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Super Admin - Brave Kids</title>
-  
+
   <meta name="theme-color" content="#f1f5f9">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="assets/logo_new.png">
@@ -24,7 +24,7 @@
   <style>
     :root {
       --primary: #3b82f6;      /* Biru Project */
-      --primary-dark: #2563eb; 
+      --primary-dark: #2563eb;
       --accent-green: #84cc16; /* Hijau Brave Kids */
       --accent-yellow: #fcd34d;/* Kuning Logo */
       --bg-light: #fffbeb;     /* Krem Lembut */
@@ -53,7 +53,7 @@
     .tabs { display: flex; gap: 10px; min-width: max-content; }
     .tab-btn { padding: 12px 20px; border: none; background: white; font-weight: 700; color: var(--text-muted); border-radius: 14px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 8px; font-size: 0.9rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .tab-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(232, 93, 94, 0.3); }
-    
+
     .tab-content { display: none; animation: fadeIn 0.4s; }
     .tab-content.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -62,23 +62,23 @@
     .filter-box { background: white; padding: 15px; border-radius: 20px; margin-bottom: 20px; border: 3px solid var(--text-main); box-shadow: 0 5px 0 rgba(87, 51, 18, 0.15); }
     .filter-grid-dash { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     @media (max-width: 600px) { .filter-grid-dash { grid-template-columns: 1fr; } }
-    
+
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
-    .kpi-card { 
-      background: white; padding: 15px 10px; border-radius: 16px; text-align: center; border: 3px solid var(--text-main); box-shadow: 0 6px 0 rgba(87, 51, 18, 0.15); transition: var(--transition); 
+    .kpi-card {
+      background: white; padding: 15px 10px; border-radius: 16px; text-align: center; border: 3px solid var(--text-main); box-shadow: 0 6px 0 rgba(87, 51, 18, 0.15); transition: var(--transition);
       /* KUNCI UTAMA: Jadikan kotak KPI sebagai patokan ukuran */
-      container-type: inline-size; 
+      container-type: inline-size;
     }
-    
-    .kpi-card h3 { 
-      margin: 0 0 5px 0; 
-      color: var(--primary); 
-      font-weight: 900; 
-      white-space: nowrap; 
-      letter-spacing: -0.5px; 
-      font-size: clamp(0.85rem, 10cqi, 1.5rem); 
-      overflow: hidden; 
-      text-overflow: ellipsis; 
+
+    .kpi-card h3 {
+      margin: 0 0 5px 0;
+      color: var(--primary);
+      font-weight: 900;
+      white-space: nowrap;
+      letter-spacing: -0.5px;
+      font-size: clamp(0.85rem, 10cqi, 1.5rem);
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     @media (max-width: 480px) {
@@ -88,7 +88,7 @@
       .header button { padding: 8px 5px !important; font-size: 0.7rem !important; flex-direction: column; gap: 4px !important; text-align: center; justify-content: center; }
       .header button i { margin: 0 !important; }
     }
-    
+
     .chart-container { background: white; padding: 20px; border-radius: 20px; border: 3px solid var(--text-main); box-shadow: 0 6px 0 rgba(87, 51, 18, 0.15); margin-bottom: 20px; }
 
     /* --- FORM INPUTS --- */
@@ -96,7 +96,7 @@
     .input-label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 700; color: var(--text-main); }
     .input-modern { width: 100%; padding: 14px 16px; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 14px; margin-bottom: 18px; font-family: inherit; font-size: 0.95rem; outline: none; transition: var(--transition); color: var(--text-main); font-weight: 700; }
     .input-modern:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); }
-    
+
     .btn-main { width: 100%; padding: 16px; background: var(--primary); color: white; border: 3px solid var(--text-main); border-radius: 16px; font-weight: 900; font-size: 1rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.1s ease; box-shadow: 0 5px 0 var(--text-main); }
     .btn-main:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--text-main); }
 
@@ -162,11 +162,11 @@
     /* --- MODAL DETAIL PESERTA --- */
     .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7); z-index: 10000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); animation: fadeIn 0.3s; padding: 20px; }
     .modal-overlay.active { display: flex; }
-    
+
     /* Sembunyikan scrollbar bawaan browser tapi tetap bisa di-scroll jari */
     .modal-content { background: white; width: calc(100% - 10px); max-width: 450px; border-radius: 28px; padding: 30px 20px; border: 4px solid var(--text-main); box-shadow: 8px 8px 0 var(--text-main); position: relative; max-height: 85vh; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
     .modal-content::-webkit-scrollbar { display: none; }
-    
+
     /* Tombol X dimasukkan ke dalam area kotak agar tidak terpotong (clipped) */
     .btn-close-modal { position: absolute; top: 12px; right: 12px; background: #fee2e2; border: 3px solid #e11d48; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #e11d48; cursor: pointer; transition: 0.1s ease; font-weight: 900; box-shadow: 3px 3px 0 #e11d48; z-index: 100; }
     .btn-close-modal:active { transform: translateY(2px); box-shadow: 1px 1px 0 #e11d48; }
@@ -195,13 +195,13 @@
       <h3 style="margin: 0 0 15px; color: #f59e0b; font-weight: 900; border-bottom: 2px dashed #f1f5f9; padding-bottom: 10px; position: sticky; top: -25px; background: white; z-index: 10;">
         <i data-lucide="edit" style="vertical-align: middle;"></i> Edit Data Peserta
       </h3>
-      
+
       <input type="hidden" id="edit_orderId">
-      
+
       <h4 style="margin: 10px 0 8px; font-size: 0.85rem; color: var(--text-muted); font-weight: 900;">👦 IDENTITAS ANAK</h4>
       <label class="input-label">Nama Lengkap</label>
       <input type="text" id="edit_nama" class="input-modern" style="border-color: #f59e0b; margin-bottom: 10px; padding: 12px;">
-      
+
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
         <div><label class="input-label">Panggilan</label><input type="text" id="edit_panggilan" class="input-modern" style="border-color: #f59e0b; margin-bottom: 10px; padding: 12px;"></div>
         <div><label class="input-label">Tahun Lahir</label><input type="number" id="edit_usia" class="input-modern" style="border-color: #f59e0b; margin-bottom: 10px; padding: 12px;" placeholder="Cth: 2018"></div>
@@ -218,10 +218,10 @@
         <div><label class="input-label">Nama Ayah</label><input type="text" id="edit_aba" class="input-modern" style="border-color: #f59e0b; margin-bottom: 10px; padding: 12px;"></div>
         <div><label class="input-label">Nama Ibu</label><input type="text" id="edit_umma" class="input-modern" style="border-color: #f59e0b; margin-bottom: 10px; padding: 12px;"></div>
       </div>
-      
+
       <label class="input-label">Domisili Lengkap</label>
       <input type="text" id="edit_domisili" class="input-modern" style="border-color: #f59e0b; margin-bottom: 10px; padding: 12px;">
-      
+
       <label class="input-label">Nomor WA Wali</label>
       <div style="display: flex; gap: 5px; margin-bottom: 15px;">
         <input type="text" value="+62" class="input-modern" style="width: 60px; background: #e2e8f0; border-color: #cbd5e1; text-align: center; padding: 12px;" disabled>
@@ -251,7 +251,7 @@
       <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 25px;">Masukkan 6 Digit PIN</p>
       <form onsubmit="event.preventDefault();" style="width: 100%;">
   <input type="text" autocomplete="username" value="admin" style="display: none;" aria-hidden="true">
-  
+
   <input type="password" autocomplete="current-password" pattern="[0-9]*" inputmode="numeric" id="pinInput" class="pin-input" placeholder="••••••" maxlength="6" oninput="cekAutoLogin()">
 </form>
 
@@ -315,7 +315,7 @@
         <div class="kpi-card" style="border-color: #3b82f6;"><h3 id="kpi-total-anak" style="color: #3b82f6;">0</h3><p>Total Pendaftar</p></div>
         <div class="kpi-card" style="border-color: #10b981;"><h3 id="kpi-total-uang" style="color: #10b981;">Rp 0</h3><p>Total Pemasukan</p></div>
         <div class="kpi-card" style="border-color: #eab308;"><h3 id="kpi-tagihan" style="color: #eab308;">Rp 0</h3><p id="kpi-label-tagihan">Tagihan (0 Anak)</p></div>
-        
+
         <div class="kpi-card" style="border-color: #f97316;"><h3 id="kpi-kuota" style="color: #f97316;">0 Seat</h3><p>Sisa Kuota Tiket</p></div>
         <div class="kpi-card" style="border-color: #8b5cf6;"><h3 id="kpi-hadir" style="color: #8b5cf6;">0 / 0</h3><p>Hadir</p></div>
         <div class="kpi-card" style="border-color: #f43f5e;"><h3 id="kpi-rating" style="color: #f43f5e;">0.0 ⭐</h3><p>Rating (<span id="kpi-ulasan">0</span> Ulasan)</p></div>
@@ -338,7 +338,7 @@
           <canvas id="chartPemasukan"></canvas>
         </div>
       </div>
-    </div> 
+    </div>
 
     <div id="tab-peserta" class="tab-content">
       <div class="form-card" style="margin-top: 0; margin-bottom: 20px;">
@@ -449,7 +449,7 @@
           <option value="copywriting">✍️ Pembuat Copywriting Broadcast WA</option>
           <option value="evaluasi">📊 Evaluasi Bisnis Menyeluruh</option>
         </select>
-        
+
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
           <button onclick="bukaKonsultanAI('chatgpt')" style="background: #10a37f; color: white; border: none; padding: 14px; border-radius: 14px; font-weight: 800; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
             <i data-lucide="cpu" style="width:18px;"></i> Ke ChatGPT
@@ -474,13 +474,13 @@
     <div id="tab-lf-admin" class="tab-content">
       <div class="form-card" style="margin-top: 0; margin-bottom: 25px;">
         <h3 style="margin-top:0; color:var(--primary);"><i data-lucide="plus-circle"></i> Upload Barang Temuan Baru</h3>
-        
+
         <label class="input-label">Nama Barang Logistik</label>
         <input type="text" id="lf_nama_barang" class="input-modern" placeholder="Cth: Botol Minum Tupperware Biru">
-        
+
         <label class="input-label">Deskripsi / Lokasi Temuan / Pesan Pengklaim</label>
         <textarea id="lf_deskripsi_barang" class="input-modern" style="min-height:80px; padding:12px;" placeholder="Cth: Ketemu di Aula lantai 2. Ada stiker nama pudar..."></textarea>
-        
+
         <div class="form-group" style="margin-bottom: 15px;">
           <label class="input-label">Foto Barang Temuan <span style="color:red;">*</span></label>
           <div class="upload-area" style="border: 3px dashed var(--primary); border-radius: 20px; padding: 30px 20px; text-align: center; background: #eff6ff; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden;">
@@ -488,14 +488,14 @@
             <p style="margin:0; font-size:0.85rem; font-weight:800; color:var(--text-main);" id="lf-upload-text">Klik untuk Ambil Foto / Pilih File</p>
             <input type="file" id="lf_file_foto" accept="image/*" onchange="prosesKonversiFotoLF(event)" style="position: absolute; inset: 0; opacity: 0; cursor: pointer;">
           </div>
-          
+
           <p style="margin: 8px 0 0 0; font-size: 0.75rem; color: #ef4444; font-weight: 800; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
             <i data-lucide="info" style="width: 14px; height: 14px;"></i> Disarankan ambil foto dengan rasio 1:1 atau Potrait
           </p>
         </div>
-        
+
         <div id="lf_preview_container" style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 15px; margin-bottom: 20px;"></div>
-        
+
         <div style="display: flex; gap: 10px; margin-top: 10px;">
            <button id="btnSimpanLF" onclick="simpanBarangLFKeServer()" class="btn-main" style="background:#10b981; flex: 1;">
              <i data-lucide="upload"></i> PUBLIKASIKAN KE KATALOG
@@ -504,7 +504,7 @@
              <i data-lucide="x"></i> BATAL
            </button>
         </div>
-      </div> 
+      </div>
 
       <div class="form-card" style="margin-top: 0; margin-bottom: 20px; padding: 15px;">
         <div class="filter-grid-dash">
@@ -543,13 +543,13 @@
 
       <div id="scanner-main" style="display: none; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; animation: fadeIn 0.5s;">
         <div class="form-card" style="text-align: center; margin-top: 0; padding: 25px 15px;">
-          
+
           <div style="display:flex; background:#f1f5f9; border-radius:12px; padding:4px; margin-bottom:15px; border:2px solid #e2e8f0;">
               <button id="btnModeCheckin" onclick="gantiModeScanner('checkin')" style="flex:1; padding:10px; border-radius:10px; border:none; background:var(--primary); color:white; font-weight:800; cursor:pointer; transition:0.2s; display:flex; align-items:center; justify-content:center; gap:5px;"><i data-lucide="log-in" style="width:16px;"></i> CHECK-IN</button>
               <button id="btnModeCheckout" onclick="gantiModeScanner('checkout')" style="flex:1; padding:10px; border-radius:10px; border:none; background:transparent; color:#64748b; font-weight:800; cursor:pointer; transition:0.2s; display:flex; align-items:center; justify-content:center; gap:5px;"><i data-lucide="log-out" style="width:16px;"></i> CHECK-OUT</button>
           </div>
           <h3 id="judulScanner" style="margin: 0 0 15px; color: var(--primary);">Pemindai Kedatangan 🟢</h3>
-          
+
           <div id="reader-wrapper" style="max-width: 350px; margin: 0 auto; aspect-ratio: 1/1;">
             <div id="qr-scanner-scoping">
               <div class="corner tl"></div><div class="corner tr"></div>
@@ -573,10 +573,10 @@
             <span style="display:flex; align-items:center; gap:8px;"><i data-lucide="user-minus" style="color: #e11d48;"></i> Belum Hadir</span>
             <span id="badge-belum-hadir" style="background:#fee2e2; color:#e11d48; padding:4px 10px; border-radius:20px; font-size:0.75rem; font-weight:800;">0 Anak</span>
           </h3>
-          
+
           <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 15px;">
               <input type="text" id="cariBelumHadir" class="input-modern" style="padding:10px; margin:0;" placeholder="Cari nama anak..." oninput="ketikSantai(renderTrackerKehadiran)">
-              
+
               <select id="filterAsramaTracker" class="input-modern" style="padding:10px; margin:0;" onchange="renderTrackerKehadiran()">
                 <option value="ALL">Semua Asrama</option>
               </select>
@@ -599,14 +599,14 @@
     // ==========================================
     // PASTE SCRIPT_URL KAMU DI SINI
     // ==========================================
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxa25GC1mdJCMpqfRDoxhQx7bMpr2R_w3YpVxnxzNNnH9YuEHyczlMY7jmISp-ZPfmSWw/exec"; 
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwEC0vwwqLBFW6U0YM1pQ0-t_MjPqnnqgHrdERRxD7wcFr5zneXT9HH4WwVkWYQrXny/exec";
 
     let globalDataPendaftar = []; let globalPengaturan = {}; let globalDataLF = [];
     let roleAdminAktif = ""; // Variabel Penyimpan Jabatan
     let chartUangInstance = null; let waktuMulaiMiliDetik = 0;
-    
+
     // Variabel Pusat Strategi & Dashboard
-    let petaSebaran = null; 
+    let petaSebaran = null;
     let chartInfoInst = null; let chartUsiaInst = null; let chartJamInst = null; let chartDomInst = null;
     let chartSekolahInst = null; let chartBayarInst = null; let chartHadirInst = null; let chartDecisionInst = null;
     let limitTabelPeserta = 100;
@@ -618,7 +618,7 @@
       clearTimeout(timerPencarian);
       timerPencarian = setTimeout(() => {
         fungsiEksekusi();
-      }, 400); 
+      }, 400);
     }
 
     const namaBulanArr = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
@@ -634,20 +634,20 @@
         la.innerHTML = '<div class="cube-loader"><div class="cube-face" style="transform: rotateY(0deg) translateZ(30px);"></div><div class="cube-face" style="transform: rotateY(90deg) translateZ(30px);"></div><div class="cube-face" style="transform: rotateY(180deg) translateZ(30px);"></div><div class="cube-face" style="transform: rotateY(270deg) translateZ(30px);"></div><div class="cube-face" style="transform: rotateX(90deg) translateZ(30px);"></div><div class="cube-face" style="transform: rotateX(-90deg) translateZ(30px);"></div></div>';
       } else if(animType === 'neural') {
         la.innerHTML = '<div class="neural-loader"><div class="neuron" style="animation-delay:0s"></div><div class="neuron" style="animation-delay:0.2s"></div><div class="neuron" style="animation-delay:0.4s"></div><div class="neuron" style="animation-delay:0.6s"></div></div>';
-      } else { 
+      } else {
         la.innerHTML = '<div class="steps-loader"><div class="step" style="animation-delay:0s"></div><div class="step" style="animation-delay:0.2s"></div><div class="step" style="animation-delay:0.4s"></div><div class="step" style="animation-delay:0.6s"></div></div>';
       }
-      
+
       lt.innerText = text;
       lc.classList.add('active');
     }
     function hideLoader() { document.getElementById('loaderCustom').classList.remove('active'); }
     function showToastAdmin(msg) { const t = document.getElementById('toastAdmin'); document.getElementById('toastAdmin-msg').innerText = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 4000); }
-    
-    function switchTab(tabId, btn) { 
-      document.querySelectorAll('.tab-content, .tab-btn').forEach(el => el.classList.remove('active')); 
-      document.getElementById(tabId).classList.add('active'); 
-      btn.classList.add('active'); 
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-content, .tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
     }
 
     function cekAutoLogin() {
@@ -665,7 +665,7 @@
 
     function formatTanggalLokal(tglMentah, pakaiJam = false) {
       if (!tglMentah) return "Unknown";
-      let d = new Date(tglMentah); if (isNaN(d.getTime())) return tglMentah; 
+      let d = new Date(tglMentah); if (isNaN(d.getTime())) return tglMentah;
       let tgl = ("0" + d.getDate()).slice(-2); let bln = namaBulanArr[d.getMonth()].substring(0,3); let thn = d.getFullYear();
       let hasil = `${tgl} ${bln} ${thn}`;
       if (pakaiJam) { let jam = ("0" + d.getHours()).slice(-2); let mnt = ("0" + d.getMinutes()).slice(-2); hasil += ` ${jam}:${mnt}`; }
@@ -681,20 +681,20 @@
       if (document.activeElement) document.activeElement.blur();
 
       showLoader("Memverifikasi Akses...", "radar");
-      waktuMulaiMiliDetik = performance.now(); 
-      
+      waktuMulaiMiliDetik = performance.now();
+
       fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "login_admin", pin: pin }) })
       .then(async res => { if (!res.ok) throw new Error("HTTP Error " + res.status); return res.json(); })
       .then(data => {
-        if (data.status === 'success') { 
+        if (data.status === 'success') {
           document.getElementById('loginScreen').style.opacity = '0';
-          setTimeout(() => { 
-            document.getElementById('loginScreen').style.display = 'none'; 
-            document.getElementById('mainAdmin').style.display = 'block'; 
-            
+          setTimeout(() => {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('mainAdmin').style.display = 'block';
+
             roleAdminAktif = data.role; // Menyimpan status jabatan ke memori
             if (data.role === "admin") {
-              document.body.classList.remove('mode-scanner'); 
+              document.body.classList.remove('mode-scanner');
               document.getElementById('teksHeader').innerText = "ADMIN";
               document.querySelector('.tabs-wrapper').style.display = 'block';
               document.querySelectorAll('.tab-btn').forEach(el => el.style.display = 'flex');
@@ -704,30 +704,30 @@
               switchTab('tab-peserta', document.querySelector('button[onclick="switchTab(\'tab-peserta\', this)"]'));
               showToastAdmin("Akses Admin Dibuka!");
             } else if (data.role === "super_admin") {
-              document.body.classList.remove('mode-scanner'); 
+              document.body.classList.remove('mode-scanner');
               document.getElementById('teksHeader').innerText = "SUPER ADMIN";
               document.querySelector('.tabs-wrapper').style.display = 'block';
               document.querySelectorAll('.tab-btn').forEach(el => el.style.display = 'flex');
               switchTab('tab-dash', document.querySelector('button[onclick="switchTab(\'tab-dash\', this)"]'));
               showToastAdmin("Akses Super Admin Dibuka!");
             } else {
-              document.body.classList.add('mode-scanner'); 
-              document.getElementById('floatingTools').style.display = 'flex'; 
+              document.body.classList.add('mode-scanner');
+              document.getElementById('floatingTools').style.display = 'flex';
               document.querySelector('.tabs-wrapper').style.display = 'none';
               switchTab('tab-scanner', document.getElementById('btnTabScanner'));
               showToastAdmin("Akses Scanner Siap! 📸");
             }
             prosesDataSukses(data);
-          }, 300); 
+          }, 300);
         } else {
             hideLoader(); pinInput.value = '';
             setTimeout(() => { pinInput.focus(); }, 500);
-            Swal.fire({ icon: 'error', title: 'Akses Ditolak', text: data.message }); 
+            Swal.fire({ icon: 'error', title: 'Akses Ditolak', text: data.message });
         }
-      }).catch(err => { 
+      }).catch(err => {
           hideLoader(); pinInput.value = '';
           setTimeout(() => { pinInput.focus(); }, 500);
-          Swal.fire({ icon: 'error', title: 'Sistem Terganggu', text: err.message }); 
+          Swal.fire({ icon: 'error', title: 'Sistem Terganggu', text: err.message });
       });
     }
 
@@ -735,11 +735,11 @@
       document.body.classList.remove('mode-scanner');
       document.getElementById('floatingTools').style.display = 'none';
       try { if (html5QrCode) { html5QrCode.stop().then(()=>{ html5QrCode.clear(); }).catch(e=>{}); isScanning = false; } } catch (err) {}
-      
+
       document.getElementById('scanner-main').style.display = 'none';
       document.getElementById('scanner-greeting').style.display = 'flex';
-      
-      document.getElementById('mainAdmin').style.display = 'none'; 
+
+      document.getElementById('mainAdmin').style.display = 'none';
       let ls = document.getElementById('loginScreen');
       ls.style.display = 'flex'; setTimeout(() => { ls.style.opacity = '1'; }, 50);
       document.getElementById('pinInput').value = '';
@@ -752,10 +752,10 @@
       if (iconFloat) iconFloat.classList.add('spin-anim');
 
       fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "get_admin_data" }) })
-      .then(res => res.json()).then(data => { 
-        if (data.status === "success") { 
+      .then(res => res.json()).then(data => {
+        if (data.status === "success") {
           prosesDataSukses(data); showToastAdmin("Data Terbaru Ditarik! 🚀");
-        } 
+        }
         resetTombolRefresh(btn, icon, iconFloat);
       }).catch(err => { resetTombolRefresh(btn, icon, iconFloat); });
     }
@@ -771,12 +771,12 @@
     function prosesDataSukses(data) {
       globalPengaturan = data.pengaturan;
       const hargaTiketFix = parseInt(String(globalPengaturan.Harga_Tiket || "410000").replace(/\D/g, ''));
-      
+
       // Mapping Object Sesuai 18 Kolom di Code.gs
       globalDataPendaftar = data.pendaftar.map(arr => {
         let d = new Date(arr.tanggal);
         let isValid = !isNaN(d.getTime());
-        
+
         return {
            tanggal: arr.tanggal, orderId: arr.orderId, email: arr.email, hp: arr.hp,
            namaAnak: arr.namaAnak, panggilan: arr.panggilan, usia: arr.usia,
@@ -784,8 +784,8 @@
            namaAba: arr.namaAba, namaUmma: arr.namaUmma, domisili: arr.domisili,
            penyakit: arr.penyakit, obat: arr.obat, infoDari: arr.infoDari,
            statusBayar: arr.statusBayar, bukti: arr.bukti, logHadir: arr.logHadir,
-           latitude: arr.latitude, longitude: arr.longitude, 
-           
+           latitude: arr.latitude, longitude: arr.longitude,
+
            // === TANGKAP DATA BARU DARI DATABASE ===
            jamKepulangan: arr.jamKepulangan || "",
            namaPenjemput: arr.namaPenjemput || "",
@@ -800,29 +800,29 @@
            nominal: hargaTiketFix
         };
       });
-      
+
       siapkanSemuaFilter(); renderDashboard(); filterTabelPeserta(); renderFormPengaturan(); renderTrackerKehadiran(); renderLogDariDatabase();
-      hideLoader(); 
+      hideLoader();
     }
 
     function siapkanSemuaFilter() {
       let setBulan = new Set(), setTahun = new Set(), setAsrama = new Set();
-      
-      globalDataPendaftar.forEach(p => { 
-        if(p.bln !== -1) { setBulan.add(p.bln); setTahun.add(p.thn); } 
+
+      globalDataPendaftar.forEach(p => {
+        if(p.bln !== -1) { setBulan.add(p.bln); setTahun.add(p.thn); }
         if(p.asrama && p.asrama !== "-") setAsrama.add(p.asrama); // 🟢 Tangkap nama asrama
       });
-      
+
       const isiSelect = (id, labelSemua, setValues, isBulan = false) => {
-        let el = document.getElementById(id); 
+        let el = document.getElementById(id);
         if(!el) return;
         el.innerHTML = `<option value="ALL">${labelSemua}</option>`;
         let arr = Array.from(setValues).sort();
         if(isBulan) arr.sort((a,b)=>a-b); else if(typeof arr[0] === 'number') arr.sort((a,b)=>b-a);
         arr.forEach(v => { el.innerHTML += `<option value="${v}">${isBulan ? namaBulanArr[v] : v}</option>`; });
       };
-      
-      isiSelect('dashFilterBulan', 'Semua Bulan', setBulan, true); 
+
+      isiSelect('dashFilterBulan', 'Semua Bulan', setBulan, true);
       isiSelect('dashFilterTahun', 'Semua Tahun', setTahun);
       isiSelect('filterAsramaTabel', 'Semua Asrama', setAsrama); // 🟢 Isi dropdown asrama (Tab Peserta)
       isiSelect('filterAsramaTracker', 'Semua Asrama', setAsrama); // 🟢 Isi dropdown asrama (Tab Scanner)
@@ -842,14 +842,14 @@
         return passBln && passThn;
       });
 
-      let totalLunas = 0; let totalUang = 0; 
+      let totalLunas = 0; let totalUang = 0;
       let totalUnpaid = 0; let uangUnpaid = 0;
       let totalHadir = 0;
       let totalRating = 0; let countRating = 0;
-      let rekapHarian = {}; 
+      let rekapHarian = {};
 
       filtered.forEach(p => {
-        if(p.statusBayar === "PAID") { totalLunas++; totalUang += p.nominal; } 
+        if(p.statusBayar === "PAID") { totalLunas++; totalUang += p.nominal; }
         else if (p.statusBayar === "UNPAID") { totalUnpaid++; uangUnpaid += p.nominal; }
 
         if(p.logHadir !== "") totalHadir++;
@@ -859,9 +859,9 @@
 
         let tglSaja = formatTanggalLokal(p.tanggal, false);
         if(!rekapHarian[tglSaja]) rekapHarian[tglSaja] = { uang: 0, anak: 0 };
-        
-        rekapHarian[tglSaja].anak += 1; 
-        if(p.statusBayar === "PAID") rekapHarian[tglSaja].uang += p.nominal; 
+
+        rekapHarian[tglSaja].anak += 1;
+        if(p.statusBayar === "PAID") rekapHarian[tglSaja].uang += p.nominal;
       });
 
       // Kalkulasi Sisa Kuota dari globalPengaturan (Default 180 jika belum diatur)
@@ -876,7 +876,7 @@
       document.getElementById('kpi-label-tagihan').innerText = `Tagihan (${totalUnpaid} Anak)`;
       document.getElementById('kpi-kuota').innerText = sisaKuota + " Seat";
       document.getElementById('kpi-hadir').innerText = `${totalHadir} / ${filtered.length}`;
-      
+
       let avgRating = countRating > 0 ? (totalRating / countRating).toFixed(1) : "0.0";
       document.getElementById('kpi-rating').innerText = `${avgRating} ⭐`;
       document.getElementById('kpi-ulasan').innerText = countRating;
@@ -884,45 +884,45 @@
       // === CHART GANDA DENGAN PERBAIKAN FORMAT "jt" & TOOLTIP ===
       const ctxUang = document.getElementById('chartPemasukan').getContext('2d');
       if(chartUangInstance) chartUangInstance.destroy();
-      
-      let labelTgl = Object.keys(rekapHarian).sort(); 
+
+      let labelTgl = Object.keys(rekapHarian).sort();
       let dataUang = labelTgl.map(tgl => rekapHarian[tgl].uang);
       let dataAnak = labelTgl.map(tgl => rekapHarian[tgl].anak);
 
       chartUangInstance = new Chart(ctxUang, {
-        type: 'line', 
-        data: { 
-          labels: labelTgl, 
+        type: 'line',
+        data: {
+          labels: labelTgl,
           datasets: [
             { label: 'Pemasukan', data: dataUang, borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.1)', borderWidth: 3, fill: true, tension: 0.3, yAxisID: 'y' },
             { label: 'Pendaftar Baru', data: dataAnak, borderColor: '#3b82f6', backgroundColor: 'transparent', borderWidth: 3, borderDash: [5, 5], fill: false, tension: 0.3, yAxisID: 'y1' }
-          ] 
+          ]
         },
-        options: { 
+        options: {
           responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
-          plugins: { 
+          plugins: {
             legend: { display: true, position: 'top', labels: { usePointStyle: true, boxWidth: 8 } },
-            tooltip: { 
-              callbacks: { 
-                label: function(ctx) { 
-                  let l = ctx.dataset.label || ''; if(l) l += ': '; 
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  let l = ctx.dataset.label || ''; if(l) l += ': ';
                   // Deteksi dia ada di garis mana berdasarkan sumbu y (Bukan array index)
-                  if(ctx.dataset.yAxisID === 'y') return l + 'Rp ' + ctx.parsed.y.toLocaleString('id-ID'); 
-                  else return l + ctx.parsed.y + ' Anak'; 
-                } 
-              } 
+                  if(ctx.dataset.yAxisID === 'y') return l + 'Rp ' + ctx.parsed.y.toLocaleString('id-ID');
+                  else return l + ctx.parsed.y + ' Anak';
+                }
+              }
             }
           },
           scales: {
-            y: { 
-              type: 'linear', display: true, position: 'left', title: { display: true, text: 'Rupiah' }, 
-              ticks: { 
+            y: {
+              type: 'linear', display: true, position: 'left', title: { display: true, text: 'Rupiah' },
+              ticks: {
                 callback: function(value) {
                   if (value >= 1000000) return (value / 1000000) + ' jt'; // Diubah jadi "jt"
                   if (value >= 1000) return (value / 1000) + 'k';
                   return value;
                 }
-              } 
+              }
             },
             y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Anak' }, grid: { drawOnChartArea: false }, ticks: { precision: 0 } }
           }
@@ -952,11 +952,11 @@
 
       let filtered = globalDataPendaftar.filter(p => {
         // 1. Logika Pencarian Teks
-        let passKeyword = (!keyword) || 
-                          p.namaAnak.toLowerCase().includes(keyword) || 
-                          p.orderId.toLowerCase().includes(keyword) || 
+        let passKeyword = (!keyword) ||
+                          p.namaAnak.toLowerCase().includes(keyword) ||
+                          p.orderId.toLowerCase().includes(keyword) ||
                           (p.sekolah && p.sekolah.toLowerCase().includes(keyword));
-        
+
         // 2. Logika Filter Asrama
         let passAsrama = (filterAsrama === "ALL") || (p.asrama === filterAsrama);
 
@@ -967,21 +967,21 @@
       if(filtered.length === 0) { tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:30px;">Tidak ada pendaftar.</td></tr>`; return; }
 
       let dataTampil = filtered.slice(0, limitTabelPeserta);
-      window.dataTampilSementara = dataTampil; 
+      window.dataTampilSementara = dataTampil;
 
       dataTampil.forEach((p, idx) => {
         let waLink = String(p.hp).replace(/[^0-9]/g, ''); if (waLink.startsWith('0')) waLink = '62' + waLink.substring(1);
-        
+
         let btnBukti = "";
         // Logika Sensor Bukti Transfer
         if(roleAdminAktif === "super_admin") {
             let linkGambar = p.bukti;
             if(linkGambar.includes('/d/')){ let m = linkGambar.match(/\/d\/([a-zA-Z0-9_-]+)/); if(m) linkGambar = "https://drive.google.com/thumbnail?id=" + m[1] + "&sz=w1000"; }
-            btnBukti = p.bukti !== "Ikut Anak Ke-1" && p.bukti !== "Tidak ada file" 
-                ? `<a href="${linkGambar}" target="_blank" onclick="event.stopPropagation();" class="btn-link">Lihat Struk</a>` 
+            btnBukti = p.bukti !== "Ikut Anak Ke-1" && p.bukti !== "Tidak ada file"
+                ? `<a href="${linkGambar}" target="_blank" onclick="event.stopPropagation();" class="btn-link">Lihat Struk</a>`
                 : `<span style="color:#94a3b8; font-size:0.7rem; font-weight:700;">${p.bukti}</span>`;
         }
-        
+
         let orderGroup = p.orderId.split('-').slice(0, 2).join('-');
         let badgeOrder = `
           <br>
@@ -990,11 +990,11 @@
           </button>
         `;
 
-        let badgeBayar = p.statusBayar === "UNPAID" ? `<span style="background:#fee2e2; color:#e11d48; padding:4px 8px; border-radius:6px; font-weight:800; font-size:0.7rem;">UNPAID</span>` 
-                       : (p.statusBayar === "PAID" ? `<span style="background:#dcfce7; color:#10b981; padding:4px 8px; border-radius:6px; font-weight:800; font-size:0.7rem;">PAID</span>` 
+        let badgeBayar = p.statusBayar === "UNPAID" ? `<span style="background:#fee2e2; color:#e11d48; padding:4px 8px; border-radius:6px; font-weight:800; font-size:0.7rem;">UNPAID</span>`
+                       : (p.statusBayar === "PAID" ? `<span style="background:#dcfce7; color:#10b981; padding:4px 8px; border-radius:6px; font-weight:800; font-size:0.7rem;">PAID</span>`
                        : `<span style="background:#f1f5f9; color:#64748b; padding:4px 8px; border-radius:6px; font-weight:800; font-size:0.7rem;">GABUNG KAKAK</span>`);
 
-        let btnUbahStatus = (p.statusBayar === "UNPAID" || p.statusBayar === "PAID") 
+        let btnUbahStatus = (p.statusBayar === "UNPAID" || p.statusBayar === "PAID")
             ? `<button onclick="event.stopPropagation(); updateBayar('${p.orderId}', '${p.statusBayar === 'PAID' ? 'UNPAID' : 'PAID'}')" style="margin-top:5px; background:var(--primary); color:white; border:none; padding:4px 8px; border-radius:6px; font-weight:700; font-size:0.7rem; cursor:pointer;">Ubah Status</button>`
             : "";
         let btnHapus = (p.statusBayar === "UNPAID")
@@ -1044,17 +1044,17 @@
 
       if (filtered.length > limitTabelPeserta) {
         tbody.innerHTML += `<tr><td colspan="5" style="text-align:center; padding:25px;"><button onclick="limitTabelPeserta+=100; renderTabelPeserta();" class="btn-main" style="width:auto; margin:0 auto; background:#f8fafc; color:var(--text-main); border:2px solid #e2e8f0; box-shadow:none;"><i data-lucide="chevron-down"></i> Tampilkan Lebih Banyak</button></td></tr>`;
-        lucide.createIcons(); 
+        lucide.createIcons();
       }
     }
 
     function updateBayar(orderId, statusBaru) {
        // Tidak menggunakan showLoader() agar tidak nge-freeze
-       showToastAdmin("Sedang memproses..."); 
+       showToastAdmin("Sedang memproses...");
        fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "update_bayar", orderId: orderId, status_baru: statusBaru }) })
-       .then(res => res.json()).then(res => { 
-          if(res.status === 'success') { 
-             tarikDataLatarBelakang(); 
+       .then(res => res.json()).then(res => {
+          if(res.status === 'success') {
+             tarikDataLatarBelakang();
              showToastAdmin("Berhasil! Status Diubah ✅");
           }
        }).catch(err => { showToastAdmin("Gagal mengubah status ❌"); });
@@ -1063,15 +1063,15 @@
     function bukaDetail(idx) {
       const p = window.dataTampilSementara[idx];
       if (!p) return;
-      
+
       let wali = (p.namaUmma !== "-" && p.namaUmma !== "") ? p.namaUmma : p.namaAba;
-      let badgeWali = (p.namaUmma !== "-" && p.namaUmma !== "") 
-          ? `<span style="background:#fdf2f8; color:#be185d; padding:2px 8px; border-radius:12px; font-size:0.65rem; border:1px solid #fbcfe8; font-weight:900; box-shadow: 2px 2px 0 #fbcfe8;">🧕 BUNDA</span>` 
+      let badgeWali = (p.namaUmma !== "-" && p.namaUmma !== "")
+          ? `<span style="background:#fdf2f8; color:#be185d; padding:2px 8px; border-radius:12px; font-size:0.65rem; border:1px solid #fbcfe8; font-weight:900; box-shadow: 2px 2px 0 #fbcfe8;">🧕 BUNDA</span>`
           : `<span style="background:#eff6ff; color:#1d4ed8; padding:2px 8px; border-radius:12px; font-size:0.65rem; border:1px solid #bfdbfe; font-weight:900; box-shadow: 2px 2px 0 #bfdbfe;">👨 AYAH</span>`;
       let hpClean = String(p.hp).replace(/\D/g, ''); if(hpClean.startsWith('0')) hpClean = '62' + hpClean.substring(1);
-      
+
       let linkQR = `https://quickchart.io/qr?text=${encodeURIComponent(p.orderId)}&centerImageUrl=https%3A%2F%2Fi.imgur.com%2FCLJWSIC.png&centerImageSizeRatio=0.3&size=300&ecLevel=H&margin=2&dark=3b82f6`;
-      
+
       // PENGAMAN UMUR DI POP-UP
       let detailThnLahir = parseInt(String(p.usia).replace(/\D/g, ''));
       let thnSkrgDetail = new Date().getFullYear();
@@ -1100,7 +1100,7 @@
 
       // Tombol Chat WA & Tagih WA
       let btnWaHtml = `<button onclick="window.open('https://wa.me/${hpClean}', '_blank')" style="background:#25D366; color:white; border:none; padding:4px 8px; border-radius:8px; font-size:0.7rem; font-weight:800; cursor:pointer; margin-left:8px; box-shadow:0 2px 5px rgba(37,211,102,0.3);"><i data-lucide="message-circle" style="width:12px; vertical-align:middle;"></i> Chat</button>`;
-      
+
       if (p.statusBayar === "UNPAID") {
           btnWaHtml += `<button onclick="tagihBayaranWA('${p.orderId}')" style="background:#eab308; color:#713f12; border:none; padding:4px 8px; border-radius:8px; font-size:0.7rem; font-weight:900; cursor:pointer; margin-left:5px; box-shadow:0 2px 5px rgba(234,179,8,0.3);"><i data-lucide="alert-circle" style="width:12px; vertical-align:middle;"></i> TAGIH</button>`;
       }
@@ -1112,7 +1112,7 @@
           <span style="display:inline-block; margin-top:8px; background:var(--bg-light); border:2px solid var(--text-main); padding:4px 12px; border-radius:12px; font-size:0.8rem; font-weight:900; color:var(--text-main); box-shadow:2px 2px 0 var(--text-main);">🎫 ID: ${p.orderId}</span>
           <button onclick="editPeserta('${p.orderId}')" style="display:inline-block; margin-top:8px; margin-left:5px; background:#fef08a; border:2px solid var(--text-main); padding:4px 12px; border-radius:12px; font-size:0.8rem; font-weight:900; color:#a16207; cursor:pointer; box-shadow:2px 2px 0 var(--text-main); transition:0.1s;" onactive="this.style.transform='translateY(2px)'"><i data-lucide="edit-3" style="width:14px; vertical-align:middle;"></i> EDIT</button>
         </div>
-        
+
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
            <div style="background:#f8fafc; border:3px solid var(--text-main); padding:10px; border-radius:16px; text-align:center; box-shadow: 4px 4px 0 var(--text-main); display:flex; flex-direction:column; justify-content:space-between;">
              <div>
@@ -1121,7 +1121,7 @@
              </div>
              <button onclick="kirimTiketUlangWA('${p.orderId}')" style="width:100%; padding:10px; background:var(--primary); color:white; border:2px solid var(--text-main); border-radius:10px; font-size:0.75rem; font-weight:900; cursor:pointer; box-shadow:0 3px 0 var(--text-main); transition:0.1s ease;" onmousedown="this.style.transform='translateY(3px)'; this.style.boxShadow='none';" onmouseup="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 0 var(--text-main)';"><i data-lucide="send" style="width:12px; height:12px; vertical-align:middle;"></i> KIRIM WA</button>
            </div>
-           
+
            ${strukHTML}
         </div>
 
@@ -1133,10 +1133,10 @@
              </div>
              <div><span style="color:var(--text-muted); font-size:0.7rem; display:block; font-weight:900;">USIA</span> ${detailUmur}</div>
              <div><span style="color:var(--text-muted); font-size:0.7rem; display:block; font-weight:900;">SEKOLAH</span> ${p.sekolah} (Kls ${p.kelasSekolah})</div>
-             
+
              <!-- 🟢 INFO PENEMPATAN KELOMPOK DI DETAIL PESERTA 🟢 -->
              <div style="grid-column: 1 / -1; border-top:2px dashed #cbd5e1; padding-top:10px; margin-top:4px; background:#eff6ff; padding:12px; border-radius:12px;">
-                <span style="color:var(--primary); font-size:0.8rem; display:block; font-weight:900; margin-bottom:8px;"><i data-lucide="map-pin" style="width:14px; vertical-align:middle;"></i> PENEMPATAN KELOMPOK</span> 
+                <span style="color:var(--primary); font-size:0.8rem; display:block; font-weight:900; margin-bottom:8px;"><i data-lucide="map-pin" style="width:14px; vertical-align:middle;"></i> PENEMPATAN KELOMPOK</span>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                     <div style="background:white; padding:8px; border-radius:8px; border:1px solid #bfdbfe;">
                         <span style="font-size:0.7rem; color:#64748b; font-weight:800;">ASRAMA</span><br>
@@ -1154,7 +1154,7 @@
              <div style="grid-column: 1 / -1; border-top:2px dashed #cbd5e1; padding-top:10px; margin-top:4px;">
                 <span style="color:var(--text-muted); font-size:0.7rem; display:block; font-weight:900;">DOMISILI</span> ${p.domisili}
              </div>
-             
+
              <div style="grid-column: 1 / -1; background:#fffbeb; border:3px dashed #f59e0b; padding:15px; border-radius:16px; margin-top:10px; box-shadow: 0 4px 0 rgba(245, 158, 11, 0.2);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
                     <span style="color:#b45309; font-size:0.85rem; font-weight:900; display:flex; align-items:center; gap:6px;">
@@ -1176,7 +1176,7 @@
                     }).join('') }
                 </div>
              </div>
-             
+
 <div style="grid-column: 1 / -1; background:#fef2f2; border:2px solid #ef4444; padding:12px; border-radius:12px; margin-top:5px;">
                  <span style="color:#b91c1c; font-size:0.75rem; font-weight:900; display:flex; align-items:center; gap:5px; margin-bottom:5px;"><i data-lucide="alert-circle" style="width:14px;"></i> MEDIS & OBAT PRIBADI</span>
                  <span style="color:#7f1d1d; font-weight:800; font-size:0.9rem;">${p.penyakit} / ${p.obat}</span>
@@ -1234,7 +1234,7 @@
         let btnIn = document.getElementById('btnModeCheckin');
         let btnOut = document.getElementById('btnModeCheckout');
         let judul = document.getElementById('judulScanner');
-        
+
         if(mode === "checkin") {
             btnIn.style.background = "var(--primary)"; btnIn.style.color = "white";
             btnOut.style.background = "transparent"; btnOut.style.color = "#64748b";
@@ -1244,7 +1244,7 @@
             btnIn.style.background = "transparent"; btnIn.style.color = "#64748b";
             judul.innerHTML = "Pemindai Kepulangan 🔴"; judul.style.color = "#e11d48";
         }
-        
+
         // 🔥 SEGERA RE-RENDER LOG DAN TRACKER AGAR MENYESUAIKAN TOGGLE SECARA REAL-TIME
         renderLogDariDatabase();
         renderTrackerKehadiran();
@@ -1299,23 +1299,23 @@
             if(res.status === 'success') {
                 p.jamKepulangan = res.jam;
                 showToastAdmin("Check-Out Berhasil! ✅");
-                
+
                 // --- TAMBAHAN BARU: RENDER ULANG LAYAR ---
-                renderLogDariDatabase(); 
-                
+                renderLogDariDatabase();
+
                 // Susun Pesan WA
                 let noWali = String(p.hp).replace(/\D/g, '');
                 if (noWali.startsWith('0')) noWali = '62' + noWali.substring(1);
-                
+
                 let linkSertifikat = `tiket.bravekidsproject.biz.id/e-sertif.html?id=${p.orderId}`;
                 let sapaan = (p.namaUmma && p.namaUmma !== "-") ? "Bunda" : "Ayah";
-                
+
                 // 🏅 LOGIKA PENGGABUNGAN LENCANA AGAR NATURAL
                 let kalimatLencana = "";
                 if (lencanaTeks && lencanaTeks.trim() !== "") {
                   // Pecah berdasarkan koma, lalu bersihkan spasi nyasar
                   let arrayLencana = lencanaTeks.split(",").map(item => item.trim()).filter(item => item !== "");
-                  
+
                   if (arrayLencana.length === 1) {
                     kalimatLencana = `menonjolkan sikap pahlawan hebat, yaitu *${arrayLencana[0]}*`;
                   } else if (arrayLencana.length >= 2) {
@@ -1326,10 +1326,10 @@
                   // Fallback jika tidak ada lencana yang dicentang
                   kalimatLencana = "menunjukkan sikap sebagai pahlawan kecil yang mandiri dan luar biasa";
                 }
-                
+
                 // 🚀 TEMPLATE PESAN WA: APRESIASI PAHLAWAN (CLEAN LINK)
                 let pesan = `Assalamu'alaikum ${sapaan}. 🌟\n\nPerpisahan hari ini membawa haru. *${p.panggilan}* pulang membawa cerita dan pengalaman baru. Kami bersaksi bahwa ananda anak yang hebat, ia benar-benar ${kalimatLencana}.\n\nSebagai apresiasi, ini E-Sertifikat kelulusan ananda beserta pengecekan barang tertinggal:\n👉 ${linkSertifikat}\n\nJazakumullahu khair atas kepercayaannya. Tolong sampaikan cinta dan pelukan paling hangat dari kami untuknya! ❤️`;
-                
+
                 window.open(`https://api.whatsapp.com/send?phone=${noWali}&text=${encodeURIComponent(pesan)}`, "_blank");
                 resetScanner();
             } else {
@@ -1344,29 +1344,29 @@
     function handleLencanaCheck(cb, orderId, labelId) {
       let checkboxes = document.querySelectorAll(`.chk-lencana-${orderId}`);
       let checkedValues = [];
-      
+
       checkboxes.forEach(c => {
         if (c.checked) checkedValues.push(c.value);
       });
-      
+
       // Kunci jika lebih dari 2
       if (checkedValues.length > 2) {
         cb.checked = false;
         showToastAdmin("Maksimal hanya 2 lencana! ✌️");
         return;
       }
-      
+
       // Update warna border label secara real-time
       let labelEl = document.getElementById(labelId);
       if(cb.checked) labelEl.style.borderColor = '#10b981';
       else labelEl.style.borderColor = '#e2e8f0';
-      
+
       // Update counter
       document.getElementById(`counter_lencana_${orderId}`).innerText = `${checkedValues.length}/2 Terpilih`;
 
       // Gabungkan hasil dengan koma
       let hasilGabungan = checkedValues.join(', ');
-      
+
       showToastAdmin("Menyimpan lencana...");
       fetch(SCRIPT_URL, {
         method: 'POST',
@@ -1378,12 +1378,12 @@
           // Update data lokal
           let peserta = globalDataPendaftar.find(x => x.orderId === orderId);
           if(peserta) peserta.lencana = hasilGabungan;
-          
+
           showToastAdmin("Lencana Tersimpan! 🏅");
-          
+
           // Render ulang tabel di background agar badge icon langsung muncul
           let oldScroll = document.querySelector('.table-container').scrollTop;
-          renderTabelPeserta(); 
+          renderTabelPeserta();
           document.querySelector('.table-container').scrollTop = oldScroll;
         } else {
           showToastAdmin("Gagal menyimpan ❌");
@@ -1419,7 +1419,7 @@
     function eksporKeCSV() {
       let csvContent = "data:text/csv;charset=utf-8,Tanggal,Order ID,Nama Anak,Panggilan,Usia,Sekolah,Kelas Sekolah,Penyakit,Obat,Wali,No WA,Domisili,Status Bayar\n";
       globalDataPendaftar.forEach(p => {
-        let tgl = formatTanggalLokal(p.tanggal, true).replace(/,/g, ''); 
+        let tgl = formatTanggalLokal(p.tanggal, true).replace(/,/g, '');
         csvContent += `${tgl},${p.orderId},${String(p.namaAnak).replace(/,/g, ' ')},${p.panggilan},${p.usia},${String(p.sekolah).replace(/,/g, '')},${p.kelasSekolah},${String(p.penyakit).replace(/,/g, ' ')},${String(p.obat).replace(/,/g, ' ')},${p.namaAba!=='-'?p.namaAba:p.namaUmma},${String(p.hp).replace(/,/g, '')},${String(p.domisili).replace(/,/g, ' ')},${p.statusBayar}\n`;
       });
       const encodedUri = encodeURI(csvContent); const link = document.createElement("a"); link.setAttribute("href", encodedUri); link.setAttribute("download", "Peserta_Brave_Kids.csv"); document.body.appendChild(link); link.click(); document.body.removeChild(link);
@@ -1432,8 +1432,8 @@
       let html = "";
       for (let key in globalPengaturan) {
         let val = globalPengaturan[key]; let labelBersih = key.replace(/_/g, ' ');
-        if (key.includes("S&K")) { html += `<label class="input-label" style="margin-top: 15px; color: var(--primary);">${labelBersih}</label><textarea id="setting_${key}" class="input-modern" style="min-height: 150px; resize: vertical;" placeholder="Ketik S&K di sini...">${val}</textarea>`; } 
-        else if (key.includes("PIN")) { html += `<label class="input-label" style="margin-top: 15px;">${labelBersih}</label><input type="text" id="setting_${key}" class="input-modern" value="${val}" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')">`; } 
+        if (key.includes("S&K")) { html += `<label class="input-label" style="margin-top: 15px; color: var(--primary);">${labelBersih}</label><textarea id="setting_${key}" class="input-modern" style="min-height: 150px; resize: vertical;" placeholder="Ketik S&K di sini...">${val}</textarea>`; }
+        else if (key.includes("PIN")) { html += `<label class="input-label" style="margin-top: 15px;">${labelBersih}</label><input type="text" id="setting_${key}" class="input-modern" value="${val}" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')">`; }
         else if (key.includes("Harga")) { html += `<label class="input-label" style="margin-top: 15px;">${labelBersih}</label><input type="text" id="setting_${key}" class="input-modern" value="Rp ${parseInt(val).toLocaleString('id-ID')}" oninput="formatRupiah(this)">`; }
         else { html += `<label class="input-label" style="margin-top: 15px;">${labelBersih}</label><input type="text" id="setting_${key}" class="input-modern" value="${val}">`; }
       }
@@ -1441,7 +1441,7 @@
     }
 
     function simpanPengaturan() {
-      let dataUpdate = {}; 
+      let dataUpdate = {};
       for (let k in globalPengaturan) {
         let valMentah = document.getElementById('setting_'+k).value;
         if (k.includes("Harga")) valMentah = valMentah.replace(/[^0-9]/g, '');
@@ -1476,10 +1476,10 @@
     }
 
     function onScanSuccess(decodedText) {
-      if (isScanning) return; 
-      isScanning = true; 
-      document.getElementById('qr-scanner-scoping').classList.add('lock-on'); 
-      
+      if (isScanning) return;
+      isScanning = true;
+      document.getElementById('qr-scanner-scoping').classList.add('lock-on');
+
       try {
           // Cari spesifik 1 anak berdasarkan Order ID Uniknya
           let peserta = globalDataPendaftar.find(p => p.orderId === decodedText);
@@ -1510,7 +1510,7 @@
                  Swal.fire({ icon: 'error', title: 'Belum Hadir?', text: `Anak ini belum tercatat check-in, tapi mau check-out? Cek Admin.` }).then(() => resetScanner());
                  return;
               }
-              
+
               // Panggil pop-up Keamanan Penjemput & WA
               tampilkanPopupCheckOut(peserta);
               return; // Stop eksekusi agar tidak lanjut ke logika check-in di bawah
@@ -1527,13 +1527,13 @@
           // Sukses Check-In
           let audSc = document.getElementById('audioSukses'); if(audSc) audSc.play().catch(e=>{});
           const d = new Date(); const waktuSaja = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2) + " WIB";
-          peserta.logHadir = waktuSaja; 
-          
+          peserta.logHadir = waktuSaja;
+
           // PERBAIKAN CATCH AGAR TIDAK FREEZE
           fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "scan_qr", qr_code: decodedText }) })
           .catch(e => { console.log(e); resetScanner(); });
 
-          renderTrackerKehadiran(); 
+          renderTrackerKehadiran();
           renderLogDariDatabase();
 
           // Hitung Umur Riil untuk Pop-up lapangan
@@ -1542,7 +1542,7 @@
 
           let idGrupUtama = peserta.orderId.split('-').slice(0, 2).join('-');
           let totalSaudaraKandung = globalDataPendaftar.filter(p => p.orderId.startsWith(idGrupUtama)).length;
-          let badgeSiblingHTML = totalSaudaraKandung > 1 
+          let badgeSiblingHTML = totalSaudaraKandung > 1
             ? `<div style="background:#e0f2fe; color:#0369a1; padding:6px 12px; border-radius:10px; font-size:0.8rem; font-weight:900; margin-top:10px; display:inline-block; border:2px solid #0369a1;"><i data-lucide="users" style="width:14px; height:14px; vertical-align:middle;"></i> Rombongan: ${totalSaudaraKandung} Saudara (1 Struk)</div>`
             : `<div style="background:#f1f5f9; color:#475569; padding:6px 12px; border-radius:10px; font-size:0.8rem; font-weight:800; margin-top:10px; display:inline-block;">Peserta Tunggal</div>`;
 
@@ -1559,11 +1559,11 @@
                     <i data-lucide="check" style="width: 45px; height: 45px; stroke-width:3;"></i>
                  </div>
                  <h2 style="margin:0 0 15px; font-weight:900; color:#10b981; font-size:1.8rem; letter-spacing:-0.5px;">CHECK-IN BERHASIL</h2>
-                 
+
                  <div style="background:#fff; border:3px solid var(--text-main); padding:20px 15px; border-radius:20px; text-align:left; box-shadow:4px 4px 0 var(--text-main);">
                     <div style="font-size:0.75rem; color:var(--text-muted); font-weight:900; tracking:1px;">NAMA LENGKAP PESERTA</div>
                     <h3 style="margin:2px 0 12px; color:var(--primary); font-size:1.6rem; font-weight:900; line-height:1.2;">${peserta.namaAnak} <span style="color:var(--text-main); font-size:1.1rem;">("${peserta.panggilan}")</span></h3>
-                    
+
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; border-top:2px dashed #e2e8f0; padding-top:12px; font-size:0.95rem; font-weight:800;">
                        <div><span style="color:var(--text-muted); font-size:0.75rem; display:block; font-weight:900;">USIA</span> <span style="color:var(--text-main); font-size:1.1rem;">${displayUmurPopup}</span></div>
                        <div><span style="color:var(--text-muted); font-size:0.75rem; display:block; font-weight:900;">ASAL SEKOLAH</span> <span style="color:var(--text-main); font-size:1.1rem;">${peserta.sekolah} (${peserta.kelasSekolah})</span></div>
@@ -1612,15 +1612,15 @@
             confirmButtonColor: '#10b981',
             allowOutsideClick: false,
             didRender: () => lucide.createIcons()
-          }).then(() => { 
-            isScanning = false; 
-            document.getElementById('qr-scanner-scoping').classList.remove('lock-on'); 
+          }).then(() => {
+            isScanning = false;
+            document.getElementById('qr-scanner-scoping').classList.remove('lock-on');
           });
 
-      } catch(err) { 
-        console.error(err); 
-        isScanning = false; 
-        document.getElementById('qr-scanner-scoping').classList.remove('lock-on'); 
+      } catch(err) {
+        console.error(err);
+        isScanning = false;
+        document.getElementById('qr-scanner-scoping').classList.remove('lock-on');
       }
     }
 
@@ -1628,15 +1628,15 @@
       const logArea = document.getElementById('logScannerArea');
       const badgeLog = document.getElementById('badge-log-harian');
       if(!logArea) return;
-      
-      const h3Element = logArea.previousElementSibling; 
+
+      const h3Element = logArea.previousElementSibling;
       const titleSpan = h3Element.querySelector('span:first-child');
-      
+
       if (modeScannerAktif === "checkin") {
         // Mode Check-In: Tampilkan yang sudah hadir masuk
         titleSpan.innerHTML = `<i data-lucide="clipboard-check" style="color: #10b981;"></i> Log Kedatangan`;
         let datangHariIni = globalDataPendaftar.filter(p => p.logHadir !== "");
-        
+
         logArea.innerHTML = datangHariIni.map(p => `
           <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; border: 1px solid #e2e8f0; padding: 12px; border-radius: 16px; background: white;">
              <div style="background:#dcfce7; color:#065f46; width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center;"><i data-lucide="check" style="width:20px;"></i></div>
@@ -1655,7 +1655,7 @@
         // Mode Check-Out: Tampilkan log yang sudah pulang
         titleSpan.innerHTML = `<i data-lucide="log-out" style="color: #e11d48;"></i> Log Kepulangan`;
         let pulangHariIni = globalDataPendaftar.filter(p => p.jamKepulangan !== "");
-        
+
         logArea.innerHTML = pulangHariIni.map(p => `
           <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; border: 1px solid #e2e8f0; padding: 12px; border-radius: 16px; background: white;">
              <div style="background:#fee2e2; color:#e11d48; width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center;"><i data-lucide="log-out" style="width:20px;"></i></div>
@@ -1675,31 +1675,31 @@
     }
 
     function renderTrackerKehadiran() {
-      const trackerArea = document.getElementById('trackerArea'); 
+      const trackerArea = document.getElementById('trackerArea');
       const inputCari = document.getElementById('cariBelumHadir');
       const dropdownAsrama = document.getElementById('filterAsramaTracker');
       if(!trackerArea || !inputCari) return;
-      
+
       const keyword = inputCari.value.toLowerCase();
       const filterAsrama = dropdownAsrama ? dropdownAsrama.value : "ALL"; // 🟢 Tangkap nilai dropdown
-      
-      const h3Element = inputCari.parentElement.previousElementSibling; 
+
+      const h3Element = inputCari.parentElement.previousElementSibling;
       const titleSpan = h3Element.querySelector('span:first-child');
       const badgeBelum = document.getElementById('badge-belum-hadir');
 
       if (modeScannerAktif === "checkin") {
         // TAMPILAN SISI TOGGLE CHECK-IN
         titleSpan.innerHTML = `<i data-lucide="user-minus" style="color: #e11d48;"></i> Belum Check-In`;
-        
+
         let belumHadir = globalDataPendaftar.filter(p => p.logHadir === "" && p.statusBayar !== "UNPAID");
-        
+
         // Terapkan Filter Ganda (Kata Kunci & Asrama)
         belumHadir = belumHadir.filter(p => {
            let passKeyword = !keyword || p.namaAnak.toLowerCase().includes(keyword);
            let passAsrama = filterAsrama === "ALL" || p.asrama === filterAsrama;
            return passKeyword && passAsrama;
         });
-        
+
         if(badgeBelum) {
           badgeBelum.innerText = belumHadir.length + " Anak";
           badgeBelum.style.background = "#fee2e2"; badgeBelum.style.color = "#e11d48";
@@ -1720,16 +1720,16 @@
       } else {
         // TAMPILAN SISI TOGGLE CHECK-OUT
         titleSpan.innerHTML = `<i data-lucide="user-x" style="color: #f59e0b;"></i> Belum Pulang (Di Lokasi)`;
-        
+
         let belumPulang = globalDataPendaftar.filter(p => p.logHadir !== "" && p.jamKepulangan === "");
-        
+
         // Terapkan Filter Ganda (Kata Kunci & Asrama)
         belumPulang = belumPulang.filter(p => {
            let passKeyword = !keyword || p.namaAnak.toLowerCase().includes(keyword);
            let passAsrama = filterAsrama === "ALL" || p.asrama === filterAsrama;
            return passKeyword && passAsrama;
         });
-        
+
         if(badgeBelum) {
           badgeBelum.innerText = belumPulang.length + " Anak";
           badgeBelum.style.background = "#fef08a"; badgeBelum.style.color = "#a16207";
@@ -1770,7 +1770,7 @@
     function renderDatabaseMember() {
       const wadah = document.getElementById('wadahDatabaseMember'); const keyword = document.getElementById('cariMember').value.toLowerCase();
       const sortBy = document.getElementById('sortMember').value; const filterDom = document.getElementById('filterDomisili').value;
-      
+
       let memberMap = {}; let domisiliSet = new Set();
       globalDataPendaftar.forEach(p => {
         let hpClean = String(p.hp).replace(/\D/g, ''); if (!hpClean) return;
@@ -1811,19 +1811,19 @@
 
     function renderPusatStrategi() {
       if (globalDataPendaftar.length === 0) return;
-      let infoMap = {}, domMap = {}, usiaMap = {}, jamMap = {}, sekolahMap = {}; 
+      let infoMap = {}, domMap = {}, usiaMap = {}, jamMap = {}, sekolahMap = {};
       let petaGrouping = {};
-      
+
       globalDataPendaftar.forEach(p => {
-        let skl = p.sekolah && p.sekolah !== "-" ? p.sekolah.trim() : "Lainnya"; 
+        let skl = p.sekolah && p.sekolah !== "-" ? p.sekolah.trim() : "Lainnya";
         sekolahMap[skl] = (sekolahMap[skl] || 0) + 1;
         let info = p.infoDari && p.infoDari !== "-" ? p.infoDari : "Lainnya"; infoMap[info] = (infoMap[info] || 0) + 1;
-        
+
         let domLengkap = p.domisili && p.domisili !== "-" ? p.domisili : "Lainnya";
         let domKotaSaja = domLengkap.split(',')[0].trim();
         // Hanya masukkan ke chart jika bukan 'Lainnya' agar data lebih bersih
         if (domKotaSaja !== "" && domKotaSaja.toLowerCase() !== "lainnya") domMap[domKotaSaja] = (domMap[domKotaSaja] || 0) + 1;
-        
+
         let tahunLahir = parseInt(String(p.usia).replace(/\D/g, ''));
         let labelUsia = "Unknown";
         if (!isNaN(tahunLahir) && tahunLahir > 1900) {
@@ -1837,7 +1837,7 @@
       });
 
       if(petaSebaran) { petaSebaran.remove(); }
-      petaSebaran = L.map('mapArea').setView([-6.3458, 106.8500], 10); 
+      petaSebaran = L.map('mapArea').setView([-6.3458, 106.8500], 10);
       L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { attribution: 'Data' }).addTo(petaSebaran);
 
       // --- 1. KAMUS KOORDINAT MINI (Pembersihan Data & Fallback) ---
@@ -1869,7 +1869,7 @@
             // Jika tidak ada di kamus dan tidak punya koordinat, ABAIKAN dari peta (jangan numpuk)
             if (!foundLokal) return;
         }
-        
+
         // --- 2. SMART CLUSTERING (Radius Pembulatan Koordinat) ---
         // Membulatkan 2 desimal artinya kita mengelompokkan area dlm radius ~1.1km sbg satu titik
         let latCluster = latParsed.toFixed(2);
@@ -1886,7 +1886,7 @@
       Object.values(petaGrouping).forEach(grup => {
          let totalDiSini = grup.anak.length;
          let listAnak = grup.anak.slice(0, 3).join(", ") + (totalDiSini > 3 ? `... (+${totalDiSini-3} lagi)` : "");
-         
+
          // Logika Warna Berdasarkan Kepadatan
          let warnaTitik = '#3b82f6'; // Biru (Sepi: < 5 anak)
          let radiusTitik = 1500;
@@ -1908,27 +1908,27 @@
              <div style="font-size:0.85rem; font-weight:800; color:var(--text-main); margin-top:8px;">👦 ${listAnak}</div>
          </div>`;
 
-         L.circle([grup.lat, grup.lon], { 
-           color: warnaTitik, fillColor: warnaTitik, fillOpacity: opacityTitik, weight: 2, radius: radiusTitik 
+         L.circle([grup.lat, grup.lon], {
+           color: warnaTitik, fillColor: warnaTitik, fillOpacity: opacityTitik, weight: 2, radius: radiusTitik
          }).bindPopup(popupTeks).addTo(petaSebaran);
       });
 
       setTimeout(() => { petaSebaran.invalidateSize(); }, 300);
 
       const t = { animation: {duration:1000}, responsive: true, maintainAspectRatio: false };
-      
+
       if(chartSekolahInst) chartSekolahInst.destroy();
       let topSekolah = Object.keys(sekolahMap).sort((a,b) => sekolahMap[b] - sekolahMap[a]).slice(0, 5);
       chartSekolahInst = new Chart(document.getElementById('chartSekolah'), { type: 'bar', data: { labels: topSekolah, datasets: [{ label:'Siswa', data: topSekolah.map(k=>sekolahMap[k]), backgroundColor: '#0ea5e9', borderRadius: 4 }] }, options: { ...t, indexAxis: 'y', plugins: { legend: { display: false } } } });
 
       if(chartDomInst) chartDomInst.destroy();
-      let topKota = Object.keys(domMap).sort((a,b) => domMap[b] - domMap[a]).slice(0, 5); 
+      let topKota = Object.keys(domMap).sort((a,b) => domMap[b] - domMap[a]).slice(0, 5);
       chartDomInst = new Chart(document.getElementById('chartDomisili'), { type: 'bar', data: { labels: topKota, datasets: [{ label:'Peserta', data: topKota.map(k=>domMap[k]), backgroundColor: '#f43f5e', borderRadius: 4 }] }, options: { ...t, indexAxis: 'y', plugins: { legend: { display: false } } } });
 
       if(chartInfoInst) chartInfoInst.destroy(); chartInfoInst = new Chart(document.getElementById('chartInfo'), { type: 'pie', data: { labels: Object.keys(infoMap), datasets: [{ data: Object.values(infoMap), backgroundColor: ['#facc15', '#a78bfa', '#34d399', '#fb923c', '#94a3b8'] }] }, options: { ...t, plugins: { legend: { display: false } } } });
       if(chartUsiaInst) chartUsiaInst.destroy(); chartUsiaInst = new Chart(document.getElementById('chartUsia'), { type: 'bar', data: { labels: Object.keys(usiaMap).sort(), datasets: [{ label:'Anak', data: Object.keys(usiaMap).sort().map(k=>usiaMap[k]), backgroundColor: '#818cf8', borderRadius: 4 }] }, options: { ...t, plugins: { legend: { display: false } } } });
       if(chartJamInst) chartJamInst.destroy(); let sortedJam = Object.keys(jamMap).sort(); chartJamInst = new Chart(document.getElementById('chartJam'), { type: 'bar', data: { labels: sortedJam, datasets: [{ label:'Transaksi', data: sortedJam.map(k=>jamMap[k]), backgroundColor: '#fbbf24', borderRadius: 4 }] }, options: { ...t, plugins: { legend: { display: false } } } });
-      
+
       let dmMap = {"Ayah / Aba": 0, "Bunda / Umma": 0};
       globalDataPendaftar.forEach(p => { if(p.namaAba && p.namaAba !== "-") dmMap["Ayah / Aba"]++; else if(p.namaUmma && p.namaUmma !== "-") dmMap["Bunda / Umma"]++; });
       if(chartDecisionInst) chartDecisionInst.destroy(); chartDecisionInst = new Chart(document.getElementById('chartDecision'), { type: 'doughnut', data: { labels: Object.keys(dmMap), datasets: [{ data: Object.values(dmMap), backgroundColor: ['#3b82f6', '#ec4899'] }] }, options: { ...t, plugins: { legend: { position: 'bottom' } } } });
@@ -1937,42 +1937,42 @@
       const getTop = (map) => Object.keys(map).length > 0 ? Object.keys(map).sort((a,b) => map[b] - map[a])[0] : "-";
       // Ambil nilai terkecil (tapi bukan 0) untuk mencari titik lemah promosi
       const getBottom = (map) => Object.keys(map).length > 0 ? Object.keys(map).sort((a,b) => map[a] - map[b])[0] : "-";
-      
-      window.dataAI = { 
-          domHotspot: getTop(domMap), 
+
+      window.dataAI = {
+          domHotspot: getTop(domMap),
           domColdspot: getBottom(domMap),
-          usia: getTop(usiaMap), 
-          info: getTop(infoMap), 
-          jam: getTop(jamMap) 
+          usia: getTop(usiaMap),
+          info: getTop(infoMap),
+          jam: getTop(jamMap)
       };
     }
 
     function bukaKonsultanAI(platform) {
-      if (!window.dataAI) return; 
-      let d = window.dataAI; 
-      let topik = document.getElementById('topikAI').value; 
-      
+      if (!window.dataAI) return;
+      let d = window.dataAI;
+      let topik = document.getElementById('topikAI').value;
+
       let promptText = `Halo AI, saya mengelola event pesantren kilat anak.\nData analytics audiens saat ini:\n- Usia Dominan: ${d.usia}.\n- Hotspot Pendaftar: ${d.domHotspot}.\n- Area Sepi (Coldspot): ${d.domColdspot}.\n- Sumber Marketing Terbaik: ${d.info}\n- Waktu Transaksi Tersibuk: ${d.jam}\n\n`;
-      
-      switch(topik) { 
-          case "marketing": promptText += `Bagaimana strategi taktis untuk mempertahankan penetrasi di ${d.domHotspot} sekaligus melakukan ekspansi iklan ke area ${d.domColdspot}?`; break; 
-          case "promo": promptText += `Buatkan strategi copywriting Flash Sale khusus di jam ${d.jam}.`; break; 
-          case "upsell": promptText += `Buatkan 2 ide Paket Bundling khusus untuk menggaet Sibling/Kakak-Adik.`; break; 
-          case "copywriting": promptText += `Buatkan 2 template Broadcast WA H-1 pengingat yang ramah.`; break; 
-          case "evaluasi": promptText += `Berikan analisis singkat terkait kekuatan geografis (Hotspot: ${d.domHotspot}) dan potensi risiko dari area Coldspot (${d.domColdspot}).`; break; 
+
+      switch(topik) {
+          case "marketing": promptText += `Bagaimana strategi taktis untuk mempertahankan penetrasi di ${d.domHotspot} sekaligus melakukan ekspansi iklan ke area ${d.domColdspot}?`; break;
+          case "promo": promptText += `Buatkan strategi copywriting Flash Sale khusus di jam ${d.jam}.`; break;
+          case "upsell": promptText += `Buatkan 2 ide Paket Bundling khusus untuk menggaet Sibling/Kakak-Adik.`; break;
+          case "copywriting": promptText += `Buatkan 2 template Broadcast WA H-1 pengingat yang ramah.`; break;
+          case "evaluasi": promptText += `Berikan analisis singkat terkait kekuatan geografis (Hotspot: ${d.domHotspot}) dan potensi risiko dari area Coldspot (${d.domColdspot}).`; break;
       }
-      
+
       let encodedPrompt = encodeURIComponent(promptText);
       navigator.clipboard.writeText(promptText).catch(e=>{});
-      
-      showLoader("Menghubungkan ke AI...", "neural"); 
-      setTimeout(() => { 
-          hideLoader(); 
-          if (platform === 'chatgpt') { 
-              window.open(`https://chatgpt.com/?prompt=${encodedPrompt}`, '_blank'); 
-          } else { 
-              window.open(`https://gemini.google.com/app?q=${encodedPrompt}`, '_blank'); 
-          } 
+
+      showLoader("Menghubungkan ke AI...", "neural");
+      setTimeout(() => {
+          hideLoader();
+          if (platform === 'chatgpt') {
+              window.open(`https://chatgpt.com/?prompt=${encodedPrompt}`, '_blank');
+          } else {
+              window.open(`https://gemini.google.com/app?q=${encodedPrompt}`, '_blank');
+          }
       }, 1000);
     }
     function getBadgeDok(izin) {
@@ -1992,7 +1992,7 @@
       // Bersihkan nomor WA
       let noWali = String(p.hp).replace(/\D/g, '');
       if (noWali.startsWith('0')) noWali = '62' + noWali.substring(1);
-      
+
       // 2. Buat Link QR khusus untuk 1 anak ini saja
       let linkQR = `https://quickchart.io/qr?text=${encodeURIComponent(p.orderId)}&centerImageUrl=https%3A%2F%2Fi.imgur.com%2FCLJWSIC.png&centerImageSizeRatio=0.3&size=500&ecLevel=H&margin=2&dark=3b82f6`;
 
@@ -2003,7 +2003,7 @@
 
       // 4. Susun pesan tunggal yang rapi
       const rawText = `Bismillah, ${sapaan}.\n\nBerikut adalah E-Ticket Resmi *Brave Kids Project* untuk ananda:\n👦 *${p.namaAnak}* (Kls ${p.kelasSekolah})\n\n🎫 *Link E-Ticket (${p.orderId}):*\n${linkQR}\n\nSampai jumpa di lokasi: *Ma'had Babussalam*\nJazakumullahu khair!`;
-      
+
       // 5. Buka WhatsApp untuk mengirim pesan
       window.open(`https://api.whatsapp.com/send?phone=${noWali}&text=${encodeURIComponent(rawText)}`, "_blank");
     }
@@ -2024,7 +2024,7 @@
         if (result.isConfirmed) {
           showLoader("Menghapus Data...", "steps");
           fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "hapus_peserta", orderId: orderId }) })
-          .then(res => res.json()).then(res => { 
+          .then(res => res.json()).then(res => {
             if(res.status === 'success') { tarikDataLatarBelakang(); showToastAdmin("Data Dihapus! 🗑️"); }
             else { hideLoader(); Swal.fire('Gagal', res.message, 'error'); }
           }).catch(err => { hideLoader(); showToastAdmin("Koneksi Error ❌"); });
@@ -2038,13 +2038,13 @@
        if(!p) return;
        let noWali = String(p.hp).replace(/\D/g, '');
        if(noWali.startsWith('0')) noWali = '62' + noWali.substring(1);
-       
+
        let rekBank = globalPengaturan.Rekening_Tujuan || "-";
        let namaBank = globalPengaturan.Bank_Tujuan || "-";
        let atasNama = globalPengaturan.Atas_Nama || "-";
-       
+
        let pesan = `Assalamualaikum Ayah/Bunda,\n\nMohon maaf mengganggu waktunya. Kami dari admin *Brave Kids* ingin menginformasikan bahwa pendaftaran atas nama ananda *${p.namaAnak}* (ID: ${p.orderId}) saat ini statusnya masih *BELUM LUNAS*.\n\nMohon untuk menyelesaikan administrasi ke rekening berikut:\n🏦 Bank: ${namaBank}\n💳 Rekening: ${rekBank}\n👤 a.n: ${atasNama}\n\nJika sudah transfer, mohon lampirkan bukti pembayarannya di sini ya. Jazakumullahu khair! 🙏`;
-       
+
        window.open(`https://api.whatsapp.com/send?phone=${noWali}&text=${encodeURIComponent(pesan)}`, "_blank");
     }
 
@@ -2056,7 +2056,7 @@
     function bukaTabPengaturan() {
       // Matikan semua tab content dan hilangkan warna aktif di tombol bawah
       document.querySelectorAll('.tab-content, .tab-btn').forEach(el => el.classList.remove('active'));
-      
+
       // Tampilkan khusus tab pengaturan
       document.getElementById('tab-pengaturan').classList.add('active');
       lucide.createIcons();
@@ -2065,16 +2065,16 @@
     function editPeserta(orderId) {
       let p = globalDataPendaftar.find(x => x.orderId === orderId);
       if(!p) return;
-      tutupDetail(); 
-      
+      tutupDetail();
+
       document.getElementById('edit_orderId').value = p.orderId;
       document.getElementById('edit_nama').value = p.namaAnak;
       document.getElementById('edit_panggilan').value = p.panggilan !== "-" ? p.panggilan : "";
-      
+
       // Ambil angka tahunnya saja untuk Usia
       let thnLahir = parseInt(String(p.usia).replace(/\D/g, ''));
       document.getElementById('edit_usia').value = isNaN(thnLahir) ? "" : thnLahir;
-      
+
       document.getElementById('edit_sekolah').value = p.sekolah !== "-" ? p.sekolah : "";
       document.getElementById('edit_kelas_sekolah').value = p.kelasSekolah !== "-" ? p.kelasSekolah : "";
       document.getElementById('edit_aba').value = p.namaAba !== "-" ? p.namaAba : "";
@@ -2082,11 +2082,11 @@
       document.getElementById('edit_domisili').value = p.domisili !== "-" ? p.domisili : "";
       document.getElementById('edit_penyakit').value = p.penyakit !== "-" ? p.penyakit : "";
       document.getElementById('edit_obat').value = p.obat !== "-" ? p.obat : "";
-      
+
       let hpClean = String(p.hp).replace(/\D/g, '');
       if(hpClean.startsWith('62')) hpClean = '0' + hpClean.substring(2);
       document.getElementById('edit_hp').value = hpClean;
-      
+
       document.getElementById('modalEditPeserta').classList.add('active');
       lucide.createIcons();
     }
@@ -2096,11 +2096,11 @@
       if (!orderId) return;
 
       // Konversi Umur Cerdas
-      let inputUsiaText = document.getElementById('edit_usia').value.replace(/\D/g, ''); 
+      let inputUsiaText = document.getElementById('edit_usia').value.replace(/\D/g, '');
       let tahunLahirSimpan = "-";
       if (inputUsiaText) {
           let angka = parseInt(inputUsiaText);
-          if (angka > 1000) { tahunLahirSimpan = angka.toString(); } 
+          if (angka > 1000) { tahunLahirSimpan = angka.toString(); }
           else { tahunLahirSimpan = (new Date().getFullYear() - angka).toString(); }
       }
 
@@ -2119,20 +2119,20 @@
       };
 
       showLoader("Menyimpan Perubahan...", "steps");
-      fetch(SCRIPT_URL, { 
-         method: 'POST', 
-         body: JSON.stringify({ action: "edit_peserta", orderId: orderId, dataBaru: dataBaru }) 
+      fetch(SCRIPT_URL, {
+         method: 'POST',
+         body: JSON.stringify({ action: "edit_peserta", orderId: orderId, dataBaru: dataBaru })
       })
-      .then(res => res.json()).then(res => { 
-         if(res.status === 'success') { 
+      .then(res => res.json()).then(res => {
+         if(res.status === 'success') {
             tutupEditPeserta();
-            tarikDataLatarBelakang(); 
-            showToastAdmin("Data Diperbarui! ✏️"); 
-         } else { 
-            hideLoader(); Swal.fire('Gagal', res.message, 'error'); 
+            tarikDataLatarBelakang();
+            showToastAdmin("Data Diperbarui! ✏️");
+         } else {
+            hideLoader(); Swal.fire('Gagal', res.message, 'error');
          }
-      }).catch(err => { 
-         hideLoader(); showToastAdmin("Koneksi Error ❌"); 
+      }).catch(err => {
+         hideLoader(); showToastAdmin("Koneksi Error ❌");
       });
     }
 
@@ -2141,7 +2141,7 @@
     // ==========================================
     function bukaDetailMember(hpRaw) {
       let hpCleanTarget = String(hpRaw).replace(/\D/g, '');
-      
+
       // Filter otomatis seluruh anak yang terdaftar di bawah nomor WA ini
       let listAnakKeluarga = globalDataPendaftar.filter(p => {
         return String(p.hp).replace(/\D/g, '') === hpCleanTarget;
@@ -2153,13 +2153,13 @@
       let namaOrtu = (p1.namaUmma && p1.namaUmma !== "-") ? p1.namaUmma : p1.namaAba;
       let jenisWali = (p1.namaUmma && p1.namaUmma !== "-") ? "🧕 BUNDA" : "👨 AYAH";
       let totalKontribusi = 0;
-      
+
       let htmlAnak = "";
       listAnakKeluarga.forEach(p => {
         if(p.statusBayar === "PAID") totalKontribusi += p.nominal;
-        
-        let badgeBayar = p.statusBayar === "UNPAID" ? `<span style="background:#fee2e2; color:#e11d48; padding:2px 6px; border-radius:6px; font-weight:800; font-size:0.65rem;">UNPAID</span>` 
-                       : (p.statusBayar === "PAID" ? `<span style="background:#dcfce7; color:#10b981; padding:2px 6px; border-radius:6px; font-weight:800; font-size:0.65rem;">PAID</span>` 
+
+        let badgeBayar = p.statusBayar === "UNPAID" ? `<span style="background:#fee2e2; color:#e11d48; padding:2px 6px; border-radius:6px; font-weight:800; font-size:0.65rem;">UNPAID</span>`
+                       : (p.statusBayar === "PAID" ? `<span style="background:#dcfce7; color:#10b981; padding:2px 6px; border-radius:6px; font-weight:800; font-size:0.65rem;">PAID</span>`
                        : `<span style="background:#f1f5f9; color:#64748b; padding:2px 6px; border-radius:6px; font-weight:800; font-size:0.65rem;">GABUNG KAKAK</span>`);
 
         let thnLahirAnak = parseInt(String(p.usia).replace(/\D/g, ''));
@@ -2187,17 +2187,17 @@
           <div style="font-size:0.75rem; color:var(--text-muted); font-weight:900; letter-spacing:1px; text-transform:uppercase;">Profil Keluarga / Member</div>
           <h3 style="margin:5px 0 2px; color:var(--text-main); font-size:1.5rem; font-weight:900;">${namaOrtu}</h3>
           <span style="background:#fff1f2; color:#e11d48; padding:2px 8px; border-radius:12px; font-size:0.65rem; font-weight:900; border:1px solid #fecaca; display:inline-block; margin-bottom:10px; box-shadow: 2px 2px 0 #fecaca;">${jenisWali}</span>
-          
+
           <div style="display:flex; justify-content:center; gap:12px; margin-bottom:15px;">
             <span style="font-size:0.8rem; font-weight:700; color:var(--text-muted);"><i data-lucide="map-pin" style="width:12px;height:12px;vertical-align:middle;"></i> ${p1.domisili.split(',')[0]}</span>
             <span style="font-size:0.8rem; font-weight:700; color:#10b981;"><i data-lucide="banknote" style="width:12px;height:12px;vertical-align:middle;"></i> Dana: Rp ${totalKontribusi.toLocaleString('id-ID')}</span>
           </div>
-          
+
           <button onclick="window.open('https://wa.me/${waLink}', '_blank')" style="background:#25D366; color:white; border:3px solid var(--text-main); padding:12px; border-radius:14px; font-size:0.85rem; font-weight:900; cursor:pointer; box-shadow:0 4px 10px rgba(37,211,102,0.2); width:100%; display:flex; align-items:center; justify-content:center; gap:8px;">
             <i data-lucide="message-circle" style="width:16px; height:16px;"></i> HUBUNGI ORANG TUA (WA)
           </button>
         </div>
-        
+
         <div style="border-top:2px dashed #cbd5e1; padding-top:15px;">
           <h4 style="margin:0 0 10px; color:var(--text-main); font-size:0.85rem; font-weight:900; letter-spacing:0.5px;"><i data-lucide="smile" style="width:14px; vertical-align:middle;"></i> DAFTAR ANANDA (${listAnakKeluarga.length} ANAK)</h4>
           ${htmlAnak}
@@ -2210,12 +2210,12 @@
 
     // --- JAVASCRIPT LOGISTIK: MULTI-FOTO PROGRESSIVE & TOMBOL HAPUS (X) ---
     // --- VARIABEL GLOBAL LOGISTIK ---
-    let fotoLFGabungan = []; 
+    let fotoLFGabungan = [];
     let modeFormLF = "TAMBAH";
     let idEditTargetLF = "";
 
     window.prosesKonversiFotoLF = function(event) {
-      const file = event.target.files[0]; 
+      const file = event.target.files[0];
       if (!file) return;
 
       document.getElementById('lf-upload-text').innerText = "Memproses...";
@@ -2224,17 +2224,17 @@
         const img = new Image();
         img.onload = function() {
           const canvas = document.createElement('canvas');
-          let max = 800; 
+          let max = 800;
           let scale = img.width > max ? max / img.width : 1;
           canvas.width = img.width * scale; canvas.height = img.height * scale;
           canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-          
+
           let base64 = canvas.toDataURL('image/jpeg', 0.6);
-          fotoLFGabungan.push(base64); 
+          fotoLFGabungan.push(base64);
           renderUlangPreviewLFAdmin();
-          
+
           document.getElementById('lf-upload-text').innerText = "Klik untuk Tambah Foto Lagi";
-          document.getElementById('lf_file_foto').value = ""; 
+          document.getElementById('lf_file_foto').value = "";
         };
         img.src = e.target.result;
       };
@@ -2243,13 +2243,13 @@
 
     function renderUlangPreviewLFAdmin() {
       const container = document.getElementById('lf_preview_container');
-      container.innerHTML = ""; 
+      container.innerHTML = "";
 
       fotoLFGabungan.forEach((item, idx) => {
         let imgSrc = item;
         // Fix Preview Gambar Mode Edit (Menarik dari Google Drive)
         if (imgSrc.startsWith("http")) {
-           let m = imgSrc.match(/\/d\/([a-zA-Z0-9_-]+)/); 
+           let m = imgSrc.match(/\/d\/([a-zA-Z0-9_-]+)/);
            if(m) imgSrc = "https://lh3.googleusercontent.com/d/" + m[1];
         }
 
@@ -2263,8 +2263,8 @@
     }
 
     window.hapusSatuFotoPreviewLF = function(index) {
-      fotoLFGabungan.splice(index, 1); 
-      renderUlangPreviewLFAdmin(); 
+      fotoLFGabungan.splice(index, 1);
+      renderUlangPreviewLFAdmin();
     };
 
     // --- FUNGSI SCROLL & SET MODE EDIT ---
@@ -2276,7 +2276,7 @@
 
       document.getElementById('lf_nama_barang').value = b.nama;
       document.getElementById('lf_deskripsi_barang').value = b.deskripsi;
-      
+
       fotoLFGabungan = b.foto === "Tidak ada foto" ? [] : b.foto.split(",").map(url => url.trim());
       renderUlangPreviewLFAdmin();
 
@@ -2285,12 +2285,12 @@
       let btnSimpan = document.getElementById('btnSimpanLF');
       if(btnSimpan) {
           btnSimpan.innerHTML = '<i data-lucide="save"></i> SIMPAN PERUBAHAN BARANG';
-          btnSimpan.style.background = "#f59e0b"; 
+          btnSimpan.style.background = "#f59e0b";
       }
-      
+
       let btnBatal = document.getElementById('btnBatalEditLF');
       if(btnBatal) btnBatal.style.display = "flex";
-      
+
       lucide.createIcons();
     };
 
@@ -2315,23 +2315,23 @@
     window.simpanBarangLFKeServer = function() {
       let nama = document.getElementById('lf_nama_barang').value.trim();
       let deskripsi = document.getElementById('lf_deskripsi_barang').value.trim();
-      
+
       if(!nama || !deskripsi) { Swal.fire('Gagal', 'Nama dan deskripsi wajib diisi!', 'warning'); return; }
       if(fotoLFGabungan.length === 0) { Swal.fire('Foto Kosong', 'Harap biarkan atau tambahkan minimal 1 foto!', 'warning'); return; }
-      
+
       showLoader(modeFormLF === "TAMBAH" ? "Mempublikasikan..." : "Menyimpan Perubahan...", "steps");
       let actionName = modeFormLF === "TAMBAH" ? "tambah_lf_barang" : "edit_lf_admin";
-      
+
       fetch(SCRIPT_URL, {
         method: 'POST',
-        body: JSON.stringify({ action: actionName, id: idEditTargetLF, nama: nama, deskripsi: deskripsi, fotoCampuran: fotoLFGabungan }) 
+        body: JSON.stringify({ action: actionName, id: idEditTargetLF, nama: nama, deskripsi: deskripsi, fotoCampuran: fotoLFGabungan })
       })
       .then(res => res.json()).then(res => {
         hideLoader();
         if(res.status === "success") {
           showToastAdmin(modeFormLF === "TAMBAH" ? "Barang berhasil diterbitkan!" : "Perubahan berhasil disimpan!");
-          window.batalEditLF(); 
-          window.ambilKatalogLFAdmin(); 
+          window.batalEditLF();
+          window.ambilKatalogLFAdmin();
         }
       }).catch(e => { hideLoader(); showToastAdmin("Koneksi Error"); });
     };
@@ -2339,15 +2339,15 @@
     window.ambilKatalogLFAdmin = function() {
       // showLoader dihapus agar tidak menutupi layar
       // Sebagai gantinya, kita kasih tahu di tombolnya atau biarkan saja di background
-      
+
       fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "get_catalog_lf" }) })
       .then(res => res.json()).then(res => {
         // hideLoader juga dihapus
         if(res.status === "success") {
-          globalDataLF = res.data; 
+          globalDataLF = res.data;
           renderTabelLFAdmin(); // Tabel langsung ter-update diam-diam
         }
-      }).catch(e => { 
+      }).catch(e => {
           showToastAdmin("Gagal memperbarui LF dari server."); // Muncul pop-up kecil di bawah
       });
     };
@@ -2368,35 +2368,35 @@
       tbody.innerHTML = filtered.map(b => {
         let splitFotos = b.foto.split(",");
         let rentetanThumbnailHTML = `<div style="display:flex; gap:6px; flex-wrap:wrap;">`;
-        
+
         splitFotos.forEach(url => {
           let urlMurni = url.trim();
           let urlThumb = urlMurni;
-          
+
           // UBAH JALUR CONVERSION DI SINI:
-          if(urlThumb.includes('/d/')){ 
-             let m = urlThumb.match(/\/d\/([a-zA-Z0-9_-]+)/); 
+          if(urlThumb.includes('/d/')){
+             let m = urlThumb.match(/\/d\/([a-zA-Z0-9_-]+)/);
              if(m) {
                  urlThumb = "https://lh3.googleusercontent.com/d/" + m[1];
-                 urlMurni = urlThumb; 
+                 urlMurni = urlThumb;
              }
           }
-          
+
           if(urlMurni !== "Tidak ada foto" && urlMurni !== "") {
             rentetanThumbnailHTML += `<img src="${urlThumb}" onclick="window.bukaLightbox('${urlMurni}')" style="width:50px; height:50px; object-fit:cover; border-radius:8px; border:2px solid #cbd5e1; cursor:zoom-in; transition:0.2s;" onmouseover="this.style.borderColor='#3b82f6'" onmouseout="this.style.borderColor='#cbd5e1'" onerror="this.src='https://placehold.co/50x50/f1f5f9/64748b?text=Error'">`;
           }
         });
-        
+
         rentetanThumbnailHTML += `</div>`;
         if(b.foto === "Tidak ada foto" || !b.foto) rentetanThumbnailHTML = `<span style="font-size:0.75rem; color:#94a3b8;">No Photo</span>`;
 
         let isDiklaim = b.status === "DIKLAIM";
-        let badgeStatus = isDiklaim 
+        let badgeStatus = isDiklaim
             ? `<span style="background:#fee2e2; color:#e11d48; padding:4px 8px; border-radius:8px; font-size:0.7rem; font-weight:900; display:inline-block; margin-bottom:5px;">DIKLAIM 🔒</span><br><small style="font-size:0.7rem; color:#78716c;">Oleh: ${b.namaPengklaim}<br>WA: ${b.noWaPengklaim}</small>`
             : `<span style="background:#dcfce7; color:#10b981; padding:4px 8px; border-radius:8px; font-size:0.7rem; font-weight:900; display:inline-block; margin-bottom:5px;">TERSEDIA 🟢</span>`;
 
         let btnUbahStatus = `<button onclick="window.ubahStatusLFCepat('${b.id}', '${b.status}')" style="background:${isDiklaim ? '#f1f5f9' : '#10b981'}; color:${isDiklaim ? '#64748b' : 'white'}; border:none; padding:6px 10px; border-radius:8px; font-size:0.7rem; font-weight:800; cursor:pointer; width:100%; margin-top:8px; display:flex; justify-content:center; gap:5px;"><i data-lucide="refresh-cw" style="width:12px;"></i> ${isDiklaim ? 'Batal Klaim' : 'Set Diklaim'}</button>`;
-        
+
         // Panggil fungsi Scroll Up yang sudah diperbaiki
         let btnEdit = `<button onclick="window.editBarangLFScrollUp('${b.id}')" style="background:#fef08a; color:#a16207; border:none; padding:6px 10px; border-radius:8px; font-size:0.7rem; font-weight:800; cursor:pointer; width:100%; margin-top:4px; display:flex; justify-content:center; gap:5px;"><i data-lucide="edit" style="width:12px;"></i> Edit Info</button>`;
 
@@ -2430,7 +2430,7 @@
       .then(res => res.json()).then(res => {
          if(res.status === 'success') {
             showToastAdmin(statusBaru === "DIKLAIM" ? "Status: Diklaim 🔒" : "Status: Tersedia 🟢");
-            window.ambilKatalogLFAdmin(); 
+            window.ambilKatalogLFAdmin();
          }
       }).catch(e => showToastAdmin("Koneksi Error"));
     };
@@ -2451,30 +2451,30 @@
       tbody.innerHTML = filtered.map(b => {
         let splitFotos = b.foto.split(",");
         let rentetanThumbnailHTML = `<div style="display:flex; gap:6px; flex-wrap:wrap;">`;
-        
+
         splitFotos.forEach(url => {
           let urlMurni = url.trim();
           let urlThumb = urlMurni;
-          
+
           // 🔥 FIX GAMBAR PECAH: Ganti jalur ke uc?export=view
-          if(urlThumb.includes('/d/')){ 
-             let m = urlThumb.match(/\/d\/([a-zA-Z0-9_-]+)/); 
+          if(urlThumb.includes('/d/')){
+             let m = urlThumb.match(/\/d\/([a-zA-Z0-9_-]+)/);
              if(m) {
                  urlThumb = "https://drive.google.com/uc?export=view&id=" + m[1];
                  urlMurni = urlThumb; // Samakan url asli untuk lightbox
              }
           }
-          
+
           if(urlMurni !== "Tidak ada foto" && urlMurni !== "") {
             rentetanThumbnailHTML += `<img src="${urlThumb}" onclick="bukaLightbox('${urlMurni}')" style="width:50px; height:50px; object-fit:cover; border-radius:8px; border:2px solid #cbd5e1; cursor:zoom-in; transition:0.2s;" onmouseover="this.style.borderColor='#3b82f6'" onmouseout="this.style.borderColor='#cbd5e1'">`;
           }
         });
-        
+
         rentetanThumbnailHTML += `</div>`;
         if(b.foto === "Tidak ada foto" || !b.foto) rentetanThumbnailHTML = `<span style="font-size:0.75rem; color:#94a3b8;">No Photo</span>`;
 
         let isDiklaim = b.status === "DIKLAIM";
-        let badgeStatus = isDiklaim 
+        let badgeStatus = isDiklaim
             ? `<span style="background:#fee2e2; color:#e11d48; padding:4px 8px; border-radius:8px; font-size:0.7rem; font-weight:900; display:inline-block; margin-bottom:5px;">DIKLAIM 🔒</span><br><small style="font-size:0.7rem; color:#78716c;">Oleh: ${b.namaPengklaim}<br>WA: ${b.noWaPengklaim}</small>`
             : `<span style="background:#dcfce7; color:#10b981; padding:4px 8px; border-radius:8px; font-size:0.7rem; font-weight:900; display:inline-block; margin-bottom:5px;">TERSEDIA 🟢</span>`;
 
@@ -2508,14 +2508,14 @@
     // --- AMBIL KATALOG LF DARI DATABASE ---
     function ambilKatalogLFAdmin() {
       // 1. Munculkan animasi loading agar layar tidak nge-freeze
-      showLoader("Memuat Data Logistik...", "radar"); 
-      
+      showLoader("Memuat Data Logistik...", "radar");
+
       fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "get_catalog_lf" }) })
       .then(res => res.json())
       .then(res => {
         hideLoader(); // Matikan loading jika sukses
         if(res.status === "success") {
-          globalDataLF = res.data; 
+          globalDataLF = res.data;
           renderTabelLFAdmin();
         } else {
           showToastAdmin("Gagal mengambil data LF ❌");
@@ -2535,7 +2535,7 @@
       .then(res => res.json()).then(res => {
          if(res.status === 'success') {
             showToastAdmin(statusBaru === "DIKLAIM" ? "Status: Diklaim 🔒" : "Status: Tersedia 🟢");
-            ambilKatalogLFAdmin(); 
+            ambilKatalogLFAdmin();
          }
       }).catch(e => showToastAdmin("Koneksi Error"));
     }
@@ -2604,13 +2604,13 @@
       // 1. Cek apakah ada Modal/Pop-up yang sedang terbuka
       const modalDetail = document.getElementById('modalDetailPeserta');
       const modalEdit = document.getElementById('modalEditPeserta');
-      
+
       if (modalDetail && modalDetail.classList.contains('active')) {
         tutupDetail();
         history.pushState({ page: 'admin_dashboard' }, "Admin Area", ""); // Tahan halaman
         return;
       }
-      
+
       if (modalEdit && modalEdit.classList.contains('active')) {
         tutupEditPeserta();
         history.pushState({ page: 'admin_dashboard' }, "Admin Area", ""); // Tahan halaman
@@ -2622,14 +2622,14 @@
         siapKeluar = true;
         history.pushState({ page: 'admin_dashboard' }, "Admin Area", ""); // Suntik history palsu lagi
         showToastAdmin("Tekan KEMBALI sekali lagi untuk keluar");
-        
+
         // Reset status siapKeluar setelah 2 detik
-        setTimeout(function() { 
-          siapKeluar = false; 
+        setTimeout(function() {
+          siapKeluar = false;
         }, 1000);
       } else {
         // Jika admin menekan back 2 kali dalam 2 detik, izinkan keluar
-        history.back(); 
+        history.back();
       }
     });
   </script>

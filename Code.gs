@@ -22,7 +22,7 @@ function doGet(e) {
 function prosesDataKirim() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const sheetSetup = ss.getSheetByName(SHEET_SETUP);
-  const sheetData = ss.getSheetByName(SHEET_DATA); // Tambahan untuk menghitung kuota
+  const sheetData = ss.getSheetByName(SHEET_DATA);
 
   const dataPengaturan = sheetSetup.getRange("B2:C" + (sheetSetup.getLastRow() || 2)).getValues();
   let settings = {};
@@ -32,7 +32,6 @@ function prosesDataKirim() {
 
   const snkText = settings["Isi_S&K"] || "S&K Belum diatur.";
 
-  // Hitung berapa anak yang sudah terdaftar
   const lastRowData = sheetData.getLastRow();
   const totalPendaftar = lastRowData > 1 ? lastRowData - 1 : 0;
 
@@ -54,7 +53,7 @@ function doPost(e) {
       const sheetDataReg = ss.getSheetByName(SHEET_DATA);
 
       // ===================================================================
-      // 1. ADMIN LOGIN & TARIK DATA (DASHBOARD & TABEL - 21 KOLOM MAPPER)
+      // 1. ADMIN LOGIN & TARIK DATA (24 KOLOM MAPPER)
       // ===================================================================
       if (data.action === "login_admin" || data.action === "get_admin_data") {
         let pinSuperadmin = "123456"; let pinAdmin = "000000"; let settingsObj = {};
@@ -78,21 +77,27 @@ function doPost(e) {
         const lastRow = sheetDataReg.getLastRow();
         let pendaftar = [];
         if (lastRow > 1) {
-          // Membaca Kolom A sampai U (Total 21 Kolom)
-          const dataRaw = sheetDataReg.getRange(2, 1, lastRow - 1, 21).getValues();
+          // Tarik full sampai Kolom X (24)
+          const dataRaw = sheetDataReg.getRange(2, 1, lastRow - 1, 24).getValues();
           dataRaw.forEach(row => {
             if (row[0] && row[1]) {
+              let dataKuis = {};
+              try { if (row[21]) dataKuis = JSON.parse(row[21]); } catch (err) {}
+
               pendaftar.push({
                 tanggal: row[0], orderId: row[1], email: row[2], hp: row[3],
                 namaAnak: row[4], panggilan: row[5], usia: row[6], sekolah: row[7], kelasSekolah: row[8],
                 namaAba: row[9], namaUmma: row[10], domisili: row[11], penyakit: row[12], obat: row[13],
                 infoDari: row[14],
-                harga: row[15],         // Kolom P (Harga Tiket Historis)
-                statusBayar: row[16],   // Kolom Q (Status Bayar Bergeser)
-                bukti: row[17],         // Kolom R (Link Bukti Bergeser)
-                logHadir: row[18],      // Kolom S (Status Kehadiran Bergeser)
-                latitude: row[19],      // Kolom T (Data Koordinat Peta)
-                longitude: row[20]      // Kolom U (Data Koordinat Peta)
+                harga: row[15],
+                statusBayar: row[16],
+                bukti: row[17],
+                logHadir: row[18],
+                latitude: row[19],
+                longitude: row[20],
+                dataKuis: dataKuis,
+                buktiFollow1: row[22],
+                buktiFollow2: row[23]
               });
             }
           });
@@ -102,35 +107,38 @@ function doPost(e) {
       }
 
       // ===================================================================
-      // 2. SCANNER QR (CHECK-IN KEHADIRAN - SINKRONISASI INDEKS BARU)
+      // 2. SCANNER QR
       // ===================================================================
       else if (data.action === "scan_qr") {
         const values = sheetDataReg.getDataRange().getValues();
-        const qrCode = data.qr_code; // Berisi Order ID
+        const qrCode = data.qr_code;
         let tz = ss.getSpreadsheetTimeZone();
 
         for (let i = 1; i < values.length; i++) {
-          if (values[i][1] === qrCode) { // Cek Kolom B (Order ID)
+          if (values[i][1] === qrCode) {
+            let dataKuis = {};
+            try { if (values[i][21]) dataKuis = JSON.parse(values[i][21]); } catch (err) {}
+
             let detailPeserta = {
               namaAnak: values[i][4], panggilan: values[i][5], usia: values[i][6],
               sekolah: values[i][7], penyakit: values[i][12], obat: values[i][13],
-              statusBayar: values[i][16] // Membaca Kolom Q (Index 16)
+              statusBayar: values[i][16],
+              dataKuis: dataKuis,
+              buktiFollow1: values[i][22],
+              buktiFollow2: values[i][23]
             };
 
-            let statusBayarCek = values[i][16]; // Kolom Q
-            let logHadirLama = values[i][18] || ""; // Membaca Kolom S (Index 18)
+            let statusBayarCek = values[i][16];
+            let logHadirLama = values[i][18] || "";
 
-            // CEK STATUS BAYAR: Tolak jika UNPAID
             if (statusBayarCek === "UNPAID") {
                return sendJSON({ status: "warning", message: `⚠️ Status Pembayaran masih UNPAID. Minta peserta konfirmasi ke Kasir!\nAtas nama: ${detailPeserta.namaAnak}` });
             }
 
-            // CEK SUDAH HADIR ATAU BELUM
             if (logHadirLama !== "") {
                return sendJSON({ status: "warning", message: `⚠️ ANAK SUDAH CHECK-IN SEBELUMNYA.\nAtas nama: ${detailPeserta.namaAnak}` });
             }
 
-            // JIKA LOLOS SEMUA: Catat Jam Hadir ke Kolom S (Ke-19)
             const d = new Date();
             const waktuSaja = Utilities.formatDate(d, tz, "HH:mm") + " WIB";
             sheetDataReg.getRange(i+1, 19).setValue(waktuSaja);
@@ -142,13 +150,13 @@ function doPost(e) {
       }
 
       // ===================================================================
-      // 3. ADMIN: UPDATE STATUS PEMBAYARAN MANUAL (KOLOM Q)
+      // 3. ADMIN: UPDATE STATUS PEMBAYARAN MANUAL
       // ===================================================================
       else if (data.action === "update_bayar") {
          const values = sheetDataReg.getDataRange().getValues();
          for(let i = 1; i < values.length; i++) {
             if(values[i][1] === data.orderId) {
-               sheetDataReg.getRange(i+1, 17).setValue(data.status_baru); // Menargetkan Kolom Q (Index 17)
+               sheetDataReg.getRange(i+1, 17).setValue(data.status_baru);
                break;
             }
          }
@@ -184,10 +192,9 @@ function doPost(e) {
         const values = sheetDataReg.getDataRange().getValues();
         let rowToDelete = -1;
 
-        // Cari baris berdasarkan Order ID (Kolom B / Index 1)
         for (let i = values.length - 1; i >= 1; i--) {
           if (values[i][1] === orderIdTarget) {
-            rowToDelete = i + 1; // Konversi index array ke nomor baris Google Sheets
+            rowToDelete = i + 1;
             break;
           }
         }
@@ -209,7 +216,6 @@ function doPost(e) {
         const values = sheetDataReg.getDataRange().getValues();
         let rowToEdit = -1;
 
-        // Cari baris berdasarkan Order ID (Kolom B / Index 1)
         for (let i = values.length - 1; i >= 1; i--) {
           if (values[i][1] === orderIdTarget) {
             rowToEdit = i + 1;
@@ -218,18 +224,17 @@ function doPost(e) {
         }
 
         if (rowToEdit !== -1) {
-          // PROSES MENIMPA 11 DATA SEKALIGUS (Sesuaikan dengan urutan kolom Spreadsheet)
-          sheetDataReg.getRange(rowToEdit, 5).setValue(dataBaru.namaAnak);       // Kolom E: Nama Anak
-          sheetDataReg.getRange(rowToEdit, 6).setValue(dataBaru.panggilan);      // Kolom F: Panggilan
-          sheetDataReg.getRange(rowToEdit, 7).setValue(dataBaru.usia);           // Kolom G: Usia (Tahun Lahir)
-          sheetDataReg.getRange(rowToEdit, 8).setValue(dataBaru.sekolah);        // Kolom H: Sekolah
-          sheetDataReg.getRange(rowToEdit, 9).setValue(dataBaru.kelasSekolah);   // Kolom I: Kelas Sekolah
-          sheetDataReg.getRange(rowToEdit, 10).setValue(dataBaru.namaAba);       // Kolom J: Nama Aba
-          sheetDataReg.getRange(rowToEdit, 11).setValue(dataBaru.namaUmma);      // Kolom K: Nama Umma
-          sheetDataReg.getRange(rowToEdit, 12).setValue(dataBaru.domisili);      // Kolom L: Domisili
-          sheetDataReg.getRange(rowToEdit, 4).setValue("'" + dataBaru.hp);       // Kolom D: No WA (Pakai petik)
-          sheetDataReg.getRange(rowToEdit, 13).setValue(dataBaru.penyakit);      // Kolom M: Penyakit
-          sheetDataReg.getRange(rowToEdit, 14).setValue(dataBaru.obat);          // Kolom N: Obat Pribadi
+          sheetDataReg.getRange(rowToEdit, 5).setValue(dataBaru.namaAnak);
+          sheetDataReg.getRange(rowToEdit, 6).setValue(dataBaru.panggilan);
+          sheetDataReg.getRange(rowToEdit, 7).setValue(dataBaru.usia);
+          sheetDataReg.getRange(rowToEdit, 8).setValue(dataBaru.sekolah);
+          sheetDataReg.getRange(rowToEdit, 9).setValue(dataBaru.kelasSekolah);
+          sheetDataReg.getRange(rowToEdit, 10).setValue(dataBaru.namaAba);
+          sheetDataReg.getRange(rowToEdit, 11).setValue(dataBaru.namaUmma);
+          sheetDataReg.getRange(rowToEdit, 12).setValue(dataBaru.domisili);
+          sheetDataReg.getRange(rowToEdit, 4).setValue("'" + dataBaru.hp);
+          sheetDataReg.getRange(rowToEdit, 13).setValue(dataBaru.penyakit);
+          sheetDataReg.getRange(rowToEdit, 14).setValue(dataBaru.obat);
 
           return sendJSON({ status: "success", message: "Data berhasil diupdate secara menyeluruh." });
         } else {
@@ -238,17 +243,20 @@ function doPost(e) {
       }
 
       // ===================================================================
-      // 7. LOGIKA PENDAFTARAN BARU (FORM SUBMIT - HARGA HISTORIS & KOORDINAT)
+      // 7. LOGIKA PENDAFTARAN BARU (FORM SUBMIT)
       // ===================================================================
       else if (!data.action) {
         let fileUrl = "Tidak ada file";
         if (data.buktiBayarBase64) fileUrl = uploadImageToDrive(data.buktiBayarBase64, "Bukti_" + data.peserta[0].namaAnak);
 
+        let buktiFollow1Url = "Tidak ada file";
+        let buktiFollow2Url = "Tidak ada file";
+        if (data.buktiFollow1Base64) buktiFollow1Url = uploadImageToDrive(data.buktiFollow1Base64, "Follow1_" + data.peserta[0].namaAnak);
+        if (data.buktiFollow2Base64) buktiFollow2Url = uploadImageToDrive(data.buktiFollow2Base64, "Follow2_" + data.peserta[0].namaAnak);
+
         const tglMasuk = new Date();
-        // Mengambil kode prefix dari frontend (yang ditarik dari Spreadsheet)
         const prefix = data.kodePrefix || "EVT";
 
-        // Format ID: [PREFIX]-TahunBulanTanggal-JamMenitDetik-Random
         const thn = tglMasuk.getFullYear();
         const bln = ("0" + (tglMasuk.getMonth() + 1)).slice(-2);
         const tgl = ("0" + tglMasuk.getDate()).slice(-2);
@@ -259,49 +267,52 @@ function doPost(e) {
         const baseTransactionId = prefix + "-" + thn + bln + tgl + "-" + jam + mnt + dtk + "-" + Math.floor(1000 + Math.random() * 9000);
         let generatedOrderIds = [];
 
-// Ambil nilai infaq dari frontend, tidak lagi membaca dari Setup Sistem
-let hargaTiketFix = parseInt(data.infaqNominal) || 0;
+        let hargaTiketFix = parseInt(data.infaqNominal) || 0;
 
-data.peserta.forEach((p, index) => {
-  let statusBayar = "UNPAID";
-  let uniqueOrderId = baseTransactionId + "-" + (index + 1);
-  generatedOrderIds.push(uniqueOrderId);
+        data.peserta.forEach((p, index) => {
+          let statusBayar = "UNPAID";
+          let uniqueOrderId = baseTransactionId + "-" + (index + 1);
+          generatedOrderIds.push(uniqueOrderId);
 
-  let linkBuktiFix = index === 0 ? fileUrl : "Ikut Anak Ke-1";
+          let linkBuktiFix = index === 0 ? fileUrl : "Ikut Anak Ke-1";
+          let linkFollow1Fix = index === 0 ? buktiFollow1Url : "Ikut Anak Ke-1";
+          let linkFollow2Fix = index === 0 ? buktiFollow2Url : "Ikut Anak Ke-1";
 
-  // Kita gunakan kolom-kolom lama yang sudah tidak dipakai di frontend untuk menyimpan
-  // data "Follow Munira" agar admin.html tetap aman berjalan.
-  // Misalnya kita simpan Follow Munira di kolom "Kelas Sekolah" (Kolom I)
+          let dataKuis = {};
+          try { if (data.dataKuisJson) dataKuis = JSON.parse(data.dataKuisJson); } catch (e) {}
+          const kuisJsonString = JSON.stringify(dataKuis);
 
-  sheetDataReg.appendRow([
-    tglMasuk,              // A: Waktu Daftar
-    uniqueOrderId,         // B: Order ID Unik
-    p.email,               // C: Email
-    "'" + p.hp,            // D: No WA
-    p.namaAnak,            // E: Nama Lengkap
-    "-",                   // F: Panggilan (dikosongkan)
-    p.usia,                // G: Usia (Disusupi data Gender L/P)
-    "-",                   // H: Asal Sekolah (dikosongkan)
-    "Follow Munira: " + p.followMunira, // I: Kelas Sekolah (Digunakan untuk data Follow)
-    "-",                   // J: Nama Aba (dikosongkan)
-    "-",                   // K: Nama Umma (dikosongkan)
-    p.domisili,            // L: Domisili Teks
-    "-",                   // M: Penyakit (dikosongkan)
-    "-",                   // N: Obat (dikosongkan)
-    data.infoDari,         // O: Info Dari
-    hargaTiketFix,         // P: HARGA TIKET HISTORIS
-    statusBayar,           // Q: STATUS BAYAR
-    linkBuktiFix,          // R: LINK BUKTI
-    "",                    // S: STATUS KEHADIRAN
-    p.latitude || "",      // T: LATITUDE
-    p.longitude || "",     // U: LONGITUDE
-    data.dataKuisJson || "-", // V: DATA KUESIONER (JSON)
-    data.buktiFollow1Base64 ? uploadImageToDrive(data.buktiFollow1Base64, "Follow1_" + uniqueOrderId) : "Tidak ada file", // W: BUKTI FOLLOW IG 1
-    data.buktiFollow2Base64 ? uploadImageToDrive(data.buktiFollow2Base64, "Follow2_" + uniqueOrderId) : "Tidak ada file"  // X: BUKTI FOLLOW IG 2
-  ]);
-});
-return sendJSON({ status: "success", orderIds: generatedOrderIds, linkBukti: fileUrl });
+          // EXACTLY 24 COLUMNS
+          sheetDataReg.appendRow([
+            tglMasuk,              // A: Waktu Daftar
+            uniqueOrderId,         // B: Order ID Unik
+            p.email,               // C: Email
+            "'" + p.hp,            // D: No WA
+            p.namaAnak,            // E: Nama Lengkap
+            "-",                   // F: Panggilan
+            p.usia,                // G: Usia (Disusupi Gender)
+            "-",                   // H: Asal Sekolah
+            "Follow Munira: " + p.followMunira, // I: Kelas Sekolah
+            "-",                   // J: Nama Aba
+            "-",                   // K: Nama Umma
+            p.domisili,            // L: Domisili Teks
+            "-",                   // M: Abaikan 5
+            "-",                   // N: Abaikan 6
+            data.infoDari,         // O: Info Dari
+            hargaTiketFix,         // P: HARGA TIKET HISTORIS
+            statusBayar,           // Q: STATUS BAYAR
+            linkBuktiFix,          // R: LINK BUKTI
+            "",                    // S: STATUS KEHADIRAN
+            p.latitude || "",      // T: LATITUDE
+            p.longitude || "",     // U: LONGITUDE
+            kuisJsonString,        // V: DATA KUESIONER (JSON)
+            linkFollow1Fix,        // W: BUKTI FOLLOW IG 1
+            linkFollow2Fix         // X: BUKTI FOLLOW IG 2
+          ]);
+        });
+        return sendJSON({ status: "success", orderIds: generatedOrderIds, linkBukti: fileUrl });
       }
+
     } catch(err) {
       return sendJSON({ status: "error", message: "Gagal memproses data: " + err.toString() });
     } finally {
