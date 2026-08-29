@@ -1190,9 +1190,31 @@
                        <div style="margin-bottom:8px;"><strong>1. Masalah/Keterampilan:</strong><br>${p.dataKuis.pertanyaan_1_masalah || "-"}</div>
                        <div style="margin-bottom:8px;"><strong>2. Pengeluaran:</strong><br>${p.dataKuis.pertanyaan_2_pengeluaran || "-"}</div>
                        <div style="margin-bottom:8px;"><strong>3. Tujuan:</strong><br>${p.dataKuis.pertanyaan_3_tujuan || "-"}</div>
-                       <div style="margin-bottom:8px;"><strong>4. Harapan:</strong><br>${p.dataKuis.pertanyaan_4_harapan || "-"}</div>
-                       <div><strong>5. Pendidikan Terakhir:</strong><br>${p.dataKuis.pertanyaan_5_pendidikan || "-"}</div>
+                       <div><strong>4. Harapan:</strong><br>${p.dataKuis.pertanyaan_4_harapan || "-"}</div>
                     ` : '<span style="color:#64748b; font-style:italic;">Belum mengisi kuesioner</span>'}
+                 </div>
+              </div>
+
+              <!-- BUKTI FOLLOW INSTAGRAM -->
+              <div style="grid-column: 1 / -1; background:#f0fdf4; border:2px solid #86efac; padding:15px; border-radius:12px; margin-top:10px;">
+                 <span style="color:#166534; font-size:0.75rem; font-weight:900; display:flex; align-items:center; gap:5px; margin-bottom:10px;"><i data-lucide="instagram" style="width:14px;"></i> BUKTI FOLLOW INSTAGRAM</span>
+                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div style="text-align: center;">
+                       <div style="font-size: 0.65rem; font-weight: 800; color: #15803d; margin-bottom: 6px;">@al.mawaaizh</div>
+                       ${p.buktiFollow1 && p.buktiFollow1 !== "Tidak ada file" && p.buktiFollow1 !== "Ikut Anak Ke-1" ? `
+                          <a href="${p.buktiFollow1}" target="_blank" style="display: block; text-decoration: none;">
+                            <img src="${p.buktiFollow1.replace('/d/', '/thumbnail?id=').replace('/view?usp=drivesdk', '&sz=w1000')}" style="width: 100%; max-height: 150px; object-fit: cover; border-radius: 8px; border: 2px solid #dcfce7; background: white;">
+                          </a>
+                       ` : '<div style="height: 100px; display: flex; align-items: center; justify-content: center; background: #f7fee7; border: 1px dashed #86efac; border-radius: 8px; color: #65a30d; font-size: 0.7rem;">Belum ada bukti</div>'}
+                    </div>
+                    <div style="text-align: center;">
+                       <div style="font-size: 0.65rem; font-weight: 800; color: #15803d; margin-bottom: 6px;">@ioubahasaindonesia</div>
+                       ${p.buktiFollow2 && p.buktiFollow2 !== "Tidak ada file" && p.buktiFollow2 !== "Ikut Anak Ke-1" ? `
+                          <a href="${p.buktiFollow2}" target="_blank" style="display: block; text-decoration: none;">
+                            <img src="${p.buktiFollow2.replace('/d/', '/thumbnail?id=').replace('/view?usp=drivesdk', '&sz=w1000')}" style="width: 100%; max-height: 150px; object-fit: cover; border-radius: 8px; border: 2px solid #dcfce7; background: white;">
+                          </a>
+                       ` : '<div style="height: 100px; display: flex; align-items: center; justify-content: center; background: #f7fee7; border: 1px dashed #86efac; border-radius: 8px; color: #65a30d; font-size: 0.7rem;">Belum ada bukti</div>'}
+                    </div>
                  </div>
               </div>
             </div>

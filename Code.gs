@@ -78,8 +78,8 @@ function doPost(e) {
         const lastRow = sheetDataReg.getLastRow(); 
         let pendaftar = [];
         if (lastRow > 1) { 
-          // Membaca Kolom A sampai V (Total 22 Kolom - tambah kolom V untuk data kuesioner)
-          const dataRaw = sheetDataReg.getRange(2, 1, lastRow - 1, 22).getValues();
+          // Membaca Kolom A sampai X (Total 24 Kolom - tambah kolom V untuk kuesioner, W & X untuk bukti follow IG)
+          const dataRaw = sheetDataReg.getRange(2, 1, lastRow - 1, 24).getValues();
           dataRaw.forEach(row => {
             if (row[0] && row[1]) {
               // Parse data kuesioner dari kolom V (index 21)
@@ -103,7 +103,9 @@ function doPost(e) {
                 logHadir: row[18],      // Kolom S (Status Kehadiran Bergeser)
                 latitude: row[19],      // Kolom T (Data Koordinat Peta)
                 longitude: row[20],     // Kolom U (Data Koordinat Peta)
-                dataKuis: dataKuis      // Kolom V (Data Kuesioner JSON)
+                dataKuis: dataKuis,     // Kolom V (Data Kuesioner JSON)
+                buktiFollow1: row[22],  // Kolom W (Bukti Follow @al.mawaaizh)
+                buktiFollow2: row[23]   // Kolom X (Bukti Follow @ioubahasaindonesia)
               });
             }
           });
@@ -136,7 +138,9 @@ function doPost(e) {
               namaAnak: values[i][4], panggilan: values[i][5], usia: values[i][6],
               sekolah: values[i][7], penyakit: values[i][12], obat: values[i][13],
               statusBayar: values[i][16], // Membaca Kolom Q (Index 16)
-              dataKuis: dataKuis          // Kolom V (Data Kuesioner)
+              dataKuis: dataKuis,         // Kolom V (Data Kuesioner)
+              buktiFollow1: values[i][22], // Kolom W (Bukti Follow @al.mawaaizh)
+              buktiFollow2: values[i][23]  // Kolom X (Bukti Follow @ioubahasaindonesia)
             };
 
             let statusBayarCek = values[i][16]; // Kolom Q
@@ -266,6 +270,12 @@ function doPost(e) {
         let fileUrl = "Tidak ada file";
         if (data.buktiBayarBase64) fileUrl = uploadImageToDrive(data.buktiBayarBase64, "Bukti_" + data.peserta[0].namaAnak); 
         
+        // Upload bukti follow Instagram
+        let buktiFollow1Url = "Tidak ada file";
+        let buktiFollow2Url = "Tidak ada file";
+        if (data.buktiFollow1Base64) buktiFollow1Url = uploadImageToDrive(data.buktiFollow1Base64, "Follow1_" + data.peserta[0].namaAnak);
+        if (data.buktiFollow2Base64) buktiFollow2Url = uploadImageToDrive(data.buktiFollow2Base64, "Follow2_" + data.peserta[0].namaAnak);
+        
         // Di file Code.gs, pada bagian: else if (!data.action) { ... }
 
 const tglMasuk = new Date();
@@ -281,6 +291,8 @@ data.peserta.forEach((p, index) => {
   generatedOrderIds.push(uniqueOrderId);
 
   let linkBuktiFix = index === 0 ? fileUrl : "Ikut Anak Ke-1";
+  let linkFollow1Fix = index === 0 ? buktiFollow1Url : "Ikut Anak Ke-1";
+  let linkFollow2Fix = index === 0 ? buktiFollow2Url : "Ikut Anak Ke-1";
 
   // Parse data kuesioner dari frontend
   let dataKuis = {};
@@ -317,6 +329,13 @@ data.peserta.forEach((p, index) => {
     statusBayar,           // Q: STATUS BAYAR
     linkBuktiFix,          // R: LINK BUKTI
     "",                    // S: STATUS KEHADIRAN
+    p.latitude || "",      // T: LATITUDE
+    p.longitude || "",     // U: LONGITUDE
+    kuisJsonString,        // V: DATA KUESIONER (JSON)
+    linkFollow1Fix,        // W: BUKTI FOLLOW @al.mawaaizh
+    linkFollow2Fix         // X: BUKTI FOLLOW @ioubahasaindonesia
+  ]);
+});
     p.latitude || "",      // T: LATITUDE
     p.longitude || "",     // U: LONGITUDE
     kuisJsonString         // V: DATA KUESIONER (JSON)
