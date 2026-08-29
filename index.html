@@ -45,6 +45,11 @@
     .splash-logo-mawaaizh { height: 110px; transform: translateX(20px); }
     .splash-logo-slot { display: flex; justify-content: center; width: 135px; }
     .splash-logo-divider { width: 1px; align-self: stretch; background: #CBD5E1; }
+        .mini-logo-lockup { display: flex; align-items: flex-end; justify-content: center; gap: 8px; }
+        .mini-logo-slot { display: flex; justify-content: center; width: 40px; }
+        .mini-logo { height: 30px; width: auto; object-fit: contain; }
+        .mini-logo-mawaaizh { height: 33px; }
+        .mini-logo-divider { width: 1px; align-self: stretch; background: #CBD5E1; }
 
     @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     .splash-loader { width: 50px; height: 5px; background: #27272a; border-radius: 10px; overflow: hidden; position: relative; }
@@ -292,8 +297,14 @@
 
         <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 1rem;">
           <div style="background: white; padding: 0.6rem; border-radius: 0.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 0.5rem; border: 1px solid #e2e8f0;">
-            <div style="width: 2.2rem; height: 2.2rem; border-radius: 0.6rem; display: flex; align-items: center; justify-content: center; color: white; background-color: var(--primary);">
-              <i data-lucide="heart" style="width: 18px; height: 18px;"></i>
+            <div class="mini-logo-lockup">
+              <div class="mini-logo-slot">
+                <img src="assets/logo_new_trimmed.png" alt="Logo Al Mawaaizh" class="mini-logo mini-logo-mawaaizh">
+              </div>
+              <div class="mini-logo-divider"></div>
+              <div class="mini-logo-slot">
+                <img src="assets/logo_iou_trimmed.png" alt="Logo International Open University" class="mini-logo">
+              </div>
             </div>
           </div>
           <p style="font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.2rem;" id="fomo-org">Muniira Kids & Teens</p>
