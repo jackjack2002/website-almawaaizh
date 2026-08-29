@@ -43,6 +43,8 @@
     .splash-logo-lockup { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 20px; }
     .splash-logo { height: 150px; width: auto; object-fit: contain; animation: floatLogo 3s ease-in-out infinite; }
     .splash-logo-mawaaizh { height: 195px; }
+    .splash-logo-iou { transform: translateY(30px); }
+    .splash-logo-slot { display: flex; justify-content: center; width: 200px; }
     .splash-logo-divider { width: 1px; align-self: stretch; background: #CBD5E1; }
 
     @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -198,9 +200,13 @@
   <div id="splashScreen" class="splash-screen">
     <!-- Efek sunrise dihilangkan agar lebih formal -->
     <div class="splash-logo-lockup" style="position:relative; z-index:10;">
-      <img src="assets/logo_new_trimmed.png" alt="Logo Al Mawaaizh" class="splash-logo splash-logo-mawaaizh" onerror="this.src='https://placehold.co/280x150/7C9082/white?text=MARRIAGE+IS+NOT+SCARY'">
+      <div class="splash-logo-slot">
+        <img src="assets/logo_new_trimmed.png" alt="Logo Al Mawaaizh" class="splash-logo splash-logo-mawaaizh" onerror="this.src='https://placehold.co/280x150/7C9082/white?text=MARRIAGE+IS+NOT+SCARY'">
+      </div>
       <div class="splash-logo-divider"></div>
-      <img src="assets/logo_iou_trimmed.png" alt="Logo International Open University" class="splash-logo">
+      <div class="splash-logo-slot">
+        <img src="assets/logo_iou_trimmed.png" alt="Logo International Open University" class="splash-logo splash-logo-iou">
+      </div>
     </div>
 
     <div class="splash-loader" style="position:relative; z-index:10;"></div>
