@@ -397,23 +397,38 @@
       <div class="form-card" style="padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 15px;">
 
         <div class="form-group" style="margin-bottom: 15px;">
-          <label class="input-label" style="font-size: 0.75rem;">1. Dalam 6 bulan terakhir, masalah apa yang paling menyita pikiran Anda — atau keterampilan apa yang Anda butuhkan — yang membuat Anda mencari ilmunya melalui buku, video, atau kelas, tetapi belum juga tuntas?</label>
-          <textarea id="kuis_q1" class="input-modern" rows="3" placeholder="Tulis jawaban Anda..." style="resize: none; font-size: 0.8rem; padding: 10px;"></textarea>
+          <label class="input-label" style="font-size: 0.75rem;">1. Dalam 6 bulan terakhir, masalah apa yang paling menyita pikiran Anda — atau keterampilan apa yang Anda butuhkan — yang membuat Anda mencari ilmunya melalui buku, video, atau kelas, tetapi belum juga untas? <span style="color: #ef4444;">*</span></label>
+          <textarea id="kuis_q1" class="input-modern" rows="3" placeholder="Tulis jawaban Anda..." style="resize: none; font-size: 0.8rem; padding: 10px;" required></textarea>
         </div>
 
         <div class="form-group" style="margin-bottom: 15px;">
-          <label class="input-label" style="font-size: 0.75rem;">2. Untuk masalah Anda di atas, berapa uang yang sudah Anda keluarkan sejauh ini — untuk kelas, konsultasi, buku, alat, atau layanan?</label>
-          <textarea id="kuis_q2" class="input-modern" rows="2" placeholder="Contoh: 500000 atau Rp 500.000" style="resize: none; font-size: 0.8rem; padding: 10px;"></textarea>
+          <label class="input-label" style="font-size: 0.75rem;">2. Untuk masalah Anda di atas, berapa uang yang sudah Anda keluarkan sejauh ini — untuk kelas, konsultasi, buku, alat, atau layanan? <span style="color: #ef4444;">*</span></label>
+          <textarea id="kuis_q2" class="input-modern" rows="2" placeholder="Contoh: 500000 atau Rp 500.000" style="resize: none; font-size: 0.8rem; padding: 10px;" required></textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+          <label class="input-label" style="font-size: 0.75rem;">3. Apa tujuan Anda mempelajari hal tersebut hingga mengeluarkan uang? <span style="color: #ef4444;">*</span></label>
+          <textarea id="kuis_q3" class="input-modern" rows="2" placeholder="Tulis jawaban Anda..." style="resize: none; font-size: 0.8rem; padding: 10px;" required></textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+          <label class="input-label" style="font-size: 0.75rem;">4. Apa harapan Anda mengikuti kajian ini? <span style="color: #ef4444;">*</span></label>
+          <textarea id="kuis_q4" class="input-modern" rows="2" placeholder="Tulis harapan Anda..." style="resize: none; font-size: 0.8rem; padding: 10px;" required></textarea>
         </div>
 
         <div class="form-group" style="margin-bottom: 0;">
-          <label class="input-label" style="font-size: 0.75rem;">3. Apa tujuan Anda mempelajari hal tersebut hingga mengeluarkan uang?</label>
-          <textarea id="kuis_q3" class="input-modern" rows="2" placeholder="Tulis jawaban Anda..." style="resize: none; font-size: 0.8rem; padding: 10px;"></textarea>
-        </div>
-
-        <div class="form-group" style="margin-bottom: 0;">
-          <label class="input-label" style="font-size: 0.75rem;">4. Apa harapan Anda mengikuti kajian ini?</label>
-          <textarea id="kuis_q4" class="input-modern" rows="2" placeholder="Tulis harapan Anda..." style="resize: none; font-size: 0.8rem; padding: 10px;"></textarea>
+          <label class="input-label" style="font-size: 0.75rem;">5. Pendidikan Terakhir <span style="color: #ef4444;">*</span></label>
+          <select id="pendidikan_terakhir" class="input-modern" style="padding: 0 10px; height: 42px; font-size: 0.8rem; margin-bottom: 0;" required>
+            <option value="" disabled selected hidden>Pilih pendidikan terakhir</option>
+            <option value="SD">SD</option>
+            <option value="SMP">SMP</option>
+            <option value="SMA/SMK">SMA/SMK</option>
+            <option value="Diploma (D1-D4)">Diploma (D1-D4)</option>
+            <option value="S1">S1</option>
+            <option value="S2">S2</option>
+            <option value="S3">S3</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
         </div>
 
       </div>
@@ -436,7 +451,7 @@
       <div id="wadah-semua-peserta"></div>
 
       <button onclick="tambahAnakCard()" class="btn-action" style="background: #fefce8; color: #a16207; border: 2px dashed #facc15; box-shadow: none; padding: 0.7rem; font-size: 0.75rem; border-radius: 10px;">
-        <i data-lucide="user-plus" style="width: 16px;"></i> + TAMBAH PESERTA LAINNYA
+        <i data-lucide="user-plus" style="width: 16px;"></i>  TAMBAH PESERTA LAINNYA
       </button>
 
       <div class="form-card" style="margin-top: 15px; padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
@@ -845,6 +860,26 @@
       if (step === 1 && currentStep === 0 && !document.getElementById('cb-setuju').checked) {
         Swal.fire({ icon: 'warning', title: 'Belum Setuju', text: 'Mohon centang persetujuan terlebih dahulu.', confirmButtonColor: '#E85D5E' }); return;
       }
+      
+      // Validasi Kuesioner wajib diisi saat pindah ke Step 2
+      if (step === 2 && currentStep === 1) {
+        const q1 = document.getElementById('kuis_q1')?.value?.trim();
+        const q2 = document.getElementById('kuis_q2')?.value?.trim();
+        const q3 = document.getElementById('kuis_q3')?.value?.trim();
+        const q4 = document.getElementById('kuis_q4')?.value?.trim();
+        const q5 = document.getElementById('pendidikan_terakhir')?.value?.trim();
+        
+        if (!q1 || !q2 || !q3 || !q4 || !q5) {
+          Swal.fire({ 
+            icon: 'warning', 
+            title: 'Kuesioner Belum Lengkap', 
+            text: 'Mohon isi seluruh pertanyaan kuesioner (1-5) sebelum lanjut.', 
+            confirmButtonColor: '#E85D5E' 
+          }); 
+          return;
+        }
+      }
+      
       if (step === 2 && (currentStep === 0 || currentStep === 1)) {
         if (jumlahAnak === 0) tambahAnakCard();
       }
