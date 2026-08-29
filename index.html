@@ -1057,11 +1057,11 @@
         <div class="form-card" id="card_anak_${id}" style="position: relative; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
           <input type="hidden" id="lat_${id}" value="">
           <input type="hidden" id="lon_${id}" value="">
-          ${id > 1 ? `<button onclick="hapusAnakCard(${id})" style="position: absolute; top: 12px; right: 12px; background: #fee2e2; border: none; color: #e11d48; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.7rem; transition: 0.2s;"><i data-lucide="trash-2" style="width:12px; height:12px; vertical-align:middle;"></i> Hapus</button>` : ''}
+                    ${id > 1 ? `<button onclick="hapusAnakCard(${id})" style="position: absolute; top: 12px; right: 12px; background: #fee2e2; border: none; color: #e11d48; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.7rem; transition: 0.2s;"><i data-lucide="trash-2" style="width:12px; height:12px; vertical-align:middle;"></i> Hapus</button>` : ''}
 
-          <h4 style="margin: 0 0 12px; color: var(--primary); border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px; font-weight: 700; font-size: 0.95rem;">👤 Data Peserta Ke-${id}</h4>
+                    <h4 style="margin: 0 0 12px; color: var(--primary); border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px; font-weight: 700; font-size: 0.95rem;">👤 Data Peserta</h4>
 
-          <div class="form-group" style="margin-bottom: 12px;">
+                    <div class="form-group" style="margin-bottom: 12px;">
             <label class="input-label" style="font-size: 0.75rem;">Nama Lengkap <span style="color: #ef4444;">*</span></label>
             <input type="text" id="nama_anak_${id}" class="input-modern" placeholder="Ketik nama lengkap kamu" style="padding: 10px 12px; height: 42px;">
           </div>
@@ -1109,30 +1109,30 @@
         </div>
       `;
 
-  wadah.insertAdjacentHTML('beforeend', cardHTML);
-  let titles = document.querySelectorAll('#wadah-semua-peserta h4');
-  titles.forEach((el, index) => { el.innerHTML = `👤 Data Peserta Ke-${index + 1}`; });
-  lucide.createIcons();
+      wadah.insertAdjacentHTML('beforeend', cardHTML);
+        let titles = document.querySelectorAll('#wadah-semua-peserta h4');
+        titles.forEach((el, index) => { el.innerHTML = `👤 Data Peserta`; });
+        lucide.createIcons();
 
-  // AUTO-FILL KELUARGA: Jika ini adalah peserta ke-2 dst, otomatis salin data kontak dari Peserta ke-1
-  if (id > 1) {
-    if (document.getElementById('kode_negara_1')) document.getElementById(`kode_negara_${id}`).value = document.getElementById('kode_negara_1').value;
-    if (document.getElementById('no_hp_1')) document.getElementById(`no_hp_${id}`).value = document.getElementById('no_hp_1').value;
-    if (document.getElementById('domisili_1')) document.getElementById(`domisili_${id}`).value = document.getElementById('domisili_1').value;
-    if (document.getElementById('lat_1')) document.getElementById(`lat_${id}`).value = document.getElementById('lat_1').value;
-    if (document.getElementById('lon_1')) document.getElementById(`lon_${id}`).value = document.getElementById('lon_1').value;
-    if (document.getElementById('email_wali_1')) document.getElementById(`email_wali_${id}`).value = document.getElementById('email_wali_1').value;
-  }
+        // AUTO-FILL KELUARGA: Jika ini adalah peserta ke-2 dst, otomatis salin data kontak dari Peserta ke-1
+        if (id > 1) {
+          if (document.getElementById('kode_negara_1')) document.getElementById(`kode_negara_${id}`).value = document.getElementById('kode_negara_1').value;
+          if (document.getElementById('no_hp_1')) document.getElementById(`no_hp_${id}`).value = document.getElementById('no_hp_1').value;
+          if (document.getElementById('domisili_1')) document.getElementById(`domisili_${id}`).value = document.getElementById('domisili_1').value;
+          if (document.getElementById('lat_1')) document.getElementById(`lat_${id}`).value = document.getElementById('lat_1').value;
+          if (document.getElementById('lon_1')) document.getElementById(`lon_${id}`).value = document.getElementById('lon_1').value;
+          if (document.getElementById('email_wali_1')) document.getElementById(`email_wali_${id}`).value = document.getElementById('email_wali_1').value;
+        }
 
-  hitungTotal();
-}
+        hitungTotal();
+      }
 
-    function hapusAnakCard(id) {
-      document.getElementById(`card_anak_${id}`).remove();
-      let titles = document.querySelectorAll('#wadah-semua-peserta h4');
-      titles.forEach((el, index) => { el.innerHTML = `👤 Data Peserta Ke-${index + 1}`; });
-      hitungTotal();
-    }
+          function hapusAnakCard(id) {
+            document.getElementById(`card_anak_${id}`).remove();
+            let titles = document.querySelectorAll('#wadah-semua-peserta h4');
+            titles.forEach((el, index) => { el.innerHTML = `👤 Data Peserta`; });
+            hitungTotal();
+          }
 
     function toggleFormOrtu(id) {
       const isChecked = document.getElementById(`copy_ortu_${id}`).checked;
