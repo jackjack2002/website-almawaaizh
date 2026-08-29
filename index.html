@@ -40,10 +40,9 @@
       /* 1s = durasi meluncur, 0.3s = menunggu splash screen melarut dulu, both = mengunci opacity 0 saat menunggu */
       animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s both;
     }
-    .splash-logo-lockup { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 20px; }
+    .splash-logo-lockup { display: flex; align-items: flex-end; justify-content: center; gap: 18px; margin-bottom: 20px; }
     .splash-logo { height: 100px; width: auto; object-fit: contain; animation: floatLogo 3s ease-in-out infinite; }
-    .splash-logo-mawaaizh { height: 130px; }
-    .splash-logo-iou { transform: translateY(20px); }
+    .splash-logo-mawaaizh { height: 110px; transform: translateX(20px); }
     .splash-logo-slot { display: flex; justify-content: center; width: 135px; }
     .splash-logo-divider { width: 1px; align-self: stretch; background: #CBD5E1; }
 
@@ -205,7 +204,7 @@
       </div>
       <div class="splash-logo-divider"></div>
       <div class="splash-logo-slot">
-        <img src="assets/logo_iou_trimmed.png" alt="Logo International Open University" class="splash-logo splash-logo-iou">
+        <img src="assets/logo_iou_trimmed.png" alt="Logo International Open University" class="splash-logo">
       </div>
     </div>
 
