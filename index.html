@@ -40,7 +40,11 @@
       /* 1s = durasi meluncur, 0.3s = menunggu splash screen melarut dulu, both = mengunci opacity 0 saat menunggu */
       animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s both;
     }
-    .splash-logo { width: 350px; height: auto; object-fit: contain; animation: floatLogo 3s ease-in-out infinite; margin-bottom: 20px; }
+    .splash-logo-lockup { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 20px; }
+    .splash-logo { height: 130px; width: auto; object-fit: contain; animation: floatLogo 3s ease-in-out infinite; }
+    .splash-logo-mawaaizh { height: 170px; }
+    .splash-logo-divider { width: 1px; height: 90px; background: #CBD5E1; }
+
     @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     .splash-loader { width: 50px; height: 5px; background: #27272a; border-radius: 10px; overflow: hidden; position: relative; }
     .splash-loader::after { content: ''; position: absolute; left: -20px; top: 0; height: 100%; width: 20px; background: var(--primary); border-radius: 10px; animation: loadingBar 1.5s infinite linear; }
@@ -193,7 +197,12 @@
 
   <div id="splashScreen" class="splash-screen">
     <!-- Efek sunrise dihilangkan agar lebih formal -->
-    <img src="assets/logo_new.png?v=2" alt="Logo" class="splash-logo" style="position:relative; z-index:10;" onerror="this.src='https://placehold.co/280x150/7C9082/white?text=MARRIAGE+IS+NOT+SCARY'">
+    <div class="splash-logo-lockup" style="position:relative; z-index:10;">
+      <img src="assets/logo_new.png?v=2" alt="Logo Al Mawaaizh" class="splash-logo splash-logo-mawaaizh" onerror="this.src='https://placehold.co/280x150/7C9082/white?text=MARRIAGE+IS+NOT+SCARY'">
+      <div class="splash-logo-divider"></div>
+      <img src="assets/Logo IOU.png" alt="Logo International Open University" class="splash-logo">
+    </div>
+
     <div class="splash-loader" style="position:relative; z-index:10;"></div>
     <p id="teksLoadingSplash" style="color: var(--text-main); font-size: 0.85rem; margin-top: 15px; font-weight: 600; letter-spacing: 1px; position:relative; z-index:10; text-align: center;">MEMUAT SISTEM...</p>
   </div>
