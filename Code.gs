@@ -78,10 +78,20 @@ function doPost(e) {
         const lastRow = sheetDataReg.getLastRow(); 
         let pendaftar = [];
         if (lastRow > 1) { 
-          // Membaca Kolom A sampai U (Total 21 Kolom)
-          const dataRaw = sheetDataReg.getRange(2, 1, lastRow - 1, 21).getValues();
+          // Membaca Kolom A sampai V (Total 22 Kolom - tambah kolom V untuk data kuesioner)
+          const dataRaw = sheetDataReg.getRange(2, 1, lastRow - 1, 22).getValues();
           dataRaw.forEach(row => {
             if (row[0] && row[1]) {
+              // Parse data kuesioner dari kolom V (index 21)
+              let dataKuis = {};
+              try {
+                if (row[21]) {
+                  dataKuis = JSON.parse(row[21]);
+                }
+              } catch (e) {
+                dataKuis = {};
+              }
+              
               pendaftar.push({
                 tanggal: row[0], orderId: row[1], email: row[2], hp: row[3],
                 namaAnak: row[4], panggilan: row[5], usia: row[6], sekolah: row[7], kelasSekolah: row[8],
@@ -92,7 +102,8 @@ function doPost(e) {
                 bukti: row[17],         // Kolom R (Link Bukti Bergeser)
                 logHadir: row[18],      // Kolom S (Status Kehadiran Bergeser)
                 latitude: row[19],      // Kolom T (Data Koordinat Peta)
-                longitude: row[20]      // Kolom U (Data Koordinat Peta)
+                longitude: row[20],     // Kolom U (Data Koordinat Peta)
+                dataKuis: dataKuis      // Kolom V (Data Kuesioner JSON)
               });
             }
           });
@@ -111,10 +122,21 @@ function doPost(e) {
 
         for (let i = 1; i < values.length; i++) {
           if (values[i][1] === qrCode) { // Cek Kolom B (Order ID)
+            // Parse data kuesioner dari kolom V (index 21)
+            let dataKuis = {};
+            try {
+              if (values[i][21]) {
+                dataKuis = JSON.parse(values[i][21]);
+              }
+            } catch (e) {
+              dataKuis = {};
+            }
+
             let detailPeserta = {
               namaAnak: values[i][4], panggilan: values[i][5], usia: values[i][6],
               sekolah: values[i][7], penyakit: values[i][12], obat: values[i][13],
-              statusBayar: values[i][16] // Membaca Kolom Q (Index 16)
+              statusBayar: values[i][16], // Membaca Kolom Q (Index 16)
+              dataKuis: dataKuis          // Kolom V (Data Kuesioner)
             };
 
             let statusBayarCek = values[i][16]; // Kolom Q
@@ -260,6 +282,17 @@ data.peserta.forEach((p, index) => {
 
   let linkBuktiFix = index === 0 ? fileUrl : "Ikut Anak Ke-1";
 
+  // Parse data kuesioner dari frontend
+  let dataKuis = {};
+  try {
+    if (data.dataKuisJson) {
+      dataKuis = JSON.parse(data.dataKuisJson);
+    }
+  } catch (e) {
+    dataKuis = {};
+  }
+  const kuisJsonString = JSON.stringify(dataKuis);
+
   // Kita gunakan kolom-kolom lama yang sudah tidak dipakai di frontend untuk menyimpan
   // data "Follow Munira" agar admin.html tetap aman berjalan.
   // Misalnya kita simpan Follow Munira di kolom "Kelas Sekolah" (Kolom I)
@@ -285,7 +318,8 @@ data.peserta.forEach((p, index) => {
     linkBuktiFix,          // R: LINK BUKTI
     "",                    // S: STATUS KEHADIRAN
     p.latitude || "",      // T: LATITUDE
-    p.longitude || ""      // U: LONGITUDE
+    p.longitude || "",     // U: LONGITUDE
+    kuisJsonString         // V: DATA KUESIONER (JSON)
   ]);
 });
 return sendJSON({ status: "success", orderIds: generatedOrderIds, linkBukti: fileUrl });

@@ -1177,11 +1177,24 @@
                 </div>
              </div>
              
-             <div style="grid-column: 1 / -1; background:#fef2f2; border:2px solid #ef4444; padding:12px; border-radius:12px; margin-top:5px;">
-                <span style="color:#b91c1c; font-size:0.75rem; font-weight:900; display:flex; align-items:center; gap:5px; margin-bottom:5px;"><i data-lucide="alert-circle" style="width:14px;"></i> MEDIS & OBAT PRIBADI</span>
-                <span style="color:#7f1d1d; font-weight:800; font-size:0.9rem;">${p.penyakit} / ${p.obat}</span>
-             </div>
-           </div>
+<div style="grid-column: 1 / -1; background:#fef2f2; border:2px solid #ef4444; padding:12px; border-radius:12px; margin-top:5px;">
+                 <span style="color:#b91c1c; font-size:0.75rem; font-weight:900; display:flex; align-items:center; gap:5px; margin-bottom:5px;"><i data-lucide="alert-circle" style="width:14px;"></i> MEDIS & OBAT PRIBADI</span>
+                 <span style="color:#7f1d1d; font-weight:800; font-size:0.9rem;">${p.penyakit} / ${p.obat}</span>
+              </div>
+
+              <!-- KUESIONER -->
+              <div style="grid-column: 1 / -1; background:#f0f9ff; border:2px solid #0ea5e9; padding:15px; border-radius:12px; margin-top:10px;">
+                 <span style="color:#0c4a6e; font-size:0.75rem; font-weight:900; display:flex; align-items:center; gap:5px; margin-bottom:10px;"><i data-lucide="clipboard-list" style="width:14px;"></i> HASIL KUESIONER</span>
+                 <div style="font-size:0.8rem; line-height:1.6; color:#164e63;">
+                    ${p.dataKuis && Object.keys(p.dataKuis).length > 0 ? `
+                       <div style="margin-bottom:8px;"><strong>1. Masalah/Keterampilan:</strong><br>${p.dataKuis.pertanyaan_1_masalah || "-"}</div>
+                       <div style="margin-bottom:8px;"><strong>2. Pengeluaran:</strong><br>${p.dataKuis.pertanyaan_2_pengeluaran || "-"}</div>
+                       <div style="margin-bottom:8px;"><strong>3. Tujuan:</strong><br>${p.dataKuis.pertanyaan_3_tujuan || "-"}</div>
+                       <div><strong>4. Harapan:</strong><br>${p.dataKuis.pertanyaan_4_harapan || "-"}</div>
+                    ` : '<span style="color:#64748b; font-style:italic;">Belum mengisi kuesioner</span>'}
+                 </div>
+              </div>
+            </div>
         </div>
       `;
       document.getElementById('modalDetailPeserta').classList.add('active');

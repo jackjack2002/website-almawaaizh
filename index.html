@@ -392,22 +392,28 @@
     <!-- ================= STEP 1: KUESIONER ================= -->
     <div id="step-1" class="step-content">
       <h3 style="margin-top:0; color:var(--primary); text-align:center; font-size: 1.1rem;">Kuesioner Singkat</h3>
-      <p style="font-size: 0.7rem; text-align:center; color:var(--text-muted); margin-top:-5px; margin-bottom: 15px;">Bantu kami mengenal Anda lebih baik</p>
+      <p style="font-size: 0.7rem; text-align:center; color:var(--text-muted); margin-top:-5px; margin-bottom: 15px;">Petunjuk: jawablah berdasarkan pengalaman dan kebutuhan nyata Anda. Tidak ada jawaban benar atau salah. Jawaban yang jujur jauh lebih berguna bagi kami.</p>
 
       <div class="form-card" style="padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 15px;">
 
-        <div class="form-group" style="margin-bottom: 12px;">
-          <label class="input-label" style="font-size: 0.75rem;">1. Apa harapan Anda mengikuti kajian ini?</label>
-          <textarea id="kuis_q1" class="input-modern" rows="2" placeholder="Tulis harapan Anda..." style="resize: none; font-size: 0.8rem; padding: 10px;"></textarea>
+        <div class="form-group" style="margin-bottom: 15px;">
+          <label class="input-label" style="font-size: 0.75rem;">1. Dalam 6 bulan terakhir, masalah apa yang paling menyita pikiran Anda — atau keterampilan apa yang Anda butuhkan — yang membuat Anda mencari ilmunya melalui buku, video, atau kelas, tetapi belum juga tuntas?</label>
+          <textarea id="kuis_q1" class="input-modern" rows="3" placeholder="Tulis jawaban Anda..." style="resize: none; font-size: 0.8rem; padding: 10px;"></textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+          <label class="input-label" style="font-size: 0.75rem;">2. Untuk masalah Anda di atas, berapa uang yang sudah Anda keluarkan sejauh ini — untuk kelas, konsultasi, buku, alat, atau layanan?</label>
+          <textarea id="kuis_q2" class="input-modern" rows="2" placeholder="Contoh: 500000 atau Rp 500.000" style="resize: none; font-size: 0.8rem; padding: 10px;"></textarea>
         </div>
 
         <div class="form-group" style="margin-bottom: 0;">
-          <label class="input-label" style="font-size: 0.75rem;">2. Pertanyaan Dummy Pilihan</label>
-          <select id="kuis_q2" class="input-modern" style="padding: 0 10px; height: 42px; font-size: 0.8rem;">
-            <option value="" disabled selected hidden>Pilih jawaban...</option>
-            <option value="Opsi 1">Opsi Jawaban 1</option>
-            <option value="Opsi 2">Opsi Jawaban 2</option>
-          </select>
+          <label class="input-label" style="font-size: 0.75rem;">3. Apa tujuan Anda mempelajari hal tersebut hingga mengeluarkan uang?</label>
+          <textarea id="kuis_q3" class="input-modern" rows="2" placeholder="Tulis jawaban Anda..." style="resize: none; font-size: 0.8rem; padding: 10px;"></textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="input-label" style="font-size: 0.75rem;">4. Apa harapan Anda mengikuti kajian ini?</label>
+          <textarea id="kuis_q4" class="input-modern" rows="2" placeholder="Tulis harapan Anda..." style="resize: none; font-size: 0.8rem; padding: 10px;"></textarea>
         </div>
 
       </div>
@@ -1275,8 +1281,10 @@
 
       // POIN 2: Kumpulkan data kuis menjadi 1 Objek JSON
       let dataKuis = {
-        pertanyaan_1_harapan: document.getElementById('kuis_q1') ? document.getElementById('kuis_q1').value : "",
-        pertanyaan_2_dummy: document.getElementById('kuis_q2') ? document.getElementById('kuis_q2').value : ""
+        pertanyaan_1_masalah: document.getElementById('kuis_q1') ? document.getElementById('kuis_q1').value : "",
+        pertanyaan_2_pengeluaran: document.getElementById('kuis_q2') ? document.getElementById('kuis_q2').value : "",
+        pertanyaan_3_tujuan: document.getElementById('kuis_q3') ? document.getElementById('kuis_q3').value : "",
+        pertanyaan_4_harapan: document.getElementById('kuis_q4') ? document.getElementById('kuis_q4').value : ""
       };
 
       const dataPayload = {
