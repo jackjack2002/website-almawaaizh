@@ -465,6 +465,21 @@
             </select>
           </div>
 
+          <div class="form-group" style="margin-top: 12px; margin-bottom: 0;">
+            <label class="input-label" style="font-size: 0.75rem;">Pendidikan Terakhir <span style="color: #ef4444;">*</span></label>
+            <select id="pendidikan_terakhir" class="input-modern" style="padding: 0 10px; height: 42px; font-size: 0.8rem; margin-bottom: 0;">
+              <option value="" disabled selected hidden>Pilih pendidikan terakhir</option>
+              <option value="SD">SD</option>
+              <option value="SMP">SMP</option>
+              <option value="SMA/SMK">SMA/SMK</option>
+              <option value="Diploma (D1-D4)">Diploma (D1-D4)</option>
+              <option value="S1">S1</option>
+              <option value="S2">S2</option>
+              <option value="S3">S3</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
+          </div>
+
           <div style="display: none;">
             <input type="radio" id="follow_ya" name="follow_munira_global" value="" checked>
           </div>
@@ -1284,7 +1299,8 @@
         pertanyaan_1_masalah: document.getElementById('kuis_q1') ? document.getElementById('kuis_q1').value : "",
         pertanyaan_2_pengeluaran: document.getElementById('kuis_q2') ? document.getElementById('kuis_q2').value : "",
         pertanyaan_3_tujuan: document.getElementById('kuis_q3') ? document.getElementById('kuis_q3').value : "",
-        pertanyaan_4_harapan: document.getElementById('kuis_q4') ? document.getElementById('kuis_q4').value : ""
+        pertanyaan_4_harapan: document.getElementById('kuis_q4') ? document.getElementById('kuis_q4').value : "",
+        pertanyaan_5_pendidikan: document.getElementById('pendidikan_terakhir') ? document.getElementById('pendidikan_terakhir').value : ""
       };
 
       const dataPayload = {
