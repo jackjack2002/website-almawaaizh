@@ -634,6 +634,7 @@
               <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.55rem; color: #94A3B8; margin-top: 3px;">Max 2MB • JPG/PNG</span>
             </div>
             <div id="preview_follow_1_img" style="display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; object-fit: cover; border-radius: 8px;"></div>
+            <button type="button" onclick="removeFollowImage(1)" style="display: none; position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; border-radius: 50%; background: #EF4444; color: white; border: none; font-size: 12px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;">×</button>
           </div>
 
           <!-- Kolom 2: ioubahasaindonesia -->
@@ -648,6 +649,7 @@
               <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.55rem; color: #94A3B8; margin-top: 3px;">Max 2MB • JPG/PNG</span>
             </div>
             <div id="preview_follow_2_img" style="display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; object-fit: cover; border-radius: 8px;"></div>
+            <button type="button" onclick="removeFollowImage(2)" style="display: none; position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; border-radius: 50%; background: #EF4444; color: white; border: none; font-size: 12px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;">×</button>
           </div>
         </div>
 
@@ -1446,7 +1448,15 @@
               const compressedBase64 = canvas.toDataURL('image/jpeg', 0.6);
               resolve(compressedBase64);
             };
+            img.onerror = function() {
+              console.error('Failed to load image for compression');
+              resolve(""); // resolve dengan empty string agar tidak hang
+            };
             img.src = e.target.result;
+          };
+          reader.onerror = function() {
+            console.error('FileReader error');
+            resolve("");
           };
           reader.readAsDataURL(file);
         });
@@ -1880,9 +1890,27 @@ Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! �
           preview.querySelector('i[data-lucide="upload-cloud"]').style.display = 'none';
           preview.querySelector('span').style.display = 'none';
           preview.querySelectorAll('span')[1].style.display = 'none';
+          // Show remove button
+          const removeBtn = preview.parentElement.querySelector('button[onclick^="removeFollowImage"]');
+          if (removeBtn) removeBtn.style.display = 'flex';
         };
         reader.readAsDataURL(file);
       }
+    }
+
+    function removeFollowImage(num) {
+      const input = document.getElementById('bukti_follow_' + num);
+      const preview = document.getElementById('preview_follow_' + num);
+      const previewImg = document.getElementById('preview_follow_' + num + '_img');
+      const removeBtn = preview.parentElement.querySelector('button[onclick^="removeFollowImage"]');
+      
+      input.value = '';
+      previewImg.src = '';
+      previewImg.style.display = 'none';
+      preview.querySelector('i[data-lucide="upload-cloud"]').style.display = 'block';
+      preview.querySelector('span').style.display = 'block';
+      preview.querySelectorAll('span')[1].style.display = 'block';
+      if (removeBtn) removeBtn.style.display = 'none';
     }
 
   </script>
