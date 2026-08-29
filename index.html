@@ -43,7 +43,7 @@
     .splash-logo-lockup { display: flex; align-items: flex-end; justify-content: center; gap: 18px; margin-bottom: 20px; }
     .splash-logo { height: 100px; width: auto; object-fit: contain; animation: floatLogo 3s ease-in-out infinite; }
     .splash-logo-mawaaizh { height: 110px; transform: translateX(20px); }
-    .splash-logo-khazanah { height: 75px; }
+    .splash-logo-khazanah { height: 80px; }
     .splash-logo-slot { display: flex; justify-content: center; width: 135px; }
     .splash-logo-slot:last-child { align-self: center; }
     .splash-logo-divider { width: 1px; align-self: stretch; background: #CBD5E1; }
@@ -545,8 +545,8 @@
             <div style="display: flex; align-items: center;">
               <span style="font-size: 0.65rem; color: #94a3b8; font-weight: 600; margin-right: 8px;">Lewati</span>
               <label class="switch">
-                <!-- Defaultnya terbuka (checked) -->
-                <input type="checkbox" id="toggle_dukungan" checked onchange="aturToggleDukungan(this.checked)">
+                <!-- Defaultnya TERTUTUP (unchecked) -->
+                <input type="checkbox" id="toggle_dukungan" onchange="aturToggleDukungan(this.checked)">
                 <span class="slider"></span>
               </label>
             </div>
@@ -561,7 +561,7 @@
 
               <label style="position: relative; display: block; cursor: pointer;">
                 <!-- Secara default Buku terpilih jika toggle ON -->
-                <input type="radio" name="pilihan_infaq" id="infaq_buku" value="buku_100000" class="opt-radio" checked onchange="document.getElementById('wadah_infaq_bebas').style.display = 'none'; lucide.createIcons();">
+                <input type="radio" name="pilihan_infaq" id="infaq_buku" value="buku_100000" class="opt-radio" onchange="document.getElementById('wadah_infaq_bebas').style.display = 'none'; lucide.createIcons();">
                 <div class="opt-card">
                   <div class="opt-icon-box"><i data-lucide="book-open" style="width:18px;"></i></div>
                   <div><div class="opt-title">Membeli Buku</div><div class="opt-desc">Rp 100.000</div></div>
@@ -596,14 +596,14 @@
           function aturToggleDukungan(isChecked) {
             const wadah = document.getElementById('wadah_pilihan_dukungan');
             if (isChecked) {
-              wadah.style.display = 'block';
-              // Otomatis kembalikan pilihan ke Buku jika dinyalakan lagi
-              document.getElementById('infaq_buku').checked = true;
-              document.getElementById('wadah_infaq_bebas').style.display = 'none';
-            } else {
-              // Sembunyikan form dan otomatis pilih "Tidak Infaq"
+              // Toggle ON → sembunyikan konten, pilih "Tidak Infaq"
               wadah.style.display = 'none';
               document.getElementById('infaq_nol').checked = true;
+            } else {
+              // Toggle OFF → tampilkan konten, pilih "Membeli Buku" default
+              wadah.style.display = 'block';
+              document.getElementById('infaq_buku').checked = true;
+              document.getElementById('wadah_infaq_bebas').style.display = 'none';
             }
           }
         </script>
@@ -627,7 +627,7 @@
             <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
               <i data-lucide="instagram" style="width: 13px; height: 13px;"></i> @al.mawaaizh
             </div>
-            <input type="file" id="bukti_follow_1" accept="image/*" capture="environment" style="display: none;" onchange="previewImage(this, 'preview_follow_1')">
+            <input type="file" id="bukti_follow_1" accept="image/*" style="display: none;" onchange="previewImage(this, 'preview_follow_1')">
             <div id="preview_follow_1" style="width: 100%; min-height: 110px; border-radius: 8px; background: #F8FAFC; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #E2E8F0; overflow: hidden; position: relative; transition: background-color 0.2s;" onclick="document.getElementById('bukti_follow_1').click()">
               <i data-lucide="upload-cloud" style="width: 30px; height: 30px; color: #94A3B8; margin-bottom: 8px;"></i>
               <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; font-weight: 600;">Tap untuk upload screenshot</span>
@@ -641,7 +641,7 @@
             <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
               <i data-lucide="instagram" style="width: 13px; height: 13px;"></i> @ioubahasaindonesia
             </div>
-            <input type="file" id="bukti_follow_2" accept="image/*" capture="environment" style="display: none;" onchange="previewImage(this, 'preview_follow_2')">
+            <input type="file" id="bukti_follow_2" accept="image/*" style="display: none;" onchange="previewImage(this, 'preview_follow_2')">
             <div id="preview_follow_2" style="width: 100%; min-height: 110px; border-radius: 8px; background: #F8FAFC; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #E2E8F0; overflow: hidden; position: relative; transition: background-color 0.2s;" onclick="document.getElementById('bukti_follow_2').click()">
               <i data-lucide="upload-cloud" style="width: 30px; height: 30px; color: #94A3B8; margin-bottom: 8px;"></i>
               <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; font-weight: 600;">Tap untuk upload screenshot</span>
@@ -668,7 +668,7 @@
           <i data-lucide="arrow-left" style="width: 18px; margin: 0;"></i>
         </button>
         <button onclick="lanjutKePembayaran()" class="btn-action" style="flex: 8; margin-top: 0; padding: 0.8rem; font-size: 0.85rem; border-radius: 10px;">
-          LANJUT PEMBAYARAN <i data-lucide="credit-card" style="width: 16px;"></i>
+          LANJUT <i data-lucide="arrow-right" style="width: 16px;"></i>
         </button>
       </div>
     </div>
