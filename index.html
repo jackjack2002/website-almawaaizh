@@ -34,9 +34,7 @@
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .anim-fade-in-up {
-      animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s both;
-    }
+    .anim-fade-in-up { animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s both; }
     .splash-logo-lockup { display: flex; align-items: flex-end; justify-content: center; gap: 18px; margin-bottom: 20px; }
     .splash-logo { height: 100px; width: auto; object-fit: contain; animation: floatLogo 3s ease-in-out infinite; }
     .splash-logo-mawaaizh { height: 110px; transform: translateX(20px); }
@@ -73,11 +71,7 @@
     .input-modern { width: 100%; padding: 13px 16px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 0.9rem; outline: none; transition: var(--transition); color: var(--text-main); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
     .input-modern:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(124, 144, 130, 0.2); }
 
-    @keyframes shakeError {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-5px); }
-      40%, 80% { transform: translateX(5px); }
-    }
+    @keyframes shakeError { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
     .error-shake { border-color: #ef4444 !important; background-color: #fef2f2 !important; animation: shakeError 0.4s ease-in-out; }
     .phone-input-group.error-shake { border-color: #ef4444 !important; animation: shakeError 0.4s ease-in-out; }
     .upload-area.error-shake { border-color: #ef4444 !important; background-color: #fef2f2 !important; animation: shakeError 0.4s ease-in-out; }
@@ -113,12 +107,6 @@
     .spinner { border: 4px solid rgba(0, 0, 0, 0.1); width: 45px; height: 45px; border-radius: 50%; border-left-color: var(--primary); animation: spin 1s linear infinite; margin-bottom: 15px; }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    .slider-container { background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px; padding: 20px 15px; text-align: center; }
-    .age-display { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin: 0 0 15px 0; letter-spacing: -0.5px; }
-    .age-slider { -webkit-appearance: none; width: 100%; height: 10px; border-radius: 5px; background: #cbd5e1; outline: none; margin: 10px 0; }
-    .age-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 32px; height: 32px; border-radius: 50%; background: var(--primary); cursor: pointer; box-shadow: 0 4px 12px rgba(232, 93, 94, 0.4); border: 4px solid #fff; transition: transform 0.1s; }
-    .age-slider::-webkit-slider-thumb:active { transform: scale(1.15); }
-
     .phone-input-group { display: flex; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; transition: var(--transition); width: 100%; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
     .phone-input-group:focus-within { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(124, 144, 130, 0.2); }
     .phone-prefix { background: #e2e8f0; color: #475569; padding: 13px 5px; font-weight: 800; font-size: 0.9rem; border: none; border-right: 2px solid #cbd5e1; width: 70px; text-align: center; outline: none; transition: var(--transition); font-family: inherit; }
@@ -126,30 +114,17 @@
     .phone-input-group .input-modern { border: none; background: transparent; border-radius: 0; margin-bottom: 0 !important; width: 100%; box-shadow: none !important; }
 
     .spin-small { animation: spin 1s linear infinite; }
-
     .map-pin-mini { width: 16px; height: 16px; background: #e11d48; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); animation: pinBounceMini 0.5s infinite alternate; display: inline-block; position: relative; margin-right: 6px; top: 2px; }
     .map-pin-mini::after { content: ''; width: 6px; height: 6px; background: white; position: absolute; top: 5px; left: 5px; border-radius: 50%; box-shadow: inset 0 1px 2px rgba(0,0,0,0.2); }
     @keyframes pinBounceMini { to { transform: translateY(-4px) rotate(-45deg); } }
-
-    .vertical-toggle { display: flex; flex-direction: column; width: 95px; background: #f8fafc; border-radius: 14px; border: 2px solid #e2e8f0; overflow: hidden; flex-shrink: 0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
-    .vertical-toggle input[type="radio"] { display: none; }
-    .v-segment { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: #64748b; cursor: pointer; transition: 0.2s ease; }
-    .vertical-toggle input[type="radio"]:nth-of-type(1) + .v-segment { border-bottom: 2px solid #e2e8f0; }
-    .vertical-toggle input[type="radio"]:checked + .v-segment { background: var(--primary); color: white; box-shadow: 0 0 10px rgba(59, 130, 246, 0.3); z-index: 2; position: relative; }
 
     .sun-glow-core { position: absolute; bottom: -100px; width: 300px; height: 300px; background: radial-gradient(circle, var(--accent-yellow) 0%, transparent 75%); border-radius: 50%; opacity: 0; transform: scale(0.3); transition: transform 2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 1.5s ease-out; z-index: 1; pointer-events: none; }
     .splash-screen.active-sunrise .sun-glow-core { opacity: 0.8; transform: scale(3); }
     .splash-screen * { position: relative; z-index: 2; }
 
-    .api-loader { position: fixed; inset: 0; background: rgba(12, 56, 122, 0.95) !important; backdrop-filter: blur(12px); z-index: 99999; display: none; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
-    .api-loader::before { content: ''; position: absolute; inset: 0; opacity: 0.15; pointer-events: none; background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 40px 40px; }
-    .api-loader.active { display: flex; }
-
     .printer-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; }
-
     .printer-slot { width: 320px; height: 32px; background: #334155; border: 4px solid #0F172A; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); position: relative; z-index: 30; display: flex; justify-content: center; align-items: center; }
     .printer-slot-inner { width: 85%; height: 100%; background: #020617; box-shadow: inset 0 2px 4px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; border-radius: 4px; }
-
     .printer-slot-light { width: 90%; height: 4px; background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); opacity: 0.8; border-radius: 2px; }
 
     @keyframes viberateMotor { 0% { transform: translate(1px, 0); } 100% { transform: translate(-1px, 0.5px); } }
@@ -170,10 +145,7 @@
 
     .fireworks-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; border-radius: 24px; }
     .firework-burst { position: absolute; width: 8px; height: 8px; background: #ff0; border-radius: 50%; opacity: 0; transform: scale(1); }
-    @keyframes fireworkExplode {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(45); opacity: 0; }
-    }
+    @keyframes fireworkExplode { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(45); opacity: 0; } }
 
     @media (max-width: 480px) {
       .form-card { padding: 16px; }
@@ -197,7 +169,6 @@
         <img src="assets/Khazanah Blue 1.png" alt="Logo Khazanah" class="splash-logo splash-logo-khazanah">
       </div>
     </div>
-
     <div class="splash-loader" style="position:relative; z-index:10;"></div>
     <p id="teksLoadingSplash" style="color: var(--text-main); font-size: 0.85rem; margin-top: 15px; font-weight: 600; letter-spacing: 1px; position:relative; z-index:10; text-align: center;">MEMUAT SISTEM...</p>
   </div>
@@ -229,24 +200,13 @@
              TANGGAL
           </div>
           <div class="fake-barcode-area">
-             <div style="width: 4px;"></div><div style="width: 8px;"></div>
-             <div style="width: 4px;"></div><div style="width: 16px;"></div>
-             <div style="width: 4px;"></div><div style="width: 4px;"></div>
-             <div style="width: 8px;"></div><div style="width: 12px;"></div>
-             <div style="width: 4px;"></div><div style="width: 16px;"></div>
-             <div style="width: 4px;"></div><div style="width: 8px;"></div>
-             <div style="width: 8px;"></div><div style="width: 4px;"></div>
-             <div style="width: 16px;"></div><div style="width: 4px;"></div>
-             <div style="width: 12px;"></div>
+             <div style="width: 4px;"></div><div style="width: 8px;"></div><div style="width: 4px;"></div><div style="width: 16px;"></div><div style="width: 4px;"></div><div style="width: 4px;"></div><div style="width: 8px;"></div><div style="width: 12px;"></div><div style="width: 4px;"></div><div style="width: 16px;"></div><div style="width: 4px;"></div><div style="width: 8px;"></div><div style="width: 8px;"></div><div style="width: 4px;"></div><div style="width: 16px;"></div><div style="width: 4px;"></div><div style="width: 12px;"></div>
           </div>
           <i data-lucide="scissors" style="width: 16px; height: 16px; color: var(--text-muted); margin-top: 8px;" stroke-width="2.5"></i>
         </div>
       </div>
     </div>
-    <div class="loading-badge">
-      <div class="loading-dot"></div>
-      MENCETAK TIKET...
-    </div>
+    <div class="loading-badge"><div class="loading-dot"></div> MENCETAK TIKET...</div>
   </div>
 
   <div class="container" id="mainContainer">
@@ -263,20 +223,16 @@
       <div class="step-item" id="dot-4"><div class="step-dot"></div><small style="font-size:0.55rem; margin-top:4px; font-weight:800;">Akhir</small></div>
     </div>
 
+    <!-- ================= STEP HOME ================= -->
     <div id="step-home" class="step-content active" style="padding: 10px;">
       <div class="glass" style="margin-top: 0px; padding: 1rem;">
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 6px; background-color: var(--primary);"></div>
-
         <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 1rem;">
           <div style="background: white; padding: 0.6rem; border-radius: 0.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 0.5rem; border: 1px solid #e2e8f0;">
             <div class="mini-logo-lockup">
-              <div class="mini-logo-slot">
-                <img src="assets/logo_new_trimmed.png" alt="Logo Al Mawaaizh" class="mini-logo mini-logo-mawaaizh">
-              </div>
+              <div class="mini-logo-slot"><img src="assets/logo_new_trimmed.png" alt="Logo Al Mawaaizh" class="mini-logo mini-logo-mawaaizh"></div>
               <div class="mini-logo-divider"></div>
-              <div class="mini-logo-slot">
-                <img src="assets/Khazanah Blue 1.png" alt="Logo Khazanah" class="mini-logo">
-              </div>
+              <div class="mini-logo-slot"><img src="assets/Khazanah Blue 1.png" alt="Logo Khazanah" class="mini-logo"></div>
             </div>
           </div>
           <p style="font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.2rem;" id="fomo-org">Muniira Kids & Teens</p>
@@ -300,15 +256,10 @@
           <div id="fomo-harga" style="display: none;"></div>
           <div class="ticket-section">
             <div class="ticket-header" style="margin-bottom: 6px;">
-              <div style="display: flex; align-items: center; gap: 4px;">
-                <i data-lucide="users" style="width: 14px; color: var(--primary);"></i>
-                <span class="ticket-label" style="font-size: 0.7rem;">SISA KUOTA</span>
-              </div>
+              <div style="display: flex; align-items: center; gap: 4px;"><i data-lucide="users" style="width: 14px; color: var(--primary);"></i><span class="ticket-label" style="font-size: 0.7rem;">SISA KUOTA</span></div>
               <span style="font-size:0.75rem; font-weight:700; color:#a16207;"><b id="sisaTiket" style="color:var(--primary); font-size:1rem;">0</b> / <span id="totalTiket">0</span></span>
             </div>
-            <div class="ticket-bar-bg" style="height: 10px;">
-              <div id="ticketProgressBar" class="ticket-bar-fill"></div>
-            </div>
+            <div class="ticket-bar-bg" style="height: 10px;"><div id="ticketProgressBar" class="ticket-bar-fill"></div></div>
             <p style="font-size: 0.65rem; color: #ef4444; margin: 6px 0 0; font-weight: 800; text-align: center; display: none; animation: pulseIcon 1.5s infinite;" id="fomo-warning">🔥 KUOTA HAMPIR HABIS!</p>
           </div>
         </div>
@@ -319,16 +270,13 @@
 
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e2e8f0;">
           <a href="#" id="fomo-link-ig" target="_blank" style="background: #ffffff; padding: 0.6rem 0.4rem; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; text-decoration: none; border: 1px solid #e2e8f0; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
-            <img src="assets/instagram.png" alt="Instagram" style="width: 18px; height: 18px; object-fit: contain;">
-            <span style="font-size: 0.55rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Instagram</span>
+            <img src="assets/instagram.png" alt="Instagram" style="width: 18px; height: 18px; object-fit: contain;"><span style="font-size: 0.55rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Instagram</span>
           </a>
           <a href="#" id="fomo-link-wa" target="_blank" style="background: #ffffff; padding: 0.6rem 0.4rem; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; text-decoration: none; border: 1px solid #e2e8f0; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
-            <img src="assets/whatsapp.png" alt="WhatsApp" style="width: 18px; height: 18px; object-fit: contain;">
-            <span style="font-size: 0.55rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">WhatsApp</span>
+            <img src="assets/whatsapp.png" alt="WhatsApp" style="width: 18px; height: 18px; object-fit: contain;"><span style="font-size: 0.55rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">WhatsApp</span>
           </a>
           <a href="#" id="fomo-link-web" target="_blank" style="background: #ffffff; padding: 0.6rem 0.4rem; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; text-decoration: none; border: 1px solid #e2e8f0; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
-            <img src="assets/globe.png" alt="Website" style="width: 18px; height: 18px; object-fit: contain; filter: grayscale(100%) opacity(70%);">
-            <span style="font-size: 0.55rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Website</span>
+            <img src="assets/globe.png" alt="Website" style="width: 18px; height: 18px; object-fit: contain; filter: grayscale(100%) opacity(70%);"><span style="font-size: 0.55rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Website</span>
           </a>
         </div>
       </div>
@@ -338,16 +286,13 @@
     <div id="step-0" class="step-content">
       <h3 style="margin-top:0; color:var(--primary); text-align:center; font-size: 1.1rem;">Syarat & Ketentuan</h3>
       <p style="font-size: 0.7rem; text-align:center; color:var(--text-muted); margin-top:-5px; margin-bottom: 12px;">Mohon baca dan setujui sebelum melanjutkan</p>
-
       <div class="snk-box" id="snk-text" style="padding: 12px; font-size: 0.75rem; margin-bottom: 12px;">
         <div style="text-align: center; margin-top: 80px;"><i data-lucide="loader-2" class="spinner" style="width:24px; height:24px; border:none; display:inline-block;"></i></div>
       </div>
-
       <label style="display: flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer; margin-bottom: 15px;">
         <input type="checkbox" id="cb-setuju" style="width: 16px; height: 16px; accent-color: var(--primary);">
         Saya menyetujui persyaratan di atas
       </label>
-
       <button onclick="goToStep(1)" class="btn-action" style="padding: 0.8rem; font-size: 0.85rem; border-radius: 10px;">
         LANJUTKAN <i data-lucide="arrow-right" style="width: 16px;"></i>
       </button>
@@ -357,7 +302,6 @@
     <div id="step-1" class="step-content">
       <h3 style="margin-top:0; color:var(--primary); text-align:center; font-size: 1.1rem;">Kuesioner Singkat</h3>
       <p style="font-size: 0.7rem; text-align:center; color:var(--text-muted); margin-top:-5px; margin-bottom: 15px;">Petunjuk: jawablah berdasarkan pengalaman dan kebutuhan nyata Anda. Tidak ada jawaban benar atau salah. Jawaban yang jujur jauh lebih berguna bagi kami.</p>
-
       <div class="form-card" style="padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 15px;">
         <div class="form-group" style="margin-bottom: 15px;">
           <label class="input-label" style="font-size: 0.75rem;">1. Dalam 6 bulan terakhir, masalah apa yang paling menyita pikiran Anda — atau keterampilan apa yang Anda butuhkan — yang membuat Anda mencari ilmunya melalui buku, video, atau kelas, tetapi belum juga tuntas? <span style="color: #ef4444;">*</span></label>
@@ -376,7 +320,6 @@
           <textarea id="kuis_q4" class="input-modern" rows="2" placeholder="Tulis harapan Anda..." style="resize: none; font-size: 0.8rem; padding: 10px;" required></textarea>
         </div>
       </div>
-
       <div style="display: flex; gap: 8px; align-items: stretch;">
         <button onclick="goToStep(0)" class="btn-action btn-secondary" style="flex: 2; margin-top: 0; padding: 0.8rem 0; border-radius: 10px; display: flex; justify-content: center;">
           <i data-lucide="arrow-left" style="width: 18px; margin: 0;"></i>
@@ -390,7 +333,6 @@
     <!-- ================= STEP 2: FORM DATA DIRI ================= -->
     <div id="step-2" class="step-content">
       <h3 style="margin-top:0; font-size: 1.1rem;">Data Diri Peserta</h3>
-
       <div id="wadah-semua-peserta"></div>
 
       <div class="form-card" style="margin-top: 15px; padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
@@ -406,7 +348,6 @@
               <option value="Lainnya">Lainnya</option>
             </select>
           </div>
-
           <div class="form-group" style="margin-top: 12px; margin-bottom: 0;">
             <label class="input-label" style="font-size: 0.75rem;">Tema yang menarik untuk Anda? <span style="color: #ef4444;">*</span></label>
             <select id="tema_pilihan" class="input-modern" style="padding: 0 10px; height: 42px; font-size: 0.8rem; margin-bottom: 0;">
@@ -417,7 +358,6 @@
               <option value="Kemana Ayah Harus Bercerita?">Kemana Ayah Harus Bercerita?</option>
             </select>
           </div>
-
           <div class="form-group" style="margin-top: 12px; margin-bottom: 0;">
             <label class="input-label" style="font-size: 0.75rem;">Pendidikan Terakhir <span style="color: #ef4444;">*</span></label>
             <select id="pendidikan_terakhir" class="input-modern" style="padding: 0 10px; height: 42px; font-size: 0.8rem; margin-bottom: 0;">
@@ -466,39 +406,36 @@
 
           <input type="radio" name="pilihan_infaq" id="infaq_nol" value="0" style="display: none;">
 
-        <div id="wadah_pilihan_dukungan">
+          <div id="wadah_pilihan_dukungan">
             <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
-
-                <!-- OPSIONAL: Opsi Membeli Buku (disabled - hapus tag comment untuk menampilkan, lalu ubah grid 1fr di atas jadi 1fr 1fr)
-                    <label style="position: relative; display: block; cursor: pointer;">
-                    <input type="radio" name="pilihan_infaq" id="infaq_buku" value="buku_100000" class="opt-radio" onchange="document.getElementById('wadah_infaq_bebas').style.display = 'none'; lucide.createIcons();">
-                    <div class="opt-card">
-                        <div class="opt-icon-box"><i data-lucide="book-open" style="width:18px;"></i></div>
-                        <div><div class="opt-title">Membeli Buku</div><div class="opt-desc">Rp 100.000</div></div>
-                        <i data-lucide="check-circle-2" class="check-icon" style="width: 16px;"></i>
-                    </div>
-                </label>
-                        -->
-
-                <label style="position: relative; display: block; cursor: pointer;">
-                    <input type="radio" name="pilihan_infaq" id="infaq_bebas" value="bebas" class="opt-radio" onchange="document.getElementById('wadah_infaq_bebas').style.display = 'block'; document.getElementById('infaq_bebas_nominal').focus(); lucide.createIcons();">
-                        <div class="opt-card">
-                        <div class="opt-icon-box"><i data-lucide="heart-handshake" style="width:18px;"></i></div>
-                            <div><div class="opt-title">Infaq Terbaik</div><div class="opt-desc">Seikhlasnya</div></div>
-                            <i data-lucide="check-circle-2" class="check-icon" style="width: 16px;"></i>
-                        </div>
-                </label>
-
-                      </div>
-
-                      <div id="wadah_infaq_bebas" style="display: none; padding: 12px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; margin-top: 10px;">
-                        <label style="font-size: 0.7rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; display: block;">Masukkan Nominal Infaq</label>
-                        <div style="position: relative;">
-                          <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-weight: 800; color: var(--text-main); font-size: 1rem;">Rp</span>
-                          <input type="text" id="infaq_bebas_nominal" class="input-modern" placeholder="0" oninput="let v=this.value.replace(/\D/g,''); this.value = v ? new Intl.NumberFormat('id-ID').format(v) : '';" style="padding-left: 45px; font-weight: 800; font-size: 1rem; height: 42px; color: var(--primary);">
-                        </div>
-                      </div>
-                    </div>
+              <!-- OPSIONAL: Opsi Membeli Buku (disabled - hapus tag comment untuk menampilkan, lalu ubah grid 1fr di atas jadi 1fr 1fr)
+              <label style="position: relative; display: block; cursor: pointer;">
+                <input type="radio" name="pilihan_infaq" id="infaq_buku" value="buku_100000" class="opt-radio" onchange="document.getElementById('wadah_infaq_bebas').style.display = 'none'; lucide.createIcons();">
+                <div class="opt-card">
+                  <div class="opt-icon-box"><i data-lucide="book-open" style="width:18px;"></i></div>
+                  <div><div class="opt-title">Membeli Buku</div><div class="opt-desc">Rp 100.000</div></div>
+                  <i data-lucide="check-circle-2" class="check-icon" style="width: 16px;"></i>
+                </div>
+              </label>
+              -->
+              <label style="position: relative; display: block; cursor: pointer;">
+                <input type="radio" name="pilihan_infaq" id="infaq_bebas" value="bebas" class="opt-radio" onchange="document.getElementById('wadah_infaq_bebas').style.display = 'block'; document.getElementById('infaq_bebas_nominal').focus(); lucide.createIcons();">
+                <div class="opt-card">
+                  <div class="opt-icon-box"><i data-lucide="heart-handshake" style="width:18px;"></i></div>
+                  <div><div class="opt-title">Infaq Terbaik</div><div class="opt-desc">Seikhlasnya</div></div>
+                  <i data-lucide="check-circle-2" class="check-icon" style="width: 16px;"></i>
+                </div>
+              </label>
+            </div>
+            <div id="wadah_infaq_bebas" style="display: none; padding: 12px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; margin-top: 10px;">
+              <label style="font-size: 0.7rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; display: block;">Masukkan Nominal Infaq</label>
+              <div style="position: relative;">
+                <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-weight: 800; color: var(--text-main); font-size: 1rem;">Rp</span>
+                <input type="text" id="infaq_bebas_nominal" class="input-modern" placeholder="0" oninput="let v=this.value.replace(/\D/g,''); this.value = v ? new Intl.NumberFormat('id-ID').format(v) : '';" style="padding-left: 45px; font-weight: 800; font-size: 1rem; height: 42px; color: var(--primary);">
+              </div>
+            </div>
+          </div>
+        </div>
 
         <script>
           function aturToggleDukungan(isChecked) {
@@ -506,16 +443,10 @@
             const infaqBebas = document.getElementById('infaq_bebas');
             const infaqNol = document.getElementById('infaq_nol');
             const wadahInfaqBebas = document.getElementById('wadah_infaq_bebas');
-
             if (isChecked) {
-              wadah.style.display = 'none';
-              infaqNol.checked = true;
-              wadahInfaqBebas.style.display = 'none';
+              wadah.style.display = 'none'; infaqNol.checked = true; wadahInfaqBebas.style.display = 'none';
             } else {
-              wadah.style.display = 'block';
-              infaqBebas.checked = false;
-              infaqNol.checked = false;
-              wadahInfaqBebas.style.display = 'none';
+              wadah.style.display = 'block'; infaqBebas.checked = false; infaqNol.checked = false; wadahInfaqBebas.style.display = 'none';
             }
           }
         </script>
@@ -532,7 +463,6 @@
         </div>
         <p style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; margin-bottom: 16px; line-height: 1.5;">Upload screenshot follow kedua akun Instagram dan bukti tag 3 teman di kolom komentar untuk melanjutkan pendaftaran.</p>
 
-        <!-- Kolom 3: BUKTI TAG -->
         <div style="background: #FFFFFF; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 14px; text-align: center; transition: border-color 0.2s, background-color 0.2s; position: relative; margin-bottom: 12px;">
           <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; color: #e11d48;">
             <i data-lucide="message-circle" style="width: 14px; height: 14px;"></i> Bukti Tag 3 Teman
@@ -549,9 +479,7 @@
           <button type="button" id="btn_remove_3" onclick="removeFollowImage(3)" style="display: none; position: absolute; top: 35px; right: 20px; width: 26px; height: 26px; border-radius: 50%; background: #EF4444; color: white; border: 2px solid white; font-size: 16px; font-weight: bold; line-height: 0; cursor: pointer; z-index: 10; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2); padding-bottom: 2px;">×</button>
         </div>
 
-        <!-- 2 Kolom Upload Foto -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px;">
-          <!-- Kolom 1 -->
           <div style="background: #FFFFFF; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 14px; text-align: center; transition: border-color 0.2s, background-color 0.2s; position: relative;">
             <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
               <i data-lucide="instagram" style="width: 13px; height: 13px;"></i> @al.mawaaizh
@@ -567,7 +495,6 @@
             </div>
             <button type="button" id="btn_remove_1" onclick="removeFollowImage(1)" style="display: none; position: absolute; top: 35px; right: 20px; width: 26px; height: 26px; border-radius: 50%; background: #EF4444; color: white; border: 2px solid white; font-size: 16px; font-weight: bold; line-height: 0; cursor: pointer; z-index: 10; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2); padding-bottom: 2px;">×</button>
           </div>
-          <!-- Kolom 2 -->
           <div style="background: #FFFFFF; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 14px; text-align: center; transition: border-color 0.2s, background-color 0.2s; position: relative;">
             <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
               <i data-lucide="instagram" style="width: 13px; height: 13px;"></i> @ioubahasaindonesia
@@ -605,6 +532,7 @@
       </div>
     </div>
 
+    <!-- ================= STEP 3: BAYAR ================= -->
     <div id="step-3" class="step-content">
       <div class="total-box" style="padding: 12px; margin-bottom: 15px;">
         <small style="font-weight: 800; text-transform: uppercase; color: #a16207; font-size: 0.65rem;">Total Tagihan</small>
@@ -653,6 +581,7 @@
       </div>
     </div>
 
+    <!-- ================= STEP 4: AKHIR ================= -->
     <div id="step-4" class="step-content" style="text-align: center; padding: 15px 10px; position: relative;">
       <div class="fireworks-overlay" id="fireworksArea"></div>
       <div style="width: 50px; height: 50px; background: #e6f4ea; color: #137333; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; position: relative; z-index: 5; box-shadow: 0 4px 10px rgba(19, 115, 51, 0.15);">
@@ -684,6 +613,7 @@
         </div>
       </div>
     </div>
+
     <div style="text-align: center; padding: 15px; background: #fafaf9; border-top: 2px dashed #f1f5f9; font-size: 0.65rem; color: #94a3b8; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">
       <span style="color: var(--primary);">e-tiket</span> © 2026. All rights reserved.<br>
       <span style="font-size: 0.6rem; color: #64748b;">Crafted with ❤️ by Serbi Kreatif</span>
