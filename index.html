@@ -596,7 +596,7 @@
             const infaqBebas = document.getElementById('infaq_bebas');
             const infaqNol = document.getElementById('infaq_nol');
             const wadahInfaqBebas = document.getElementById('wadah_infaq_bebas');
-            
+
             if (isChecked) {
               // Toggle ON → sembunyikan konten, pilih "Tidak Infaq"
               wadah.style.display = 'none';
@@ -1201,14 +1201,14 @@
         preview1.classList.add('error-shake');
         Swal.fire({ icon: 'warning', title: 'Data Belum Lengkap', text: 'Mohon upload bukti follow Instagram @al.mawaaizh', confirmButtonColor: '#0C387A', returnFocus: false });
         preview1.scrollIntoView({behavior: "smooth", block: "center"});
-        setTimeout(() => bukti1.click(), 300); return;
+        return;
       }
 
       if (!bukti2.files || !bukti2.files[0]) {
         preview2.classList.add('error-shake');
         Swal.fire({ icon: 'warning', title: 'Data Belum Lengkap', text: 'Mohon upload bukti follow Instagram @ioubahasaindonesia', confirmButtonColor: '#0C387A', returnFocus: false });
         preview2.scrollIntoView({behavior: "smooth", block: "center"});
-        setTimeout(() => bukti2.click(), 300); return;
+        return;
       }
 
       for(let i=1; i<=jumlahAnak; i++) {
@@ -1254,22 +1254,22 @@
           let infaqChecked = document.querySelector('input[name="pilihan_infaq"]:checked');
           let toggleDukungan = document.getElementById('toggle_dukungan');
           let wadahInfaq = document.getElementById('wadah_pilihan_dukungan');
-          
+
           if (!infaqChecked && !toggleDukungan.checked) {
             // Belum pilih infaq DAN toggle OFF → error, scroll ke infaq
             if (wadahInfaq) wadahInfaq.classList.add('error-shake');
-            Swal.fire({ 
-              icon: 'warning', 
-              title: 'Data Belum Lengkap', 
-              text: 'Mohon pilih opsi infaq atau aktifkan toggle "Lewati" untuk mendaftar gratis.', 
-              confirmButtonColor: '#0C387A', 
-              returnFocus: false 
+            Swal.fire({
+              icon: 'warning',
+              title: 'Data Belum Lengkap',
+              text: 'Mohon pilih opsi infaq atau klik "Lewati" untuk mendaftar gratis.',
+              confirmButtonColor: '#0C387A',
+              returnFocus: false
             });
             if (wadahInfaq) wadahInfaq.scrollIntoView({behavior: "smooth", block: "center"});
             setTimeout(() => {
               const firstRadio = wadahInfaq?.querySelector('input[type="radio"]');
               if (firstRadio) firstRadio.focus();
-            }, 300); 
+            }, 300);
             return;
           }
 
