@@ -1,4 +1,4 @@
-const CACHE_NAME = 'Mawaaizh-admin-v14'; // Naik ke v10
+const CACHE_NAME = 'Mawaaizh-admin-v15'; // Naik ke v10
 const coreAssets = [
   '/admin.html',
   '/manifest.json',
