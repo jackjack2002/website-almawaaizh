@@ -556,8 +556,8 @@
           <div id="wadah_pilihan_dukungan">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
 
+              <!-- OPSIONAL: Opsi Membeli Buku (disabled - comment out untuk hide)
               <label style="position: relative; display: block; cursor: pointer;">
-                <!-- Secara default Buku terpilih jika toggle ON -->
                 <input type="radio" name="pilihan_infaq" id="infaq_buku" value="buku_100000" class="opt-radio" onchange="document.getElementById('wadah_infaq_bebas').style.display = 'none'; lucide.createIcons();">
                 <div class="opt-card">
                   <div class="opt-icon-box"><i data-lucide="book-open" style="width:18px;"></i></div>
@@ -565,6 +565,7 @@
                   <i data-lucide="check-circle-2" class="check-icon" style="width: 16px;"></i>
                 </div>
               </label>
+              -->
 
               <label style="position: relative; display: block; cursor: pointer;">
                 <input type="radio" name="pilihan_infaq" id="infaq_bebas" value="bebas" class="opt-radio" onchange="document.getElementById('wadah_infaq_bebas').style.display = 'block'; document.getElementById('infaq_bebas_nominal').focus(); lucide.createIcons();">
@@ -597,9 +598,9 @@
               wadah.style.display = 'none';
               document.getElementById('infaq_nol').checked = true;
             } else {
-              // Toggle OFF → tampilkan konten, pilih "Membeli Buku" default
+              // Toggle OFF → tampilkan konten, pilih "Infaq Terbaik" default
               wadah.style.display = 'block';
-              document.getElementById('infaq_buku').checked = true;
+              document.getElementById('infaq_bebas').checked = true;
               document.getElementById('wadah_infaq_bebas').style.display = 'none';
             }
           }
@@ -1029,8 +1030,8 @@
                 Swal.fire({
                   icon: 'info',
                   title: 'Langkah Terakhir!',
-                  text: 'Mohon gabung grup WhatsApp untuk konfirmasi pendaftaran.',
-                  confirmButtonText: 'Gabung Grup WhatsApp',
+                  text: 'Mohon kirimkan E-Ticket & Bukti Transfer ke WhatsApp Admin agar data segera divalidasi.',
+                  confirmButtonText: 'Kirim Konfirmasi WA',
                   confirmButtonColor: '#25D366',
                   allowOutsideClick: false,
                   allowEscapeKey: false
@@ -1259,11 +1260,11 @@
 
           hitungTotal(); // Panggil hitung agar rincian nominal di sistem update
 
-          if (valInfaq === '0' || valInfaq === 'buku_100000') {
-             submitData(); // Langsung proses data tanpa upload QRIS
-          } else {
-             goToStep(3); // Masuk ke halaman QRIS
-          }
+if (valInfaq === '0') {
+              submitData(); // Langsung proses data tanpa upload QRIS
+            } else {
+              goToStep(3); // Masuk ke halaman QRIS
+            }
         }
 
     function hitungTotal() {
