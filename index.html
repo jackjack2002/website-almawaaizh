@@ -593,15 +593,21 @@
         <script>
           function aturToggleDukungan(isChecked) {
             const wadah = document.getElementById('wadah_pilihan_dukungan');
+            const infaqBebas = document.getElementById('infaq_bebas');
+            const infaqNol = document.getElementById('infaq_nol');
+            const wadahInfaqBebas = document.getElementById('wadah_infaq_bebas');
+            
             if (isChecked) {
               // Toggle ON → sembunyikan konten, pilih "Tidak Infaq"
               wadah.style.display = 'none';
-              document.getElementById('infaq_nol').checked = true;
+              infaqNol.checked = true;
+              wadahInfaqBebas.style.display = 'none';
             } else {
-              // Toggle OFF → tampilkan konten, pilih "Infaq Terbaik" default
+              // Toggle OFF → tampilkan konten, TIDAK auto-pilih apapun
               wadah.style.display = 'block';
-              document.getElementById('infaq_bebas').checked = true;
-              document.getElementById('wadah_infaq_bebas').style.display = 'none';
+              infaqBebas.checked = false;
+              infaqNol.checked = false;
+              wadahInfaqBebas.style.display = 'none';
             }
           }
         </script>
