@@ -2,7 +2,11 @@
 // BACKEND APPS SCRIPT - BRAVE KIDS PROJECT (V2 - HISTORICAL PRICE & MAP API)
 // =========================================================================
 
-const FOLDER_BUKTI = "1nqB9gJ2JpvzLmplnYRxLw00cwSkp4yVE";
+const FOLDER_BUKTI_TRANSFER = "1QyLKT6Iwed9BWC9GRDBaso-pWb4vADBX";
+const FOLDER_BUKTI_IG_1 = "1O-N-pJMClwlxzKEQZCya80m3AhO3DNYw";
+const FOLDER_BUKTI_IG_2 = "1q5pRNdsTCnBiOE1-GcJXMUKDAEwRNol-";
+const FOLDER_BUKTI_TAG = "1a3pT2BcJnnGejRltQPV97pcRa5p46xY5"; // Tambahan Folder Tag 3 Teman
+
 const SHEET_DATA = "Data Pendaftar";
 const SHEET_SETUP = "Setup Sistem";
 
@@ -77,8 +81,8 @@ function doPost(e) {
         const lastRow = sheetDataReg.getLastRow();
         let pendaftar = [];
         if (lastRow > 1) {
-          // Tarik full sampai Kolom X (24)
-          const dataRaw = sheetDataReg.getRange(2, 1, lastRow - 1, 24).getValues();
+          // Tarik full sampai Kolom Y (25)
+          const dataRaw = sheetDataReg.getRange(2, 1, lastRow - 1, 25).getValues();
           dataRaw.forEach(row => {
             if (row[0] && row[1]) {
               let dataKuis = {};
@@ -97,7 +101,8 @@ function doPost(e) {
                 longitude: row[20],
                 dataKuis: dataKuis,
                 buktiFollow1: row[22],
-                buktiFollow2: row[23]
+                buktiFollow2: row[23],
+                buktiTag3: row[24]
               });
             }
           });
@@ -125,7 +130,8 @@ function doPost(e) {
               statusBayar: values[i][16],
               dataKuis: dataKuis,
               buktiFollow1: values[i][22],
-              buktiFollow2: values[i][23]
+              buktiFollow2: values[i][23],
+              buktiTag3: values[i][24]
             };
 
             let statusBayarCek = values[i][16];
@@ -246,13 +252,31 @@ function doPost(e) {
       // 7. LOGIKA PENDAFTARAN BARU (FORM SUBMIT)
       // ===================================================================
       else if (!data.action) {
+
+        // --- FITUR AUTO-FILL HEADER (KOLOM V - Y) ---
+        if (sheetDataReg.getRange("V1").getValue() === "") {
+          sheetDataReg.getRange("V1:Y1").setValues([[
+            "1. Masalah yang paling menyita pikiran/belum tuntas?\n2. Uang yang sudah dikeluarkan sejauh ini?\n3. Tujuan mempelajari hal tersebut?\n4. Harapan mengikuti kajian ini?",
+            "Bukti Follow @al.mawaaizh",
+            "Bukti Follow @ioubahasaindonesia",
+            "Bukti Tag 3 Teman"
+          ]]);
+          // Mengaktifkan fitur teks melipat (word wrap) agar rapi terbaca
+          sheetDataReg.getRange("V1:Y1").setWrap(true);
+          sheetDataReg.getRange("V1:Y1").setFontWeight("bold");
+        }
+        // --------------------------------------------
+
         let fileUrl = "Tidak ada file";
-        if (data.buktiBayarBase64) fileUrl = uploadImageToDrive(data.buktiBayarBase64, "Bukti_" + data.peserta[0].namaAnak);
+        if (data.buktiBayarBase64) fileUrl = uploadImageToDrive(data.buktiBayarBase64, "Bukti_" + data.peserta[0].namaAnak, FOLDER_BUKTI_TRANSFER);
 
         let buktiFollow1Url = "Tidak ada file";
         let buktiFollow2Url = "Tidak ada file";
-        if (data.buktiFollow1Base64) buktiFollow1Url = uploadImageToDrive(data.buktiFollow1Base64, "Follow1_" + data.peserta[0].namaAnak);
-        if (data.buktiFollow2Base64) buktiFollow2Url = uploadImageToDrive(data.buktiFollow2Base64, "Follow2_" + data.peserta[0].namaAnak);
+        let buktiFollow3Url = "Tidak ada file";
+
+        if (data.buktiFollow1Base64) buktiFollow1Url = uploadImageToDrive(data.buktiFollow1Base64, "Follow1_" + data.peserta[0].namaAnak, FOLDER_BUKTI_IG_1);
+        if (data.buktiFollow2Base64) buktiFollow2Url = uploadImageToDrive(data.buktiFollow2Base64, "Follow2_" + data.peserta[0].namaAnak, FOLDER_BUKTI_IG_2);
+        if (data.buktiFollow3Base64) buktiFollow3Url = uploadImageToDrive(data.buktiFollow3Base64, "Tag3_" + data.peserta[0].namaAnak, FOLDER_BUKTI_TAG);
 
         const tglMasuk = new Date();
         const prefix = data.kodePrefix || "EVT";
@@ -277,12 +301,21 @@ function doPost(e) {
           let linkBuktiFix = index === 0 ? fileUrl : "Ikut Anak Ke-1";
           let linkFollow1Fix = index === 0 ? buktiFollow1Url : "Ikut Anak Ke-1";
           let linkFollow2Fix = index === 0 ? buktiFollow2Url : "Ikut Anak Ke-1";
+          let linkFollow3Fix = index === 0 ? buktiFollow3Url : "Ikut Anak Ke-1";
 
-          let dataKuis = {};
-          try { if (data.dataKuisJson) dataKuis = JSON.parse(data.dataKuisJson); } catch (e) {}
-          const kuisJsonString = JSON.stringify(dataKuis);
+          // --- OLAH JSON KUESIONER MENJADI TEKS PARAGRAF ---
+          let kuisTerformat = "-";
+          try {
+            if (data.dataKuisJson) {
+              let kuisObj = JSON.parse(data.dataKuisJson);
+              kuisTerformat = "1. " + (kuisObj.pertanyaan_1_masalah || "-") + "\n" +
+                              "2. " + (kuisObj.pertanyaan_2_pengeluaran || "-") + "\n" +
+                              "3. " + (kuisObj.pertanyaan_3_tujuan || "-") + "\n" +
+                              "4. " + (kuisObj.pertanyaan_4_harapan || "-");
+            }
+          } catch (e) {}
 
-          // EXACTLY 24 COLUMNS
+          // EXACTLY 25 COLUMNS
           sheetDataReg.appendRow([
             tglMasuk,              // A: Waktu Daftar
             uniqueOrderId,         // B: Order ID Unik
@@ -305,9 +338,10 @@ function doPost(e) {
             "",                    // S: STATUS KEHADIRAN
             p.latitude || "",      // T: LATITUDE
             p.longitude || "",     // U: LONGITUDE
-            kuisJsonString,        // V: DATA KUESIONER (JSON)
+            kuisTerformat,         // V: DATA KUESIONER (SUDAH DIOLAH JADI TEKS)
             linkFollow1Fix,        // W: BUKTI FOLLOW IG 1
-            linkFollow2Fix         // X: BUKTI FOLLOW IG 2
+            linkFollow2Fix,        // X: BUKTI FOLLOW IG 2
+            linkFollow3Fix         // Y: BUKTI TAG TEMAN
           ]);
         });
         return sendJSON({ status: "success", orderIds: generatedOrderIds, linkBukti: fileUrl });
@@ -327,11 +361,41 @@ function sendJSON(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
 
-function uploadImageToDrive(base64Str, fileName) {
-  const folder = DriveApp.getFolderById(FOLDER_BUKTI);
+function uploadImageToDrive(base64Str, fileName, folderId) {
+  const folder = DriveApp.getFolderById(folderId);
   const mimeType = base64Str.split(';')[0].split(':')[1];
   const blob = Utilities.newBlob(Utilities.base64Decode(base64Str.split(',')[1]), mimeType, fileName + ".jpg");
   const file = folder.createFile(blob);
   file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
   return file.getUrl();
+}
+
+// ===================================================================
+// FUNGSI DEBUGGING (TEST UPLOAD KE 4 FOLDER)
+// ===================================================================
+function testUploadFolders() {
+  try {
+    // Gambar dummy 1x1 pixel (Base64)
+    const dummyBase64 = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFAABAAAAAAAAAAAAAAAAAAAACP/EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAD8A0z//2Q==";
+
+    Logger.log("1. Mencoba upload ke Folder Bukti Transfer...");
+    let urlTransfer = uploadImageToDrive(dummyBase64, "TEST_DEBUG_TRANSFER", FOLDER_BUKTI_TRANSFER);
+    Logger.log("   Sukses! Link: " + urlTransfer);
+
+    Logger.log("2. Mencoba upload ke Folder IG Al Mawaaizh...");
+    let urlIG1 = uploadImageToDrive(dummyBase64, "TEST_DEBUG_IG_ALMAWAAIZH", FOLDER_BUKTI_IG_1);
+    Logger.log("   Sukses! Link: " + urlIG1);
+
+    Logger.log("3. Mencoba upload ke Folder IG Khazilmu...");
+    let urlIG2 = uploadImageToDrive(dummyBase64, "TEST_DEBUG_IG_KHAZILMU", FOLDER_BUKTI_IG_2);
+    Logger.log("   Sukses! Link: " + urlIG2);
+
+    Logger.log("4. Mencoba upload ke Folder Tag 3 Teman...");
+    let urlTag = uploadImageToDrive(dummyBase64, "TEST_DEBUG_TAG3", FOLDER_BUKTI_TAG);
+    Logger.log("   Sukses! Link: " + urlTag);
+
+    Logger.log("✅ SEMUA FOLDER BERHASIL TERHUBUNG DENGAN BAIK!");
+  } catch(e) {
+    Logger.log("❌ ERROR: " + e.toString());
+  }
 }
