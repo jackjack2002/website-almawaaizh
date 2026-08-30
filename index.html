@@ -1250,8 +1250,31 @@
             }
           }
 
+          // VALIDASI: Infaq (harus pilih salah satu: Infaq Terbaik / Tidak Infaq via toggle)
+          let infaqChecked = document.querySelector('input[name="pilihan_infaq"]:checked');
+          let toggleDukungan = document.getElementById('toggle_dukungan');
+          let wadahInfaq = document.getElementById('wadah_pilihan_dukungan');
+          
+          if (!infaqChecked && !toggleDukungan.checked) {
+            // Belum pilih infaq DAN toggle OFF → error, scroll ke infaq
+            if (wadahInfaq) wadahInfaq.classList.add('error-shake');
+            Swal.fire({ 
+              icon: 'warning', 
+              title: 'Data Belum Lengkap', 
+              text: 'Mohon pilih opsi infaq atau aktifkan toggle "Lewati" untuk mendaftar gratis.', 
+              confirmButtonColor: '#0C387A', 
+              returnFocus: false 
+            });
+            if (wadahInfaq) wadahInfaq.scrollIntoView({behavior: "smooth", block: "center"});
+            setTimeout(() => {
+              const firstRadio = wadahInfaq?.querySelector('input[type="radio"]');
+              if (firstRadio) firstRadio.focus();
+            }, 300); 
+            return;
+          }
+
           // TAHAP 6: Validasi Infaq dan Skip QRIS
-          let valInfaq = document.querySelector('input[name="pilihan_infaq"]:checked').value;
+          let valInfaq = infaqChecked ? infaqChecked.value : '0';
           if (valInfaq === 'bebas') {
             let inputNominal = document.getElementById('infaq_bebas_nominal');
             // Hapus titik agar parseInt membaca angka dengan benar
