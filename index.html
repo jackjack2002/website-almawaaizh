@@ -614,18 +614,35 @@
       </div>
 
       <!-- ==================== BUKTI FOLLOW INSTAGRAM ==================== -->
-      <div class="form-card" style="margin-top: 20px; padding: 20px; background: #FFFFFF; border: 2px solid #E2E8F0; border-radius: 16px;">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #E2E8F0;">
-          <img src="assets/instagram.png" alt="Instagram" style="width: 28px; height: 28px; object-fit: contain;">
-          <div>
-            <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 800; font-size: 0.9rem; color: #042346;">Bukti Follow Instagram</span>
-            <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 700; font-size: 0.7rem; color: #EF4444; margin-left: 4px;">* Wajib</span>
-          </div>
-        </div>
-        <p style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; margin-bottom: 16px; line-height: 1.5;">Upload screenshot follow kedua akun Instagram di bawah ini untuk melanjutkan pendaftaran.</p>
+            <div class="form-card" style="margin-top: 20px; padding: 20px; background: #FFFFFF; border: 2px solid #E2E8F0; border-radius: 16px;">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #E2E8F0;">
+                <img src="assets/instagram.png" alt="Instagram" style="width: 28px; height: 28px; object-fit: contain;">
+                <div>
+                  <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 800; font-size: 0.9rem; color: #042346;">Bukti Follow Instagram & tag 3 temen</span>
+                  <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 700; font-size: 0.7rem; color: #EF4444;">* Wajib</span>
+                </div>
+              </div>
+              <p style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; margin-bottom: 16px; line-height: 1.5;">Upload screenshot follow kedua akun Instagram dan bukti tag 3 teman di kolom komentar untuk melanjutkan pendaftaran.</p>
 
-        <!-- 2 Kolom Upload Foto - Responsive -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px;">
+              <!-- Kolom 3: BUKTI TAG (FULL WIDTH DI ATAS) -->
+              <div style="background: #FFFFFF; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 14px; text-align: center; transition: border-color 0.2s, background-color 0.2s; position: relative; margin-bottom: 12px;">
+                <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; color: #e11d48;">
+                  <i data-lucide="message-circle" style="width: 14px; height: 14px;"></i> Bukti Tag 3 Teman
+                </div>
+                <input type="file" id="bukti_follow_3" accept="image/*" style="display: none;" onchange="previewImage(this, 'preview_follow_3')">
+                <div id="preview_follow_3" style="width: 100%; min-height: 110px; border-radius: 8px; background: #F8FAFC; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #E2E8F0; overflow: hidden; position: relative; transition: background-color 0.2s;" onclick="document.getElementById('bukti_follow_3').click()">
+                  <div id="teks_placeholder_3" style="display: flex; flex-direction: column; align-items: center;">
+                    <i data-lucide="upload-cloud" style="width: 30px; height: 30px; color: #94A3B8; margin-bottom: 8px;"></i>
+                    <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; font-weight: 600;">Tap untuk upload screenshot</span>
+                    <span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.55rem; color: #94A3B8; margin-top: 3px;">Max 2MB • JPG/PNG</span>
+                  </div>
+                  <img id="preview_follow_3_img" src="" style="display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; object-fit: cover; border-radius: 8px; z-index: 5;">
+                </div>
+                <button type="button" id="btn_remove_3" onclick="removeFollowImage(3)" style="display: none; position: absolute; top: 35px; right: 20px; width: 26px; height: 26px; border-radius: 50%; background: #EF4444; color: white; border: 2px solid white; font-size: 16px; font-weight: bold; line-height: 0; cursor: pointer; z-index: 10; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2); padding-bottom: 2px;">×</button>
+              </div>
+
+              <!-- 2 Kolom Upload Foto - Responsive -->
+                      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px;">
                   <!-- Kolom 1: al.mawaaizh -->
                   <div style="background: #FFFFFF; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 14px; text-align: center; transition: border-color 0.2s, background-color 0.2s; position: relative;">
                     <div style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
@@ -1191,25 +1208,34 @@
         setTimeout(() => elTema.focus(), 300); return;
       }
 
-      // VALIDASI: Bukti Follow Instagram
-      let bukti1 = document.getElementById('bukti_follow_1');
-      let bukti2 = document.getElementById('bukti_follow_2');
-      let preview1 = document.getElementById('preview_follow_1');
-      let preview2 = document.getElementById('preview_follow_2');
+      // VALIDASI: Bukti Follow Instagram & Tag
+            let bukti1 = document.getElementById('bukti_follow_1');
+            let bukti2 = document.getElementById('bukti_follow_2');
+            let bukti3 = document.getElementById('bukti_follow_3');
+            let preview1 = document.getElementById('preview_follow_1');
+            let preview2 = document.getElementById('preview_follow_2');
+            let preview3 = document.getElementById('preview_follow_3');
 
-      if (!bukti1.files || !bukti1.files[0]) {
-        preview1.classList.add('error-shake');
-        Swal.fire({ icon: 'warning', title: 'Data Belum Lengkap', text: 'Mohon upload bukti follow Instagram @al.mawaaizh', confirmButtonColor: '#0C387A', returnFocus: false });
-        preview1.scrollIntoView({behavior: "smooth", block: "center"});
-        return;
-      }
+            if (!bukti3.files || !bukti3.files[0]) {
+              preview3.classList.add('error-shake');
+              Swal.fire({ icon: 'warning', title: 'Data Belum Lengkap', text: 'Mohon upload bukti tag 3 teman.', confirmButtonColor: '#0C387A', returnFocus: false });
+              preview3.scrollIntoView({behavior: "smooth", block: "center"});
+              return;
+            }
 
-      if (!bukti2.files || !bukti2.files[0]) {
-        preview2.classList.add('error-shake');
-        Swal.fire({ icon: 'warning', title: 'Data Belum Lengkap', text: 'Mohon upload bukti follow Instagram @ioubahasaindonesia', confirmButtonColor: '#0C387A', returnFocus: false });
-        preview2.scrollIntoView({behavior: "smooth", block: "center"});
-        return;
-      }
+            if (!bukti1.files || !bukti1.files[0]) {
+              preview1.classList.add('error-shake');
+              Swal.fire({ icon: 'warning', title: 'Data Belum Lengkap', text: 'Mohon upload bukti follow Instagram @al.mawaaizh', confirmButtonColor: '#0C387A', returnFocus: false });
+              preview1.scrollIntoView({behavior: "smooth", block: "center"});
+              return;
+            }
+
+            if (!bukti2.files || !bukti2.files[0]) {
+              preview2.classList.add('error-shake');
+              Swal.fire({ icon: 'warning', title: 'Data Belum Lengkap', text: 'Mohon upload bukti follow Instagram @ioubahasaindonesia', confirmButtonColor: '#0C387A', returnFocus: false });
+              preview2.scrollIntoView({behavior: "smooth", block: "center"});
+              return;
+            }
 
       for(let i=1; i<=jumlahAnak; i++) {
         if(document.getElementById(`card_anak_${i}`)) {
@@ -1456,61 +1482,64 @@ if (valInfaq === '0') {
       };
 
       // Konversi bukti follow Instagram ke Base64
-      let buktiFollow1Base64 = "";
-      let buktiFollow2Base64 = "";
+            let buktiFollow1Base64 = "";
+            let buktiFollow2Base64 = "";
+            let buktiFollow3Base64 = "";
 
-      const convertToBase64 = (fileInput) => {
-        return new Promise((resolve) => {
-          const file = fileInput.files[0];
-          if (!file) {
-            resolve("");
-            return;
-          }
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            const img = new Image();
-            img.onload = function() {
-              const canvas = document.createElement('canvas');
-              const MAX_WIDTH = 800;
-              let scaleSize = img.width > MAX_WIDTH ? MAX_WIDTH / img.width : 1;
-              canvas.width = img.width * scaleSize;
-              canvas.height = img.height * scaleSize;
-              canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-              const compressedBase64 = canvas.toDataURL('image/jpeg', 0.6);
-              resolve(compressedBase64);
+            const convertToBase64 = (fileInput) => {
+              return new Promise((resolve) => {
+                const file = fileInput.files[0];
+                if (!file) {
+                  resolve("");
+                  return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                  const img = new Image();
+                  img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 800;
+                    let scaleSize = img.width > MAX_WIDTH ? MAX_WIDTH / img.width : 1;
+                    canvas.width = img.width * scaleSize;
+                    canvas.height = img.height * scaleSize;
+                    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.6);
+                    resolve(compressedBase64);
+                  };
+                  img.onerror = function() {
+                    console.error('Failed to load image for compression');
+                    resolve(""); // resolve dengan empty string agar tidak hang
+                  };
+                  img.src = e.target.result;
+                };
+                reader.onerror = function() {
+                  console.error('FileReader error');
+                  resolve("");
+                };
+                reader.readAsDataURL(file);
+              });
             };
-            img.onerror = function() {
-              console.error('Failed to load image for compression');
-              resolve(""); // resolve dengan empty string agar tidak hang
+
+            // Tunggu konversi KETIGA gambar selesai
+            await Promise.all([
+              convertToBase64(document.getElementById('bukti_follow_1')).then(r => buktiFollow1Base64 = r),
+              convertToBase64(document.getElementById('bukti_follow_2')).then(r => buktiFollow2Base64 = r),
+              convertToBase64(document.getElementById('bukti_follow_3')).then(r => buktiFollow3Base64 = r)
+            ]);
+
+            const dataPayload = {
+              peserta: arrPeserta,
+              email: emailVal,
+              infoDari: document.getElementById('info_dari').value,
+              buktiBayarBase64: base64Str,
+              buktiFollow1Base64: buktiFollow1Base64,
+              buktiFollow2Base64: buktiFollow2Base64,
+              buktiFollow3Base64: buktiFollow3Base64,
+              kodeUnik: kodeUnikBayar,
+              infaqNominal: infaqTerpilih,
+              kodePrefix: prefixEvent,
+              dataKuisJson: JSON.stringify(dataKuis)
             };
-            img.src = e.target.result;
-          };
-          reader.onerror = function() {
-            console.error('FileReader error');
-            resolve("");
-          };
-          reader.readAsDataURL(file);
-        });
-      };
-
-      // Tunggu konversi kedua gambar selesai
-      await Promise.all([
-        convertToBase64(document.getElementById('bukti_follow_1')).then(r => buktiFollow1Base64 = r),
-        convertToBase64(document.getElementById('bukti_follow_2')).then(r => buktiFollow2Base64 = r)
-      ]);
-
-      const dataPayload = {
-        peserta: arrPeserta,
-        email: emailVal,
-        infoDari: document.getElementById('info_dari').value,
-        buktiBayarBase64: base64Str,
-        buktiFollow1Base64: buktiFollow1Base64,
-        buktiFollow2Base64: buktiFollow2Base64,
-        kodeUnik: kodeUnikBayar,
-        infaqNominal: infaqTerpilih,
-        kodePrefix: prefixEvent,
-        dataKuisJson: JSON.stringify(dataKuis)
-      };
 
       // --- EFEK PERSONALISASI PRINTER ---
       let namaPrint = arrPeserta.length > 0 ? arrPeserta[0].namaAnak : "PESERTA";
