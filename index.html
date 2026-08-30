@@ -1029,8 +1029,8 @@
                 Swal.fire({
                   icon: 'info',
                   title: 'Langkah Terakhir!',
-                  text: 'Mohon kirimkan E-Ticket & Bukti Transfer ke WhatsApp Admin agar data segera divalidasi.',
-                  confirmButtonText: 'Kirim Konfirmasi WA',
+                  text: 'Mohon gabung grup WhatsApp untuk konfirmasi pendaftaran.',
+                  confirmButtonText: 'Gabung Grup WhatsApp',
                   confirmButtonColor: '#25D366',
                   allowOutsideClick: false,
                   allowEscapeKey: false
@@ -1590,66 +1590,8 @@
 
     function kirimWA() {
       sudahKirimWA = true;
-      const noAdmin = appSettings.Nomor_Admin || "6285156575710";
-
-      // 1. Tarik Link Grup WA dari Pengaturan
-      let linkGrupWA = appSettings["Link_Grup_WA"];
-      if (!linkGrupWA) {
-        for (let key in appSettings) {
-          if (key.includes("Grup_WA")) linkGrupWA = appSettings[key];
-        }
-      }
-      if (!linkGrupWA || linkGrupWA === "#") {
-        linkGrupWA = "https://chat.whatsapp.com/contohlink123";
-      }
-
-      // 2. Susun DATA PENDAFTAR (Sederhana dan Dewasa)
-      let detailPesertaWA = "";
-      let index = 1;
-
-      for (let i = 1; i <= jumlahAnak; i++) {
-        if (!document.getElementById(`card_anak_${i}`)) continue;
-
-        const getVal = (id) => document.getElementById(`${id}_${i}`) ? document.getElementById(`${id}_${i}`).value : "-";
-
-        let nama = getVal('nama_anak');
-        let usia = getVal('usia');
-        let domisili = getVal('domisili');
-        let email = getVal('email_wali');
-        let noHp = document.getElementById(`kode_negara_${i}`).value + " " + getVal('no_hp');
-
-        detailPesertaWA += `PESERTA (${index++})\n▪️ Nama: ${nama} (${usia} Tahun)\n▪️ Domisili: ${domisili}\n▪️ No. WA: ${noHp}\n▪️ Email: ${email}\n\n`;
-      }
-
-      // 3. Susun Pesan Super Singkat, Sopan & Clean
-      let valInfaq = document.querySelector('input[name="pilihan_infaq"]:checked') ? document.querySelector('input[name="pilihan_infaq"]:checked').value : "0";
-
-      let namaPesertaTampil = document.getElementById('nama_anak_1') ? document.getElementById('nama_anak_1').value : "Peserta";
-
-      let teksTambahan = "";
-      if (valInfaq === 'buku_100000') {
-         teksTambahan = "Saya juga telah memilih opsi membeli buku kajian. Saya akan menyelesaikan pembayaran dan klaim melalui link resmi: https://lynk.id/masukkan_username_anda";
-      } else if (valInfaq === 'bebas') {
-         let linkB = (window.linkBuktiGlobal && window.linkBuktiGlobal !== "Tidak ada file") ? window.linkBuktiGlobal : "(Belum Upload)";
-         teksTambahan = `Sebagai bentuk dukungan, berikut saya lampirkan link bukti transfer infaq saya:\n${linkB}`;
-      } else {
-         teksTambahan = "Saya mendaftar menggunakan jalur tiket gratis.";
-      }
-
-      // 4. Gabungkan Menjadi Template Utuh & Sopan (Memasukkan kembali linkGrupWA)
-      const rawText = `Assalamu'alaikum Admin,
-
-Perkenalkan, saya telah menyelesaikan pendaftaran kajian atas nama *${namaPesertaTampil}*.
-
-${teksTambahan}
-
-Sesuai instruksi pendaftaran, saya izin menyimpan link grup ini di sini agar saya bisa langsung bergabung:
-👉 ${linkGrupWA}
-
-Mohon arahannya jika ada langkah verifikasi selanjutnya. Terima kasih banyak! 🙏`;
-
-      // 5. Buka WhatsApp
-      window.open(`https://api.whatsapp.com/send?phone=${noAdmin}&text=${encodeURIComponent(rawText)}`, "_blank");
+      const linkGrupWA = "https://chat.whatsapp.com/IytPwYuf8EvCfRpeI7VrCE?s=cl&p=a&mlu=4";
+      window.open(linkGrupWA, "_blank");
     }
 
     function tanyaDaftarLagi() {
