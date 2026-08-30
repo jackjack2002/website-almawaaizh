@@ -466,27 +466,39 @@
 
           <input type="radio" name="pilihan_infaq" id="infaq_nol" value="0" style="display: none;">
 
-          <div id="wadah_pilihan_dukungan">
+        <div id="wadah_pilihan_dukungan">
             <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
-              <label style="position: relative; display: block; cursor: pointer;">
-                <input type="radio" name="pilihan_infaq" id="infaq_bebas" value="bebas" class="opt-radio" onchange="document.getElementById('wadah_infaq_bebas').style.display = 'block'; document.getElementById('infaq_bebas_nominal').focus(); lucide.createIcons();">
-                <div class="opt-card">
-                  <div class="opt-icon-box"><i data-lucide="heart-handshake" style="width:18px;"></i></div>
-                  <div><div class="opt-title">Infaq Terbaik</div><div class="opt-desc">Seikhlasnya</div></div>
-                  <i data-lucide="check-circle-2" class="check-icon" style="width: 16px;"></i>
-                </div>
-              </label>
-            </div>
 
-            <div id="wadah_infaq_bebas" style="display: none; padding: 12px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; margin-top: 10px;">
-              <label style="font-size: 0.7rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; display: block;">Masukkan Nominal Infaq</label>
-              <div style="position: relative;">
-                <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-weight: 800; color: var(--text-main); font-size: 1rem;">Rp</span>
-                <input type="text" id="infaq_bebas_nominal" class="input-modern" placeholder="0" oninput="let v=this.value.replace(/\D/g,''); this.value = v ? new Intl.NumberFormat('id-ID').format(v) : '';" style="padding-left: 45px; font-weight: 800; font-size: 1rem; height: 42px; color: var(--primary);">
-              </div>
-            </div>
-          </div>
-        </div>
+                <!-- OPSIONAL: Opsi Membeli Buku (disabled - hapus tag comment untuk menampilkan, lalu ubah grid 1fr di atas jadi 1fr 1fr)
+                    <label style="position: relative; display: block; cursor: pointer;">
+                    <input type="radio" name="pilihan_infaq" id="infaq_buku" value="buku_100000" class="opt-radio" onchange="document.getElementById('wadah_infaq_bebas').style.display = 'none'; lucide.createIcons();">
+                    <div class="opt-card">
+                        <div class="opt-icon-box"><i data-lucide="book-open" style="width:18px;"></i></div>
+                        <div><div class="opt-title">Membeli Buku</div><div class="opt-desc">Rp 100.000</div></div>
+                        <i data-lucide="check-circle-2" class="check-icon" style="width: 16px;"></i>
+                    </div>
+                </label>
+                        -->
+
+                <label style="position: relative; display: block; cursor: pointer;">
+                    <input type="radio" name="pilihan_infaq" id="infaq_bebas" value="bebas" class="opt-radio" onchange="document.getElementById('wadah_infaq_bebas').style.display = 'block'; document.getElementById('infaq_bebas_nominal').focus(); lucide.createIcons();">
+                        <div class="opt-card">
+                        <div class="opt-icon-box"><i data-lucide="heart-handshake" style="width:18px;"></i></div>
+                            <div><div class="opt-title">Infaq Terbaik</div><div class="opt-desc">Seikhlasnya</div></div>
+                            <i data-lucide="check-circle-2" class="check-icon" style="width: 16px;"></i>
+                        </div>
+                </label>
+
+                      </div>
+
+                      <div id="wadah_infaq_bebas" style="display: none; padding: 12px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; margin-top: 10px;">
+                        <label style="font-size: 0.7rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; display: block;">Masukkan Nominal Infaq</label>
+                        <div style="position: relative;">
+                          <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-weight: 800; color: var(--text-main); font-size: 1rem;">Rp</span>
+                          <input type="text" id="infaq_bebas_nominal" class="input-modern" placeholder="0" oninput="let v=this.value.replace(/\D/g,''); this.value = v ? new Intl.NumberFormat('id-ID').format(v) : '';" style="padding-left: 45px; font-weight: 800; font-size: 1rem; height: 42px; color: var(--primary);">
+                        </div>
+                      </div>
+                    </div>
 
         <script>
           function aturToggleDukungan(isChecked) {
