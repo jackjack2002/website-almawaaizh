@@ -148,6 +148,14 @@
     .firework-burst { position: absolute; width: 8px; height: 8px; background: #ff0; border-radius: 50%; opacity: 0; transform: scale(1); }
     @keyframes fireworkExplode { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(45); opacity: 0; } }
 
+    .poster-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 99999; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; padding: 20px; }
+    .poster-modal.show { opacity: 1; visibility: visible; }
+    .poster-modal-content { position: relative; max-width: 90vw; max-height: 90vh; transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .poster-modal.show .poster-modal-content { transform: scale(1); }
+    .poster-modal-content img { max-width: 100%; max-height: 90vh; border-radius: 8px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+    .poster-modal-close { position: absolute; top: -50px; right: 0; width: 44px; height: 44px; background: rgba(255, 255, 255, 0.1); border: none; border-radius: 50%; color: white; font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; line-height: 1; }
+    .poster-modal-close:hover { background: rgba(255, 255, 255, 0.2); }
+
     @media (max-width: 480px) {
       .form-card { padding: 16px; }
       .form-card > div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
@@ -155,6 +163,7 @@
       .form-card div[style*="min-height: 110px"] { min-height: 100px !important; }
       #step-2 h3 { font-size: 1rem; }
       .step-item small { font-size: 0.5rem !important; }
+      .poster-modal-close { top: -45px; right: -5px; width: 40px; height: 40px; font-size: 24px; }
     }
   </style>
 </head>
@@ -253,7 +262,7 @@
         </div>
 
         <div class="pricing-status-card" style="padding: 1rem; margin-bottom: 1rem;">
-          <img src="assets/poster.jpeg" alt="Poster Kegiatan" style="width: 100%; max-width: 220px; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 8px; margin: 0 auto 10px auto; border: 1px solid #e2e8f0; display: block;">
+          <img id="posterImage" src="assets/poster.jpeg" alt="Poster Kegiatan" style="width: 100%; max-width: 220px; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 8px; margin: 0 auto 10px auto; border: 1px solid #e2e8f0; display: block; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'" onclick="bukaPosterModal()">
           <div id="fomo-harga" style="display: none;"></div>
           <div class="ticket-section">
             <div class="ticket-header" style="margin-bottom: 6px;">
@@ -680,7 +689,17 @@
               document.getElementById('fomo-warning').style.display = 'block'; document.getElementById('fomo-warning').style.color = "#64748b";
             }
 
-            if(document.getElementById('fomo-link-maps')) document.getElementById('fomo-link-maps').href = appSettings.Link_Maps || "#";
+            const mapsLink = document.getElementById('fomo-link-maps');
+            if (mapsLink) {
+              if (appSettings.Link_Maps) {
+                mapsLink.href = appSettings.Link_Maps;
+                mapsLink.target = "_blank";
+              } else {
+                mapsLink.removeAttribute("href");
+                mapsLink.removeAttribute("target");
+                mapsLink.style.pointerEvents = "none";
+              }
+            }
             if(document.getElementById('fomo-link-ig')) document.getElementById('fomo-link-ig').href = appSettings.Link_Instagram || "#";
             if(document.getElementById('fomo-link-web')) document.getElementById('fomo-link-web').href = appSettings.Link_Website || "#";
             if(document.getElementById('fomo-link-wa')) {
@@ -1312,6 +1331,29 @@
       input.value = ''; previewImg.src = ''; previewImg.style.display = 'none';
       teksPlaceholder.style.display = 'flex'; btnRemove.style.display = 'none';
     }
+
+    function bukaPosterModal() {
+      const modal = document.getElementById('posterModal');
+      const modalImg = document.getElementById('posterModalImg');
+      const posterSrc = document.getElementById('posterImage').src;
+      modalImg.src = posterSrc;
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function tutupPosterModal() {
+      const modal = document.getElementById('posterModal');
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
   </script>
+
+  <!-- Poster Modal -->
+  <div id="posterModal" class="poster-modal" onclick="tutupPosterModal()">
+    <div class="poster-modal-content" onclick="event.stopPropagation()">
+      <button class="poster-modal-close" onclick="tutupPosterModal()" aria-label="Tutup">×</button>
+      <img id="posterModalImg" src="" alt="Poster Perbesar">
+    </div>
+  </div>
 </body>
 </html>
