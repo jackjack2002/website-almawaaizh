@@ -659,6 +659,10 @@
     let appSettings = {};
     let jumlahAnak = 0;
     let sudahKirimWA = false;
+    let follow1Base64 = "";
+    let follow2Base64 = "";
+    let follow3Base64 = "";
+    let follow4Base64 = "";
 
     window.onload = function() {
       const kataCeria = ["Membangun Keluarga Hebat\nDari Tauhid yang Kuat"];
@@ -1100,53 +1104,22 @@
         pertanyaan_4_harapan: document.getElementById('kuis_q4') ? document.getElementById('kuis_q4').value : "-"
       };
 
-      let buktiFollow1Base64 = ""; let buktiFollow2Base64 = ""; let buktiFollow3Base64 = "";
-
-      const convertToBase64 = (fileInput) => {
-        return new Promise((resolve) => {
-          const file = fileInput.files[0];
-          if (!file) { resolve(""); return; }
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            const img = new Image();
-            img.onload = function() {
-              const canvas = document.createElement('canvas');
-              let scaleSize = img.width > 800 ? 800 / img.width : 1;
-              canvas.width = img.width * scaleSize; canvas.height = img.height * scaleSize;
-              canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-              resolve(canvas.toDataURL('image/jpeg', 0.6));
-            };
-            img.onerror = function() { resolve(""); };
-            img.src = e.target.result;
-          };
-          reader.onerror = function() { resolve(""); };
-          reader.readAsDataURL(file);
-        });
-      };
-
-      await Promise.all([
-        convertToBase64(document.getElementById('bukti_follow_1')).then(r => buktiFollow1Base64 = r),
-        convertToBase64(document.getElementById('bukti_follow_2')).then(r => buktiFollow2Base64 = r),
-        convertToBase64(document.getElementById('bukti_follow_3')).then(r => buktiFollow3Base64 = r),
-        convertToBase64(document.getElementById('bukti_follow_4')).then(r => buktiFollow4Base64 = r)
-      ]);
-
       const dataPayload = {
-        peserta: arrPeserta,
-        email: emailVal,
-        infoDari: document.getElementById('info_dari').value,
-        temaPilihan: document.getElementById('tema_pilihan').value,
-        pendidikanTerakhir: document.getElementById('pendidikan_terakhir').value,
-        buktiBayarBase64: base64Str,
-        buktiFollow1Base64: buktiFollow1Base64,
-        buktiFollow2Base64: buktiFollow2Base64,
-        buktiFollow3Base64: buktiFollow3Base64,
-        buktiFollow4Base64: buktiFollow4Base64,
-        kodeUnik: kodeUnikBayar,
-        infaqNominal: infaqTerpilih,
-        kodePrefix: prefixEvent,
-        dataKuisJson: JSON.stringify(dataKuis)
-      };
+              peserta: arrPeserta,
+              email: emailVal,
+              infoDari: document.getElementById('info_dari').value,
+              temaPilihan: document.getElementById('tema_pilihan').value,
+              pendidikanTerakhir: document.getElementById('pendidikan_terakhir').value,
+              buktiBayarBase64: base64Str,
+              buktiFollow1Base64: follow1Base64,
+              buktiFollow2Base64: follow2Base64,
+              buktiFollow3Base64: follow3Base64,
+              buktiFollow4Base64: follow4Base64,
+              kodeUnik: kodeUnikBayar,
+              infaqNominal: infaqTerpilih,
+              kodePrefix: prefixEvent,
+              dataKuisJson: JSON.stringify(dataKuis)
+            };
 
       let namaPrint = arrPeserta.length > 0 ? arrPeserta[0].namaPeserta : "PESERTA";
       if (arrPeserta.length > 1) namaPrint += " & KEL";
@@ -1332,33 +1305,62 @@
     }
 
     function previewImage(input, previewId) {
-      const previewImg = document.getElementById(previewId + '_img');
-      const num = previewId.split('_')[2];
-      const teksPlaceholder = document.getElementById('teks_placeholder_' + num);
-      const btnRemove = document.getElementById('btn_remove_' + num);
+              const previewImg = document.getElementById(previewId + '_img');
+              const num = previewId.split('_')[2];
+              const teksPlaceholder = document.getElementById('teks_placeholder_' + num);
+              const btnRemove = document.getElementById('btn_remove_' + num);
 
-      if (input.files && input.files[0]) {
-        const file = input.files[0];
-        if (file.size > 2 * 1024 * 1024) { Swal.fire({ icon: 'warning', title: 'File Terlalu Besar', text: 'Ukuran maksimal 2MB', confirmButtonColor: '#E85D5E' }); input.value = ''; return; }
-        if (!file.type.match('image/(jpeg|png|jpg)')) { Swal.fire({ icon: 'warning', title: 'Format Tidak Didukung', text: 'Hanya JPG/PNG', confirmButtonColor: '#E85D5E' }); input.value = ''; return; }
+              if (input.files && input.files[0]) {
+                const file = input.files[0];
+                if (file.size > 2 * 1024 * 1024) { Swal.fire({ icon: 'warning', title: 'File Terlalu Besar', text: 'Ukuran maksimal 2MB', confirmButtonColor: '#E85D5E' }); input.value = ''; return; }
+                if (!file.type.match('image/(jpeg|png|jpg)')) { Swal.fire({ icon: 'warning', title: 'Format Tidak Didukung', text: 'Hanya JPG/PNG', confirmButtonColor: '#E85D5E' }); input.value = ''; return; }
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          previewImg.src = e.target.result; previewImg.style.display = 'block';
-          teksPlaceholder.style.display = 'none'; btnRemove.style.display = 'flex';
-        };
-        reader.readAsDataURL(file);
-      }
-    }
+                teksPlaceholder.innerHTML = `<i data-lucide="loader-2" class="spin-small" style="width: 30px; height: 30px; color: var(--primary); margin-bottom: 8px;"></i><span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; font-weight: 600;">Memproses foto...</span>`;
+                if(window.lucide) lucide.createIcons();
 
-    function removeFollowImage(num) {
-      const input = document.getElementById('bukti_follow_' + num);
-      const previewImg = document.getElementById('preview_follow_' + num + '_img');
-      const teksPlaceholder = document.getElementById('teks_placeholder_' + num);
-      const btnRemove = document.getElementById('btn_remove_' + num);
-      input.value = ''; previewImg.src = ''; previewImg.style.display = 'none';
-      teksPlaceholder.style.display = 'flex'; btnRemove.style.display = 'none';
-    }
+                setTimeout(() => {
+                  const reader = new FileReader();
+                  reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                      const canvas = document.createElement('canvas');
+                      let scaleSize = img.width > 800 ? 800 / img.width : 1;
+                      canvas.width = img.width * scaleSize; canvas.height = img.height * scaleSize;
+                      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                      const compressedStr = canvas.toDataURL('image/jpeg', 0.6);
+
+                      if(num === '1') follow1Base64 = compressedStr;
+                      else if(num === '2') follow2Base64 = compressedStr;
+                      else if(num === '3') follow3Base64 = compressedStr;
+                      else if(num === '4') follow4Base64 = compressedStr;
+
+                      previewImg.src = compressedStr;
+                      previewImg.style.display = 'block';
+                      teksPlaceholder.style.display = 'none';
+                      btnRemove.style.display = 'flex';
+
+                      teksPlaceholder.innerHTML = `<i data-lucide="upload-cloud" style="width: 30px; height: 30px; color: #94A3B8; margin-bottom: 8px;"></i><span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.7rem; color: #64748B; font-weight: 600;">Tap untuk upload</span><span style="font-family: 'Nunito Sans', sans-serif; font-size: 0.55rem; color: #94A3B8; margin-top: 3px;">Max 2MB • JPG/PNG</span>`;
+                    };
+                    img.src = e.target.result;
+                  };
+                  reader.readAsDataURL(file);
+                }, 50);
+              }
+            }
+
+        function removeFollowImage(num) {
+          const input = document.getElementById('bukti_follow_' + num);
+          const previewImg = document.getElementById('preview_follow_' + num + '_img');
+          const teksPlaceholder = document.getElementById('teks_placeholder_' + num);
+          const btnRemove = document.getElementById('btn_remove_' + num);
+          input.value = ''; previewImg.src = ''; previewImg.style.display = 'none';
+          teksPlaceholder.style.display = 'flex'; btnRemove.style.display = 'none';
+
+          if(num == 1) follow1Base64 = "";
+          else if(num == 2) follow2Base64 = "";
+          else if(num == 3) follow3Base64 = "";
+          else if(num == 4) follow4Base64 = "";
+        }
 
     function bukaPosterModal() {
       const modal = document.getElementById('posterModal');
