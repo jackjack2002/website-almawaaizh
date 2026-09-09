@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/logo_new.png?v=3">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root { --primary: #00AED6; }
-    body { font-family: 'Poppins', sans-serif; background: #f0f4f8; padding: 8vh 15px 15px; margin: 0; color: #1e293b; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
+    body { font-family: 'Poppins', sans-serif; background: #f0f4f8; padding: 6vh 15px 15px; margin: 0; color: #1e293b; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; min-height: 100vh; }
 
     .card { background: white; width: 100%; max-width: 420px; padding: 30px 20px; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); text-align: center; position: relative; overflow: hidden; display: none; }
     .input-box { width: 100%; padding: 15px; border-radius: 15px; border: 2px solid #f1f5f9; font-size: 0.95rem; outline: none; margin-top: 15px; box-sizing: border-box;}
@@ -44,14 +45,11 @@
     @keyframes scaleUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
     .splash-screen { position: fixed; inset: 0; background: #f8fafc; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
-    .logo-wrapper { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
-    .splash-logo { width: 75px; height: auto; border-radius: 12px; animation: pulseLogo 2s infinite alternate; }
     .splash-title { font-size: 1.2rem; font-weight: 900; color: #1e293b; margin: 0; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
     .splash-subtitle { font-size: 0.75rem; color: #64748b; margin-top: 6px; font-weight: 600; letter-spacing: 2px; }
     .loading-bar-container { width: 150px; height: 4px; background: #e2e8f0; margin-top: 25px; border-radius: 4px; overflow: hidden; position: relative; }
     .loading-bar-fill { width: 50%; height: 100%; background: var(--primary, #00AED6); border-radius: 4px; animation: slideBar 1s infinite ease-in-out alternate; }
 
-    @keyframes pulseLogo { 0% { transform: translateY(0) scale(0.95); opacity: 0.8;} 100% { transform: translateY(-5px) scale(1.05); opacity: 1;} }
     @keyframes slideBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
 
     /* BADGE SESI AKTIF */
@@ -67,13 +65,48 @@
       margin-top: 10px;
       box-shadow: 0 4px 10px rgba(225, 29, 72, 0.05);
     }
+
+    /* --- LOGO SPLASH SCREEN --- */
+    .splash-logo-lockup { display: flex; align-items: flex-end; justify-content: center; gap: 18px; margin-bottom: 20px; }
+    .splash-logo { height: 100px; width: auto; object-fit: contain; animation: floatLogo 3s ease-in-out infinite; }
+    .splash-logo-mawaaizh { height: 110px; transform: translateX(20px); }
+    .splash-logo-khazanah { height: 80px; }
+    .splash-logo-slot { display: flex; justify-content: center; width: 135px; }
+    .splash-logo-slot:last-child { align-self: center; }
+    .splash-logo-divider { width: 1px; align-self: stretch; background: #CBD5E1; }
+    @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    /* --- LOGO UTAMA DI ATAS CARD --- */
+    .main-logo-lockup {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      background: white;
+      padding: 10px 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      margin: 0 auto 20px;
+      width: max-content;
+    }
+    .main-logo { height: 38px; width: auto; object-fit: contain; }
+    .main-logo-mawaaizh { height: 42px; }
+    .main-logo-khazanah { height: 32px; }
+    .main-logo-divider { width: 1px; height: 32px; background: #CBD5E1; }
   </style>
 </head>
 <body>
 
   <div id="initialLoader" class="splash-screen">
-    <div class="logo-wrapper">
-      <img src="assets/logo_new_trimmed.png" alt="Logo" class="splash-logo" style="width: 100px;">
+    <div class="splash-logo-lockup" style="position:relative; z-index:10;">
+      <div class="splash-logo-slot">
+        <img src="assets/logo_new_trimmed.png" alt="Logo Al Mawaaizh" class="splash-logo splash-logo-mawaaizh">
+      </div>
+      <div class="splash-logo-divider"></div>
+      <div class="splash-logo-slot">
+        <img src="assets/Khazanah Blue 1.png" alt="Logo Khazanah" class="splash-logo splash-logo-khazanah">
+      </div>
     </div>
     <h2 class="splash-title">MEMUAT ABSENSI</h2>
     <p class="splash-subtitle">SINKRONISASI DATABASE...</p>
@@ -91,13 +124,20 @@
     </div>
   </div>
 
+  <!-- KOTAK LOGO DI LUAR / DI ATAS CARD UTAMA -->
+  <div class="main-logo-lockup">
+    <img src="assets/logo_new_trimmed.png" alt="Al Mawaaizh" class="main-logo main-logo-mawaaizh">
+    <div class="main-logo-divider"></div>
+    <img src="assets/Khazanah Blue 1.png" alt="Khazanah" class="main-logo main-logo-khazanah">
+  </div>
+
   <div class="card" id="mainCard">
 
     <div id="searchSection" class="section active">
-      <div style="background: #e0f2fe; color: #0284c7; padding: 8px 15px; border-radius: 20px; display: inline-block; font-size: 0.75rem; font-weight: 800; margin-bottom: 10px;">PORTAL PESERTA</div>
+      <div style="background: #e0f2fe; color: #0284c7; padding: 8px 15px; border-radius: 20px; display: inline-block; font-size: 0.75rem; font-weight: 800; margin-bottom: 12px;">PORTAL PESERTA</div>
       <h2 id="uiNamaEvent" style="margin: 0; font-weight: 800; color: var(--primary);">Memuat...</h2>
 
-      <!-- ELEMEN SESI AKTIF YANG MENARIK DATA DARI SHEET (KOLOM I) -->
+      <!-- ELEMEN SESI AKTIF -->
       <div id="uiSesiBerlangsung" class="badge-sesi">Sesi Aktif: Memuat...</div>
 
       <p style="font-size: 0.85rem; color: #64748b; margin-top: 15px;">Ketik nama Anda untuk mencari ID pendaftaran.</p>
@@ -121,10 +161,8 @@
       <div class="profile-box">
         <p style="margin: 0; font-size: 0.75rem; color: #64748b;">Ahlan Wa Sahlan,</p>
         <h3 id="displayName" style="margin: 5px 0 5px; color: #1e293b; font-weight: 800; line-height: 1.3; font-size: 1.8rem;">Nama Peserta</h3>
-        <!-- TAMPILAN NO HP DI BAWAH NAMA -->
         <p id="displayWa" style="margin: 0 0 15px; font-size: 0.8rem; color: #64748b; font-weight: 600;"></p>
 
-        <!-- ELEMEN SESI AKTIF DI DASBOR -->
         <div style="margin-bottom: 15px;">
            <span style="font-size: 0.7rem; font-weight: 700; color: #94a3b8; display: block; margin-bottom: 4px;">AKAN MENGISI UNTUK:</span>
            <span id="uiSesiTarget" style="font-size: 0.85rem; font-weight: 800; color: #e11d48;">Memuat Sesi...</span>
@@ -173,9 +211,6 @@
   <script>
     lucide.createIcons();
 
-    // ==========================================
-    // PASTE SCRIPT URL APPS SCRIPT ANDA DI SINI
-    // ==========================================
     const GAS_URL = "https://script.google.com/macros/s/AKfycbwEC0vwwqLBFW6U0YM1pQ0-t_MjPqnnqgHrdERRxD7wcFr5zneXT9HH4WwVkWYQrXny/exec";
 
     let TARGET_HADIR = 4;
@@ -184,7 +219,7 @@
     let savedHadir = parseInt(localStorage.getItem("absen_total")) || 0;
 
     let dataPesertaLokal = [];
-    let sesiAktifGlobal = ""; // Menampung data dropdown sesi dari kolom I
+    let sesiAktifGlobal = "";
 
     window.onload = function() {
       fetch(GAS_URL + "?p=absen")
@@ -204,9 +239,8 @@
             localStorage.setItem("token_keamanan", serverToken);
           }
 
-          // Injeksi UI Sesi yang Sedang Berlangsung dari server
           sesiAktifGlobal = data.sesiAktif || "Sesi Belum Diatur";
-          document.getElementById('uiSesiBerlangsung').innerText = `SEKARANG: ${sesiAktifGlobal.toUpperCase()}`;
+          document.getElementById('uiSesiBerlangsung').innerText = sesiAktifGlobal.toUpperCase();
           document.getElementById('uiSesiTarget').innerText = sesiAktifGlobal;
 
           TARGET_HADIR = data.syaratHadir || 4;
@@ -285,16 +319,15 @@
       let hasilTerbatas = hasilFilter.slice(0, 10);
 
       if (hasilTerbatas.length > 0) {
-              resBox.innerHTML = hasilTerbatas.map(p => {
-                let nomorAman = p.wa || "Tidak ada nomor";
-                // Escape tanda kutip tunggal agar sintaks onclick tidak rusak
-                let amanNama = p.nama.replace(/'/g, "\\'");
+        resBox.innerHTML = hasilTerbatas.map(p => {
+          let nomorAman = p.wa || "Tidak ada nomor";
+          let amanNama = p.nama.replace(/'/g, "\\'");
 
-                return `<div class="result-item" onclick="setProfile('${amanNama}', '${p.wa}', ${p.total_hadir})">
-                   <b>${p.nama}</b><br><span style="color:#94a3b8; font-size:0.7rem;">WA: ${nomorAman}</span>
-                 </div>`;
-              }).join('');
-            } else {
+          return `<div class="result-item" onclick="setProfile('${amanNama}', '${p.wa}', ${p.total_hadir})">
+             <b>${p.nama}</b><br><span style="color:#94a3b8; font-size:0.7rem;">WA: ${nomorAman}</span>
+           </div>`;
+        }).join('');
+      } else {
         resBox.innerHTML = '<div style="font-size:0.8rem; color:#ef4444; padding:10px;">Data tidak ditemukan. Pastikan ejaan nama atau WA benar.</div>';
       }
     }
@@ -325,69 +358,69 @@
     }
 
     function prosesAbsen() {
-          let btn = document.getElementById('btnAbsen');
-          let oriText = btn.innerHTML;
-          btn.innerHTML = "MEMPROSES... ⏳";
-          btn.disabled = true;
+      let btn = document.getElementById('btnAbsen');
+      let oriText = btn.innerHTML;
+      btn.innerHTML = "MEMPROSES... ⏳";
+      btn.disabled = true;
 
-          fetch(GAS_URL, {
-            method: 'POST',
-            body: JSON.stringify({
-              action: "proses_absen",
-              nama: savedNama,
-              wa: savedWa,
-              sesi: sesiAktifGlobal
-            })
-          })
-          .then(r => r.json())
-          .then(res => {
-            let title = "Informasi";
-            if (res.status === 'success') title = "Alhamdulillah!";
-            else if (res.status === 'warning') title = "Perhatian";
-            else title = "Terjadi Kesalahan";
+      fetch(GAS_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+          action: "proses_absen",
+          nama: savedNama,
+          wa: savedWa,
+          sesi: sesiAktifGlobal
+        })
+      })
+      .then(r => r.json())
+      .then(res => {
+        let title = "Informasi";
+        if (res.status === 'success') title = "Alhamdulillah!";
+        else if (res.status === 'warning') title = "Perhatian";
+        else title = "Terjadi Kesalahan";
 
-            bukaAlert(res.status, title, res.message || res.msg || "Terjadi kesalahan internal server.");
+        bukaAlert(res.status, title, res.message || res.msg || "Terjadi kesalahan internal server.");
 
-            if (res.status === 'success' || res.status === 'warning') {
-              setProfile(savedNama, savedWa, res.total);
-            }
-            btn.innerHTML = oriText;
-            btn.disabled = false;
-          })
-          .catch(err => {
-            btn.innerHTML = oriText;
-            btn.disabled = false;
-            bukaAlert("error", "Koneksi Terputus", "Gagal menghubungi server.");
-          });
+        if (res.status === 'success' || res.status === 'warning') {
+          setProfile(savedNama, savedWa, res.total);
         }
+        btn.innerHTML = oriText;
+        btn.disabled = false;
+      })
+      .catch(err => {
+        btn.innerHTML = oriText;
+        btn.disabled = false;
+        bukaAlert("error", "Koneksi Terputus", "Gagal menghubungi server.");
+      });
+    }
 
-        function downloadSertif() {
-          let btn = document.getElementById('btnDownload');
-          let oriText = btn.innerHTML;
-          btn.innerHTML = "MENCETAK PDF... ⏳";
-          btn.disabled = true;
+    function downloadSertif() {
+      let btn = document.getElementById('btnDownload');
+      let oriText = btn.innerHTML;
+      btn.innerHTML = "MENCETAK PDF... ⏳";
+      btn.disabled = true;
 
-          fetch(GAS_URL, {
-            method: 'POST',
-            body: JSON.stringify({ action: "cetak_sertifikat", nama: savedNama, wa: savedWa })
-          })
-          .then(r => r.json())
-          .then(res => {
-            btn.innerHTML = oriText; btn.disabled = false;
-            if (res.status === 'success') {
-              const link = document.createElement('a');
-              link.href = "data:application/pdf;base64," + res.base64;
-              link.download = res.filename; link.click();
-              bukaAlert('success', 'Sertifikat Diunduh', 'File PDF sedang didownload. Periksa notifikasi perangkat Anda.');
-            } else {
-              bukaAlert('error', 'Gagal Mencetak', res.message || res.msg || "Error pencetakan.");
-            }
-          })
-          .catch(err => {
-            btn.innerHTML = oriText; btn.disabled = false;
-            bukaAlert("error", "Error Koneksi", "Gagal mencetak sertifikat. Coba lagi nanti.");
-          });
+      fetch(GAS_URL, {
+        method: 'POST',
+        body: JSON.stringify({ action: "cetak_sertifikat", nama: savedNama, wa: savedWa })
+      })
+      .then(r => r.json())
+      .then(res => {
+        btn.innerHTML = oriText; btn.disabled = false;
+        if (res.status === 'success') {
+          const link = document.createElement('a');
+          link.href = "data:application/pdf;base64," + res.base64;
+          link.download = res.filename; link.click();
+          bukaAlert('success', 'Sertifikat Diunduh', 'File PDF sedang didownload. Periksa notifikasi perangkat Anda.');
+        } else {
+          bukaAlert('error', 'Gagal Mencetak', res.message || res.msg || "Error pencetakan.");
         }
+      })
+      .catch(err => {
+        btn.innerHTML = oriText; btn.disabled = false;
+        bukaAlert("error", "Error Koneksi", "Gagal mencetak sertifikat. Coba lagi nanti.");
+      });
+    }
 
     function gantiAkun() {
       localStorage.clear();
