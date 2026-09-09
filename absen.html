@@ -213,7 +213,7 @@
 
     const GAS_URL = "https://script.google.com/macros/s/AKfycbwEC0vwwqLBFW6U0YM1pQ0-t_MjPqnnqgHrdERRxD7wcFr5zneXT9HH4WwVkWYQrXny/exec";
 
-    let TARGET_HADIR = 4;
+    let TARGET_HADIR = 3;
     let savedNama = localStorage.getItem("absen_nama");
     let savedWa = localStorage.getItem("absen_wa");
     let savedHadir = parseInt(localStorage.getItem("absen_total")) || 0;
@@ -243,7 +243,7 @@
           document.getElementById('uiSesiBerlangsung').innerText = sesiAktifGlobal.toUpperCase();
           document.getElementById('uiSesiTarget').innerText = sesiAktifGlobal;
 
-          TARGET_HADIR = data.syaratHadir || 4;
+          TARGET_HADIR = data.syaratHadir || 3;
           document.documentElement.style.setProperty('--primary', data.Warna_Utama || '#0C387A');
           document.getElementById('uiNamaEvent').innerText = data.namaEvent || "Akademi Ayah Muslim";
 
