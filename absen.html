@@ -358,41 +358,47 @@
     }
 
     function prosesAbsen() {
-      let btn = document.getElementById('btnAbsen');
-      let oriText = btn.innerHTML;
-      btn.innerHTML = "MEMPROSES... ⏳";
-      btn.disabled = true;
+          // CEGATAN: Cek apakah sesi aktif adalah "Sesi Belum dimulai"
+          if (sesiAktifGlobal === "Sesi Belum dimulai") {
+            bukaAlert("warning", "Sesi Belum Dibuka", "Mohon maaf, saat ini belum ada sesi absensi yang aktif. Silakan tunggu arahan dari panitia.");
+            return; // Hentikan fungsi di sini, jangan kirim data ke server
+          }
 
-      fetch(GAS_URL, {
-        method: 'POST',
-        body: JSON.stringify({
-          action: "proses_absen",
-          nama: savedNama,
-          wa: savedWa,
-          sesi: sesiAktifGlobal
-        })
-      })
-      .then(r => r.json())
-      .then(res => {
-        let title = "Informasi";
-        if (res.status === 'success') title = "Alhamdulillah!";
-        else if (res.status === 'warning') title = "Perhatian";
-        else title = "Terjadi Kesalahan";
+          let btn = document.getElementById('btnAbsen');
+          let oriText = btn.innerHTML;
+          btn.innerHTML = "MEMPROSES... ⏳";
+          btn.disabled = true;
 
-        bukaAlert(res.status, title, res.message || res.msg || "Terjadi kesalahan internal server.");
+          fetch(GAS_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+              action: "proses_absen",
+              nama: savedNama,
+              wa: savedWa,
+              sesi: sesiAktifGlobal
+            })
+          })
+          .then(r => r.json())
+          .then(res => {
+            let title = "Informasi";
+            if (res.status === 'success') title = "Alhamdulillah!";
+            else if (res.status === 'warning') title = "Perhatian";
+            else title = "Terjadi Kesalahan";
 
-        if (res.status === 'success' || res.status === 'warning') {
-          setProfile(savedNama, savedWa, res.total);
+            bukaAlert(res.status, title, res.message || res.msg || "Terjadi kesalahan internal server.");
+
+            if (res.status === 'success' || res.status === 'warning') {
+              setProfile(savedNama, savedWa, res.total);
+            }
+            btn.innerHTML = oriText;
+            btn.disabled = false;
+          })
+          .catch(err => {
+            btn.innerHTML = oriText;
+            btn.disabled = false;
+            bukaAlert("error", "Koneksi Terputus", "Gagal menghubungi server.");
+          });
         }
-        btn.innerHTML = oriText;
-        btn.disabled = false;
-      })
-      .catch(err => {
-        btn.innerHTML = oriText;
-        btn.disabled = false;
-        bukaAlert("error", "Koneksi Terputus", "Gagal menghubungi server.");
-      });
-    }
 
     function downloadSertif() {
       let btn = document.getElementById('btnDownload');
