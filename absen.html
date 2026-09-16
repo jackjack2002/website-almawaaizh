@@ -222,47 +222,52 @@
     let sesiAktifGlobal = "";
 
     window.onload = function() {
-      fetch(GAS_URL + "?p=absen")
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('initialLoader').style.display = 'none';
-          document.getElementById('mainCard').style.display = 'block';
+          // 1. URL ditambah timestamp waktu biar browser selalu tarik data terbaru dari server (ANTI-CACHE)
+          fetch(GAS_URL + "?p=absen&nocache=" + new Date().getTime())
+            .then(res => res.json())
+            .then(data => {
+              document.getElementById('initialLoader').style.display = 'none';
+              document.getElementById('mainCard').style.display = 'block';
 
-          let serverToken = data.tokenKeamanan;
-          let localToken = localStorage.getItem("token_keamanan");
+              // 2. Bersihkan memori HP biar nama peserta nggak kecantol (ANTI AUTO-LOGIN)
+              localStorage.removeItem("absen_nama");
+              localStorage.removeItem("absen_wa");
+              localStorage.removeItem("absen_total");
+              savedNama = null;
+              savedWa = null;
+              savedHadir = 0;
 
-          if (localToken && localToken !== serverToken) {
-            localStorage.clear();
-            savedNama = null; savedWa = null; savedHadir = 0;
-            localStorage.setItem("token_keamanan", serverToken);
-          } else if (!localToken) {
-            localStorage.setItem("token_keamanan", serverToken);
-          }
+              let serverToken = data.tokenKeamanan;
+              let localToken = localStorage.getItem("token_keamanan");
 
-          sesiAktifGlobal = data.sesiAktif || "Sesi Belum Diatur";
-          document.getElementById('uiSesiBerlangsung').innerText = sesiAktifGlobal.toUpperCase();
-          document.getElementById('uiSesiTarget').innerText = sesiAktifGlobal;
+              if (localToken && localToken !== serverToken) {
+                localStorage.clear();
+                localStorage.setItem("token_keamanan", serverToken);
+              } else if (!localToken) {
+                localStorage.setItem("token_keamanan", serverToken);
+              }
 
-          TARGET_HADIR = data.syaratHadir || 3;
-          document.documentElement.style.setProperty('--primary', data.Warna_Utama || '#0C387A');
-          document.getElementById('uiNamaEvent').innerText = data.namaEvent || "Akademi Ayah Muslim";
+              sesiAktifGlobal = data.sesiAktif || "Sesi Belum Diatur";
+              document.getElementById('uiSesiBerlangsung').innerText = sesiAktifGlobal.toUpperCase();
+              document.getElementById('uiSesiTarget').innerText = sesiAktifGlobal;
 
-          if(data.idTemplate) {
-            document.getElementById('certMockup').style.backgroundImage = `url('https://drive.google.com/thumbnail?id=${data.idTemplate}&sz=w1000')`;
-          }
+              TARGET_HADIR = data.syaratHadir || 3;
+              document.documentElement.style.setProperty('--primary', data.Warna_Utama || '#0C387A');
+              document.getElementById('uiNamaEvent').innerText = data.namaEvent || "Akademi Ayah Muslim";
 
-          dataPesertaLokal = data.daftarPeserta || [];
+              if(data.idTemplate) {
+                document.getElementById('certMockup').style.backgroundImage = `url('https://drive.google.com/thumbnail?id=${data.idTemplate}&sz=w1000')`;
+              }
 
-          if (savedNama && savedWa) {
-            setProfile(savedNama, savedWa, savedHadir);
-          } else {
-            switchSection('searchSection');
-          }
-        })
-        .catch(err => {
-          document.getElementById('initialLoader').innerText = "Gagal memuat data. Periksa koneksi internet Anda.";
-        });
-    };
+              dataPesertaLokal = data.daftarPeserta || [];
+
+              // 3. Wajibkan semua user mulai dari halaman pencarian
+              switchSection('searchSection');
+            })
+            .catch(err => {
+              document.getElementById('initialLoader').innerText = "Gagal memuat data. Periksa koneksi internet Anda.";
+            });
+        };
 
     function bukaAlert(type, title, msg) {
       const alertEl = document.getElementById('customAlertAbsen');
