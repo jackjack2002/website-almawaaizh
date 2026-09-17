@@ -391,8 +391,8 @@
 
     function downloadSertif() {
 
-        let btn = document.getElementById('btnDownload');
-        let oriText = btn.innerHTML;
+        const btn = document.getElementById('btnDownload');
+        const oriText = btn.innerHTML;
 
         if (typeof html2canvas === 'undefined') {
             bukaAlert(
@@ -424,17 +424,16 @@
 
         }).then(canvas => {
 
-          const imgData = canvas.toDataURL("image/png");
-
-          link.download =
-              `Sertifikat_Akademi_Ayah_Muslim_${namaFileAman}.png`;
+            // PNG tanpa kompresi lossy
+            const imgData = canvas.toDataURL("image/png");
 
             const link = document.createElement('a');
 
-            let namaFileAman = savedNama.replace(/\s+/g, '_');
+            const namaFileAman = savedNama
+                .replace(/\s+/g, '_');
 
             link.download =
-                `Sertifikat_Akademi_Ayah_Muslim_${namaFileAman}.jpg`;
+                `Sertifikat_Akademi_Ayah_Muslim_${namaFileAman}.png`;
 
             link.href = imgData;
             link.click();
@@ -442,7 +441,7 @@
             bukaAlert(
                 'success',
                 'Berhasil!',
-                'Sertifikat JPG berhasil diunduh.'
+                'Sertifikat PNG berhasil diunduh.'
             );
 
             btn.innerHTML = oriText;
@@ -462,6 +461,8 @@
             );
 
         });
+
+    }
 
     }
 
