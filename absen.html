@@ -6,6 +6,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="assets/logo_new.png?v=3">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- MESIN CETAK GAMBAR -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
   <style>
     :root { --primary: #00AED6; }
     body { font-family: 'Poppins', sans-serif; background: #f0f4f8; padding: 6vh 15px 15px; margin: 0; color: #1e293b; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; min-height: 100vh; }
@@ -35,10 +38,6 @@
     .alert-box { background: white; width: 90%; max-width: 340px; padding: 35px 25px; border-radius: 25px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.15); animation: scaleUp 0.3s cubic-bezier(0.23, 1, 0.32, 1); }
     .alert-icon { font-size: 4rem; margin-bottom: 10px; line-height: 1; }
 
-    .cert-mockup { background-size: cover; background-position: center; border: 4px solid #cbd5e1; border-radius: 12px; padding: 25px 15px; aspect-ratio: 1.414 / 1; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 15px 30px rgba(0,0,0,0.08); position: relative; overflow: hidden; margin: 25px 0; }
-    .cert-name { font-size: 1rem; font-weight: 800; color: #0f172a; font-family: 'Playfair Display', serif; width: 75%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: relative; z-index: 2; background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); padding: 9px 15px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border: 1px solid rgba(255, 255, 255, 0.8); margin-top: 20.5%; }
-    .cert-title, .cert-subtitle, .cert-desc, .cert-badge { display: none; }
-
     .confetti { position: fixed; width: 10px; height: 10px; background: red; z-index: 3000; top: -10px; animation: confetti-fall 3s linear forwards; }
     @keyframes confetti-fall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -52,7 +51,6 @@
 
     @keyframes slideBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
 
-    /* BADGE SESI AKTIF */
     .badge-sesi {
       display: inline-block;
       background: #fef2f2;
@@ -66,7 +64,6 @@
       box-shadow: 0 4px 10px rgba(225, 29, 72, 0.05);
     }
 
-    /* --- LOGO SPLASH SCREEN --- */
     .splash-logo-lockup { display: flex; align-items: flex-end; justify-content: center; gap: 18px; margin-bottom: 20px; }
     .splash-logo { height: 100px; width: auto; object-fit: contain; animation: floatLogo 3s ease-in-out infinite; }
     .splash-logo-mawaaizh { height: 110px; transform: translateX(20px); }
@@ -76,7 +73,6 @@
     .splash-logo-divider { width: 1px; align-self: stretch; background: #CBD5E1; }
     @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-    /* --- LOGO UTAMA DI ATAS CARD --- */
     .main-logo-lockup {
       display: flex;
       align-items: center;
@@ -124,7 +120,6 @@
     </div>
   </div>
 
-  <!-- KOTAK LOGO DI LUAR / DI ATAS CARD UTAMA -->
   <div class="main-logo-lockup">
     <img src="assets/logo_new_trimmed.png" alt="Al Mawaaizh" class="main-logo main-logo-mawaaizh">
     <div class="main-logo-divider"></div>
@@ -137,7 +132,6 @@
       <div style="background: #e0f2fe; color: #0284c7; padding: 8px 15px; border-radius: 20px; display: inline-block; font-size: 0.75rem; font-weight: 800; margin-bottom: 12px;">PORTAL PESERTA</div>
       <h2 id="uiNamaEvent" style="margin: 0; font-weight: 800; color: var(--primary);">Memuat...</h2>
 
-      <!-- ELEMEN SESI AKTIF -->
       <div id="uiSesiBerlangsung" class="badge-sesi">Sesi Aktif: Memuat...</div>
 
       <p style="font-size: 0.85rem; color: #64748b; margin-top: 15px;">Ketik nama Anda untuk mencari ID pendaftaran.</p>
@@ -191,12 +185,13 @@
       <h2 style="margin: 0; color: #d97706; font-weight: 900; font-size: 1.5rem;">ALHAMDULILLAH! 🎉</h2>
       <p style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">Barakallah fiikum. Anda telah berhasil menyelesaikan syarat kehadiran acara ini.</p>
 
-      <div id="certMockup" class="cert-mockup">
-        <div class="cert-title">E-SERTIFIKAT</div>
-        <div class="cert-subtitle">Diberikan Kepada:</div>
-        <div id="mockupName" class="cert-name">Nama Peserta</div>
-        <div class="cert-desc">Atas partisipasi...</div>
-        <div class="cert-badge"></div>
+      <!-- STRUKTUR MOCKUP SERTIFIKAT FIX -->
+      <div id="certWrapper" style="width: 100%; border-radius: 12px; overflow: hidden; margin: 25px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; aspect-ratio: 1.414 / 1; background-color: white;">
+        <img id="bgSertifikat" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;" crossorigin="anonymous">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
+            <!-- Angka top: 54% ini untuk menaik-turunkan nama. Silakan diubah kalau dirasa kurang pas di garis -->
+            <div id="mockupName" style="position: absolute; top: 54%; left: 50%; transform: translate(-50%, -50%); font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 800; color: #0f172a; text-align: center; width: 85%; word-wrap: break-word; line-height: 1.2;">Nama Peserta</div>
+        </div>
       </div>
 
       <button id="btnDownload" class="btn btn-download" onclick="downloadSertif()">
@@ -222,52 +217,44 @@
     let sesiAktifGlobal = "";
 
     window.onload = function() {
-          // 1. URL ditambah timestamp waktu biar browser selalu tarik data terbaru dari server (ANTI-CACHE)
-          fetch(GAS_URL + "?p=absen&nocache=" + new Date().getTime())
-            .then(res => res.json())
-            .then(data => {
-              document.getElementById('initialLoader').style.display = 'none';
-              document.getElementById('mainCard').style.display = 'block';
+      fetch(GAS_URL + "?p=absen&nocache=" + new Date().getTime())
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('initialLoader').style.display = 'none';
+          document.getElementById('mainCard').style.display = 'block';
 
-              // 2. Bersihkan memori HP biar nama peserta nggak kecantol (ANTI AUTO-LOGIN)
-              localStorage.removeItem("absen_nama");
-              localStorage.removeItem("absen_wa");
-              localStorage.removeItem("absen_total");
-              savedNama = null;
-              savedWa = null;
-              savedHadir = 0;
+          localStorage.removeItem("absen_nama");
+          localStorage.removeItem("absen_wa");
+          localStorage.removeItem("absen_total");
+          savedNama = null;
+          savedWa = null;
+          savedHadir = 0;
 
-              let serverToken = data.tokenKeamanan;
-              let localToken = localStorage.getItem("token_keamanan");
+          let serverToken = data.tokenKeamanan;
+          let localToken = localStorage.getItem("token_keamanan");
 
-              if (localToken && localToken !== serverToken) {
-                localStorage.clear();
-                localStorage.setItem("token_keamanan", serverToken);
-              } else if (!localToken) {
-                localStorage.setItem("token_keamanan", serverToken);
-              }
+          if (localToken && localToken !== serverToken) {
+            localStorage.clear();
+            localStorage.setItem("token_keamanan", serverToken);
+          } else if (!localToken) {
+            localStorage.setItem("token_keamanan", serverToken);
+          }
 
-              sesiAktifGlobal = data.sesiAktif || "Sesi Belum Diatur";
-              document.getElementById('uiSesiBerlangsung').innerText = sesiAktifGlobal.toUpperCase();
-              document.getElementById('uiSesiTarget').innerText = sesiAktifGlobal;
+          sesiAktifGlobal = data.sesiAktif || "Sesi Belum Diatur";
+          document.getElementById('uiSesiBerlangsung').innerText = sesiAktifGlobal.toUpperCase();
+          document.getElementById('uiSesiTarget').innerText = sesiAktifGlobal;
 
-              TARGET_HADIR = data.syaratHadir || 3;
-              document.documentElement.style.setProperty('--primary', data.Warna_Utama || '#0C387A');
-              document.getElementById('uiNamaEvent').innerText = data.namaEvent || "Akademi Ayah Muslim";
+          TARGET_HADIR = data.syaratHadir || 3;
+          document.documentElement.style.setProperty('--primary', data.Warna_Utama || '#0C387A');
+          document.getElementById('uiNamaEvent').innerText = data.namaEvent || "Akademi Ayah Muslim";
 
-              if(data.idTemplate) {
-                document.getElementById('certMockup').style.backgroundImage = `url('https://drive.google.com/thumbnail?id=${data.idTemplate}&sz=w1000')`;
-              }
-
-              dataPesertaLokal = data.daftarPeserta || [];
-
-              // 3. Wajibkan semua user mulai dari halaman pencarian
-              switchSection('searchSection');
-            })
-            .catch(err => {
-              document.getElementById('initialLoader').innerText = "Gagal memuat data. Periksa koneksi internet Anda.";
-            });
-        };
+          dataPesertaLokal = data.daftarPeserta || [];
+          switchSection('searchSection');
+        })
+        .catch(err => {
+          document.getElementById('initialLoader').innerText = "Gagal memuat data. Periksa koneksi internet Anda.";
+        });
+    };
 
     function bukaAlert(type, title, msg) {
       const alertEl = document.getElementById('customAlertAbsen');
@@ -276,13 +263,9 @@
       const msgEl   = document.getElementById('alertMsg');
       const btnEl   = document.getElementById('alertBtn');
 
-      if (type === 'success') {
-        iconEl.innerText = '🎉'; btnEl.style.background = '#10b981';
-      } else if (type === 'warning') {
-        iconEl.innerText = '⚠️'; btnEl.style.background = '#f59e0b';
-      } else {
-        iconEl.innerText = '❌'; btnEl.style.background = '#ef4444';
-      }
+      if (type === 'success') { iconEl.innerText = '🎉'; btnEl.style.background = '#10b981'; }
+      else if (type === 'warning') { iconEl.innerText = '⚠️'; btnEl.style.background = '#f59e0b'; }
+      else { iconEl.innerText = '❌'; btnEl.style.background = '#ef4444'; }
       titleEl.innerText = title; msgEl.innerHTML = msg; alertEl.style.display = 'flex';
     }
 
@@ -312,22 +295,15 @@
     function cariNama() {
       let keyword = document.getElementById('keyword').value.toLowerCase().trim();
       let resBox = document.getElementById('resultBox');
-
       if(keyword.length === 0) { resBox.innerHTML = ''; return; }
-
       let hasilFilter = dataPesertaLokal.filter(p => {
-        let cocokNama = p.nama.toLowerCase().includes(keyword);
-        let cocokWA = p.wa && p.wa.toLowerCase().includes(keyword);
-        return cocokNama || cocokWA;
+        return p.nama.toLowerCase().includes(keyword) || (p.wa && p.wa.toLowerCase().includes(keyword));
       });
-
       let hasilTerbatas = hasilFilter.slice(0, 10);
-
       if (hasilTerbatas.length > 0) {
         resBox.innerHTML = hasilTerbatas.map(p => {
           let nomorAman = p.wa || "Tidak ada nomor";
           let amanNama = p.nama.replace(/'/g, "\\'");
-
           return `<div class="result-item" onclick="setProfile('${amanNama}', '${p.wa}', ${p.total_hadir})">
              <b>${p.nama}</b><br><span style="color:#94a3b8; font-size:0.7rem;">WA: ${nomorAman}</span>
            </div>`;
@@ -341,9 +317,7 @@
       localStorage.setItem("absen_nama", nama);
       localStorage.setItem("absen_wa", wa);
       localStorage.setItem("absen_total", totalHadir);
-
       savedNama = nama; savedWa = wa;
-
       switchSection('profileSection');
       document.getElementById('displayName').innerText = nama;
       document.getElementById('displayWa').innerText = "WA: " + wa;
@@ -363,73 +337,71 @@
     }
 
     function prosesAbsen() {
-          // CEGATAN: Cek apakah sesi aktif adalah "Sesi Belum dimulai"
-          if (sesiAktifGlobal === "Sesi Belum dimulai") {
-            bukaAlert("warning", "Sesi Belum Dibuka", "Mohon maaf, saat ini belum ada sesi absensi yang aktif. Silakan tunggu arahan dari panitia.");
-            return; // Hentikan fungsi di sini, jangan kirim data ke server
-          }
+      if (sesiAktifGlobal === "Sesi Belum dimulai") {
+        bukaAlert("warning", "Sesi Belum Dibuka", "Mohon maaf, saat ini belum ada sesi absensi yang aktif. Silakan tunggu arahan dari panitia.");
+        return;
+      }
+      let btn = document.getElementById('btnAbsen');
+      let oriText = btn.innerHTML;
+      btn.innerHTML = "MEMPROSES... ⏳";
+      btn.disabled = true;
+      fetch(GAS_URL, {
+        method: 'POST',
+        body: JSON.stringify({ action: "proses_absen", nama: savedNama, wa: savedWa, sesi: sesiAktifGlobal })
+      })
+      .then(r => r.json())
+      .then(res => {
+        let title = res.status === 'success' ? "Alhamdulillah!" : (res.status === 'warning' ? "Perhatian" : "Terjadi Kesalahan");
+        bukaAlert(res.status, title, res.message || res.msg || "Terjadi kesalahan internal server.");
+        if (res.status === 'success' || res.status === 'warning') { setProfile(savedNama, savedWa, res.total); }
+        btn.innerHTML = oriText; btn.disabled = false;
+      })
+      .catch(err => {
+        btn.innerHTML = oriText; btn.disabled = false;
+        bukaAlert("error", "Koneksi Terputus", "Gagal menghubungi server.");
+      });
+    }
 
-          let btn = document.getElementById('btnAbsen');
-          let oriText = btn.innerHTML;
-          btn.innerHTML = "MEMPROSES... ⏳";
-          btn.disabled = true;
+    function bukaSelebrasi() {
+      switchSection('celebrationSection');
+      document.getElementById('mockupName').innerText = savedNama;
+      let waktuSekarang = new Date().getTime();
+      document.getElementById('bgSertifikat').src = "assets/sertifikat_kosong.png?v=" + waktuSekarang;
+    }
 
-          fetch(GAS_URL, {
-            method: 'POST',
-            body: JSON.stringify({
-              action: "proses_absen",
-              nama: savedNama,
-              wa: savedWa,
-              sesi: sesiAktifGlobal
-            })
-          })
-          .then(r => r.json())
-          .then(res => {
-            let title = "Informasi";
-            if (res.status === 'success') title = "Alhamdulillah!";
-            else if (res.status === 'warning') title = "Perhatian";
-            else title = "Terjadi Kesalahan";
-
-            bukaAlert(res.status, title, res.message || res.msg || "Terjadi kesalahan internal server.");
-
-            if (res.status === 'success' || res.status === 'warning') {
-              setProfile(savedNama, savedWa, res.total);
-            }
-            btn.innerHTML = oriText;
-            btn.disabled = false;
-          })
-          .catch(err => {
-            btn.innerHTML = oriText;
-            btn.disabled = false;
-            bukaAlert("error", "Koneksi Terputus", "Gagal menghubungi server.");
-          });
-        }
+    function kembaliKeProfil() {
+      switchSection('profileSection');
+    }
 
     function downloadSertif() {
       let btn = document.getElementById('btnDownload');
       let oriText = btn.innerHTML;
-      btn.innerHTML = "MENCETAK PDF... ⏳";
+      btn.innerHTML = "MENYIAPKAN GAMBAR... ⏳";
       btn.disabled = true;
 
-      fetch(GAS_URL, {
-        method: 'POST',
-        body: JSON.stringify({ action: "cetak_sertifikat", nama: savedNama, wa: savedWa })
-      })
-      .then(r => r.json())
-      .then(res => {
-        btn.innerHTML = oriText; btn.disabled = false;
-        if (res.status === 'success') {
+      const elemenSertifikat = document.getElementById('certWrapper');
+
+      html2canvas(elemenSertifikat, {
+          scale: 3,
+          useCORS: true,
+          allowTaint: true, // Bypass strict local file restriction sementara
+          backgroundColor: null
+      }).then(canvas => {
+          const imgData = canvas.toDataURL("image/jpeg", 0.95);
           const link = document.createElement('a');
-          link.href = "data:application/pdf;base64," + res.base64;
-          link.download = res.filename; link.click();
-          bukaAlert('success', 'Sertifikat Diunduh', 'File PDF sedang didownload. Periksa notifikasi perangkat Anda.');
-        } else {
-          bukaAlert('error', 'Gagal Mencetak', res.message || res.msg || "Error pencetakan.");
-        }
-      })
-      .catch(err => {
-        btn.innerHTML = oriText; btn.disabled = false;
-        bukaAlert("error", "Error Koneksi", "Gagal mencetak sertifikat. Coba lagi nanti.");
+          let namaFileAman = savedNama.replace(/\s+/g, '_');
+          link.download = `Sertifikat_Akademi_Ayah_Muslim_${namaFileAman}.jpg`;
+          link.href = imgData;
+          link.click();
+
+          bukaAlert('success', 'Berhasil!', 'Sertifikat JPG berhasil diunduh. Silakan cek galeri perangkat Anda.');
+          btn.innerHTML = oriText;
+          btn.disabled = false;
+      }).catch(err => {
+          console.error(err);
+          btn.innerHTML = oriText;
+          btn.disabled = false;
+          bukaAlert('error', 'Gagal Mencetak', 'Gagal memproses gambar. Pastikan web sudah diupload ke server (bukan diakses via file://).');
       });
     }
 
