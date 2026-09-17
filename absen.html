@@ -13,7 +13,7 @@
     :root { --primary: #00AED6; }
     body { font-family: 'Poppins', sans-serif; background: #f0f4f8; padding: 6vh 15px 15px; margin: 0; color: #1e293b; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; min-height: 100vh; }
 
-    .card { background: white; width: 100%; max-width: 420px; padding: 30px 20px; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); text-align: center; position: relative; overflow: hidden; display: none; }
+    .card { background: white; width: 100%; max-width: 420px; padding: 30px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); text-align: center; position: relative; overflow: visible; display: none; }
     .input-box { width: 100%; padding: 15px; border-radius: 15px; border: 2px solid #f1f5f9; font-size: 0.95rem; outline: none; margin-top: 15px; box-sizing: border-box;}
     .input-box:focus { border-color: var(--primary); background: #f8fafc; }
     .result-item { padding: 12px; border-bottom: 1px solid #f1f5f9; cursor: pointer; text-align: left; font-size: 0.85rem; font-weight: 600; transition: 0.2s;}
@@ -424,7 +424,10 @@
 
         }).then(canvas => {
 
-            const imgData = canvas.toDataURL("image/jpeg", 1.0);
+          const imgData = canvas.toDataURL("image/png");
+
+          link.download =
+              `Sertifikat_Akademi_Ayah_Muslim_${namaFileAman}.png`;
 
             const link = document.createElement('a');
 
