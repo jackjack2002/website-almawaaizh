@@ -389,55 +389,78 @@
       switchSection('profileSection');
     }
 
-    const elemenSertifikat = document.getElementById('certWrapper');
+    function downloadSertif() {
 
-    // Target resolusi sesuai template asli
-    const targetWidth = 1600;
-    const currentWidth = elemenSertifikat.getBoundingClientRect().width;
+        let btn = document.getElementById('btnDownload');
+        let oriText = btn.innerHTML;
 
-    const scale = targetWidth / currentWidth;
+        if (typeof html2canvas === 'undefined') {
+            bukaAlert(
+                'error',
+                'Sistem Sibuk',
+                'Modul pencetak gambar belum siap.'
+            );
+            return;
+        }
 
-    html2canvas(elemenSertifikat, {
-        scale: scale,
-        useCORS: true,
-        allowTaint: false,
-        backgroundColor: '#ffffff',
-        width: currentWidth,
-        height: elemenSertifikat.getBoundingClientRect().height
-    }).then(canvas => {
+        btn.innerHTML = "MENYIAPKAN GAMBAR... ⏳";
+        btn.disabled = true;
 
-        const imgData = canvas.toDataURL("image/jpeg", 1.0);
+        const elemenSertifikat = document.getElementById('certWrapper');
 
-        const link = document.createElement('a');
-        let namaFileAman = savedNama.replace(/\s+/g, '_');
+        const targetWidth = 1600;
+        const currentWidth = elemenSertifikat.getBoundingClientRect().width;
+        const scale = targetWidth / currentWidth;
 
-        link.download = `Sertifikat_Akademi_Ayah_Muslim_${namaFileAman}.jpg`;
-        link.href = imgData;
-        link.click();
+        html2canvas(elemenSertifikat, {
 
-        bukaAlert(
-            'success',
-            'Berhasil!',
-            'Sertifikat JPG berhasil diunduh.'
-        );
+            scale: scale,
+            useCORS: true,
+            allowTaint: false,
+            backgroundColor: '#ffffff',
 
-        btn.innerHTML = oriText;
-        btn.disabled = false;
+            width: currentWidth,
+            height: elemenSertifikat.getBoundingClientRect().height
 
-    }).catch(err => {
+        }).then(canvas => {
 
-        console.error(err);
+            const imgData = canvas.toDataURL("image/jpeg", 1.0);
 
-        btn.innerHTML = oriText;
-        btn.disabled = false;
+            const link = document.createElement('a');
 
-        bukaAlert(
-            'error',
-            'Gagal Mencetak',
-            'Gagal memproses gambar.'
-        );
+            let namaFileAman = savedNama.replace(/\s+/g, '_');
 
-    });
+            link.download =
+                `Sertifikat_Akademi_Ayah_Muslim_${namaFileAman}.jpg`;
+
+            link.href = imgData;
+            link.click();
+
+            bukaAlert(
+                'success',
+                'Berhasil!',
+                'Sertifikat JPG berhasil diunduh.'
+            );
+
+            btn.innerHTML = oriText;
+            btn.disabled = false;
+
+        }).catch(err => {
+
+            console.error(err);
+
+            btn.innerHTML = oriText;
+            btn.disabled = false;
+
+            bukaAlert(
+                'error',
+                'Gagal Mencetak',
+                'Gagal memproses gambar.'
+            );
+
+        });
+
+    }
 
     function gantiAkun() {
       localStorage.clear();
