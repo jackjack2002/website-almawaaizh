@@ -188,7 +188,16 @@
       <p style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">Barakallah fiikum. Anda telah berhasil menyelesaikan syarat kehadiran acara ini.</p>
 
       <!-- STRUKTUR MOCKUP SERTIFIKAT FIX -->
-      <div id="certWrapper" style="width: 100%; border-radius: 12px; overflow: hidden; margin: 25px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; aspect-ratio: 1.414 / 1; background-color: white;">
+      <div id="certWrapper"
+        style="
+          width: 100%;
+          margin: 25px 0;
+          position: relative;
+          aspect-ratio: 1600 / 1131;
+          background-color: white;
+          border-radius: 0;
+          overflow: visible;
+        ">
         <img id="bgSertifikat" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;" crossorigin="anonymous">
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
             <!-- Angka top: 54% ini untuk menaik-turunkan nama. Silakan diubah kalau dirasa kurang pas di garis -->
@@ -380,43 +389,55 @@
       switchSection('profileSection');
     }
 
-    function downloadSertif() {
-      let btn = document.getElementById('btnDownload');
-      let oriText = btn.innerHTML;
+    const elemenSertifikat = document.getElementById('certWrapper');
 
-      if (typeof html2canvas === 'undefined') {
-        bukaAlert('error', 'Sistem Sibuk', 'Modul pencetak gambar sedang dimuat atau diblokir browser. Pastikan koneksi stabil lalu refresh halaman.');
-        return;
-      }
+    // Target resolusi sesuai template asli
+    const targetWidth = 1600;
+    const currentWidth = elemenSertifikat.getBoundingClientRect().width;
 
-      btn.innerHTML = "MENYIAPKAN GAMBAR... ⏳";
-      btn.disabled = true;
+    const scale = targetWidth / currentWidth;
 
-      const elemenSertifikat = document.getElementById('certWrapper');
+    html2canvas(elemenSertifikat, {
+        scale: scale,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: '#ffffff',
+        width: currentWidth,
+        height: elemenSertifikat.getBoundingClientRect().height
+    }).then(canvas => {
 
-      html2canvas(elemenSertifikat, {
-          scale: 3,
-          useCORS: true,
-          allowTaint: true,
-          backgroundColor: null
-      }).then(canvas => {
-          const imgData = canvas.toDataURL("image/jpeg", 0.95);
-          const link = document.createElement('a');
-          let namaFileAman = savedNama.replace(/\s+/g, '_');
-          link.download = `Sertifikat_Akademi_Ayah_Muslim_${namaFileAman}.jpg`;
-          link.href = imgData;
-          link.click();
+        const imgData = canvas.toDataURL("image/jpeg", 1.0);
 
-          bukaAlert('success', 'Berhasil!', 'Sertifikat JPG berhasil diunduh. Silakan cek galeri perangkat Anda.');
-          btn.innerHTML = oriText;
-          btn.disabled = false;
-      }).catch(err => {
-          console.error(err);
-          btn.innerHTML = oriText;
-          btn.disabled = false;
-          bukaAlert('error', 'Gagal Mencetak', 'Gagal memproses gambar. Pastikan web sudah diupload ke server (bukan diakses via file://).');
-      });
-    }
+        const link = document.createElement('a');
+        let namaFileAman = savedNama.replace(/\s+/g, '_');
+
+        link.download = `Sertifikat_Akademi_Ayah_Muslim_${namaFileAman}.jpg`;
+        link.href = imgData;
+        link.click();
+
+        bukaAlert(
+            'success',
+            'Berhasil!',
+            'Sertifikat JPG berhasil diunduh.'
+        );
+
+        btn.innerHTML = oriText;
+        btn.disabled = false;
+
+    }).catch(err => {
+
+        console.error(err);
+
+        btn.innerHTML = oriText;
+        btn.disabled = false;
+
+        bukaAlert(
+            'error',
+            'Gagal Mencetak',
+            'Gagal memproses gambar.'
+        );
+
+    });
 
     function gantiAkun() {
       localStorage.clear();
