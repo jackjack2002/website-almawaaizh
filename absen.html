@@ -21,7 +21,8 @@
 
     .btn { width: 100%; padding: 16px; border-radius: 15px; border: none; font-weight: 800; font-size: 1rem; color: white; margin-top: 20px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;}
     .btn-absen { background: var(--primary); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-    .btn-klaim { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 8px 20px rgba(245, 158, 11, 0.25); display: none; margin-top: 15px; animation: pulseGlow 2s infinite; }
+    /* Proteksi Z-Index agar selalu bisa diklik di atas elemen lain */
+    .btn-klaim { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 8px 20px rgba(245, 158, 11, 0.25); display: none; margin-top: 15px; animation: pulseGlow 2s infinite; position: relative; z-index: 50; }
     .btn-download { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2); }
     .btn:active { transform: scale(0.97); }
     @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(245,158,11,0.4); } 70% { box-shadow: 0 0 0 10px rgba(245,158,11,0); } 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0); } }
@@ -173,6 +174,7 @@
           <i data-lucide="scan-line" style="width: 20px;"></i> REKAM ABSEN SESI INI
         </button>
 
+        <!-- Tombol dipastikan memiliki z-index dan siap diklik -->
         <button id="btnKlaim" class="btn btn-klaim" onclick="bukaSelebrasi()">
           <i data-lucide="award" style="width: 20px;"></i> KLAIM E-SERTIFIKAT
         </button>
@@ -195,7 +197,7 @@
       </div>
 
       <button id="btnDownload" class="btn btn-download" onclick="downloadSertif()">
-        <i data-lucide="download-cloud" style="width: 20px;"></i> DOWNLOAD PDF ASLI
+        <i data-lucide="download-cloud" style="width: 20px;"></i> DOWNLOAD SERTIFIKAT (JPG)
       </button>
 
       <p style="margin-top:20px; font-size:0.75rem; color:#94a3b8; cursor:pointer; font-weight: 600;" onclick="kembaliKeProfil()">< Kembali ke Dasbor</p>
@@ -363,10 +365,15 @@
     }
 
     function bukaSelebrasi() {
-      switchSection('celebrationSection');
-      document.getElementById('mockupName').innerText = savedNama;
-      let waktuSekarang = new Date().getTime();
-      document.getElementById('bgSertifikat').src = "assets/sertifikat_kosong.png?v=" + waktuSekarang;
+      try {
+        switchSection('celebrationSection');
+        document.getElementById('mockupName').innerText = savedNama;
+        let waktuSekarang = new Date().getTime();
+        document.getElementById('bgSertifikat').src = "assets/sertifikat_kosong.png?v=" + waktuSekarang;
+      } catch (err) {
+        console.error(err);
+        bukaAlert("error", "Error Tampilan", "Sistem gagal membuka halaman sertifikat.");
+      }
     }
 
     function kembaliKeProfil() {
@@ -376,6 +383,12 @@
     function downloadSertif() {
       let btn = document.getElementById('btnDownload');
       let oriText = btn.innerHTML;
+
+      if (typeof html2canvas === 'undefined') {
+        bukaAlert('error', 'Sistem Sibuk', 'Modul pencetak gambar sedang dimuat atau diblokir browser. Pastikan koneksi stabil lalu refresh halaman.');
+        return;
+      }
+
       btn.innerHTML = "MENYIAPKAN GAMBAR... ⏳";
       btn.disabled = true;
 
@@ -384,7 +397,7 @@
       html2canvas(elemenSertifikat, {
           scale: 3,
           useCORS: true,
-          allowTaint: true, // Bypass strict local file restriction sementara
+          allowTaint: true,
           backgroundColor: null
       }).then(canvas => {
           const imgData = canvas.toDataURL("image/jpeg", 0.95);
